@@ -24,6 +24,7 @@
 9. **[09-ai-control-strategies.md](./09-ai-control-strategies.md)** - Maintain control over AI
 10. **[10-prompt-templates.md](./10-prompt-templates.md)** - Ready-to-use prompt templates
 11. **[11-practice-exercises.md](./11-practice-exercises.md)** - Hands-on practice exercises
+12. **[12-real-scenarios-with-prompts.md](./12-real-scenarios-with-prompts.md)** - 5 complete scenarios with full dialogues
 
 ## ✅ Quick Pre-Interview Checklist
 
