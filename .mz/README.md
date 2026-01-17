@@ -10,6 +10,7 @@
 
 ## 📚 Prep Materials in This Directory
 
+### Core Guides
 1. **[01-environment-setup.md](./01-environment-setup.md)** - Complete setup checklist
 2. **[02-codebase-navigation.md](./02-codebase-navigation.md)** - How to navigate Cal.com
 3. **[03-ai-collaboration.md](./03-ai-collaboration.md)** - Effective AI prompting strategies
@@ -17,6 +18,12 @@
 5. **[05-interview-day-checklist.md](./05-interview-day-checklist.md)** - Day-of checklist
 6. **[06-common-patterns.md](./06-common-patterns.md)** - Cal.com coding patterns
 7. **[07-problem-solving-framework.md](./07-problem-solving-framework.md)** - Approach framework
+
+### Advanced AI Mastery
+8. **[08-cursor-prompting-mastery.md](./08-cursor-prompting-mastery.md)** - Master Cursor AI prompting
+9. **[09-ai-control-strategies.md](./09-ai-control-strategies.md)** - Maintain control over AI
+10. **[10-prompt-templates.md](./10-prompt-templates.md)** - Ready-to-use prompt templates
+11. **[11-practice-exercises.md](./11-practice-exercises.md)** - Hands-on practice exercises
 
 ## ✅ Quick Pre-Interview Checklist
 
@@ -136,6 +143,44 @@ yarn vitest run path/to/file.test.ts
 yarn prisma generate
 yarn workspace @calcom/prisma db-migrate
 ```
+
+## 📖 Reading Order
+
+### First Time (2-3 hours before interview)
+1. Read this README
+2. Read 01-environment-setup (ensure setup works)
+3. Skim 02-codebase-navigation
+4. Read 03-ai-collaboration
+5. Bookmark 04-tech-stack-reference
+6. Read 05-interview-day-checklist
+7. Skim 06-common-patterns
+
+### Day Before Interview (1-2 hours)
+1. Re-read 05-interview-day-checklist
+2. Study 08-cursor-prompting-mastery
+3. Study 09-ai-control-strategies
+4. Practice with 10-prompt-templates
+5. Do 2-3 exercises from 11-practice-exercises
+
+### Morning of Interview (30 minutes)
+1. Quick review of 05-interview-day-checklist
+2. Have 10-prompt-templates open for reference
+3. Review "Quick Reference Card" sections
+
+## 🎯 Quick Start Path
+
+**Minimum viable prep (2 hours):**
+1. Environment setup (01) - 30 min
+2. AI collaboration (03) - 20 min  
+3. Interview checklist (05) - 20 min
+4. Cursor prompting (08) - 30 min
+5. Practice one exercise (11) - 20 min
+
+**Comprehensive prep (6-8 hours):**
+- Read all guides sequentially
+- Complete 4-5 practice exercises
+- Do a mock interview simulation
+- Review and refine weak areas
 
 ## 📖 Additional Resources
 
