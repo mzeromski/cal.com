@@ -1,0 +1,6 @@
+# Ignore generated PDF files
+*.pdf
+
+# Ignore Python cache if we add Python scripts later
+__pycache__/
+*.pyc
