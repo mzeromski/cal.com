@@ -1,7 +1,3 @@
-import type { Kysely } from "kysely";
-import { type SelectQueryBuilder } from "kysely";
-import { jsonObjectFrom, jsonArrayFrom } from "kysely/helpers/postgres";
-
 import dayjs from "@calcom/dayjs";
 import getAllUserBookings from "@calcom/features/bookings/lib/getAllUserBookings";
 import { isTextFilterValue } from "@calcom/features/data-table/lib/utils";
@@ -13,11 +9,11 @@ import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";
 import type { PrismaClient } from "@calcom/prisma";
 import type { Booking, Prisma, Prisma as PrismaClientType } from "@calcom/prisma/client";
-import { SchedulingType } from "@calcom/prisma/enums";
-import { BookingStatus } from "@calcom/prisma/enums";
+import { BookingStatus, SchedulingType } from "@calcom/prisma/enums";
 import { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
-
 import { TRPCError } from "@trpc/server";
+import type { Kysely, SelectQueryBuilder } from "kysely";
+import { jsonArrayFrom, jsonObjectFrom } from "kysely/helpers/postgres";
 
 import type { TrpcSessionUser } from "../../../types";
 import type { TGetInputSchema } from "./get.schema";
@@ -468,7 +464,8 @@ export async function getBookings({
           "Booking.metadata",
           "Booking.uid",
           eb
-            .cast<Prisma.JsonValue>( // Target TypeScript type
+            .cast<Prisma.JsonValue>(
+              // Target TypeScript type
               eb.ref("Booking.responses"), // Source column
               "jsonb" // Target SQL type
             )
@@ -812,7 +809,7 @@ type EnrichedUserData = {
  * @returns Bookings with attendees enriched with user data (name, email, avatarUrl, username)
  */
 async function enrichAttendeesWithUserData<
-  TBooking extends { attendees: ReadonlyArray<{ id: number; email: string }> }
+  TBooking extends { attendees: ReadonlyArray<{ id: number; email: string }> },
 >(
   bookings: TBooking[],
   kysely: Kysely<DB>

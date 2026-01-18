@@ -1,8 +1,3 @@
-import type { TokenResponse, Connection, Field } from "@jsforce/jsforce-node";
-import jsforce from "@jsforce/jsforce-node";
-import { RRule } from "rrule";
-import { z } from "zod";
-
 import { RoutingFormResponseDataFactory } from "@calcom/app-store/routing-forms/lib/RoutingFormResponseDataFactory";
 import { checkIfFreeEmailDomain } from "@calcom/features/watchlist/lib/freeEmailDomainCheck/checkIfFreeEmailDomain";
 import { getLocation } from "@calcom/lib/CalEventParser";
@@ -13,27 +8,31 @@ import { safeStringify } from "@calcom/lib/safeStringify";
 import { PrismaAssignmentReasonRepository } from "@calcom/lib/server/repository/PrismaAssignmentReasonRepository";
 import { PrismaRoutingFormResponseRepository as RoutingFormResponseRepository } from "@calcom/lib/server/repository/PrismaRoutingFormResponseRepository";
 import { prisma } from "@calcom/prisma";
-import type { CalendarEvent, CalEventResponses } from "@calcom/types/Calendar";
+import type { CalEventResponses, CalendarEvent } from "@calcom/types/Calendar";
 import type { CredentialPayload } from "@calcom/types/Credential";
-import type { CRM, Contact, CrmEvent } from "@calcom/types/CrmService";
+import type { Contact, CRM, CrmEvent } from "@calcom/types/CrmService";
+import type { Connection, Field, TokenResponse } from "@jsforce/jsforce-node";
+import jsforce from "@jsforce/jsforce-node";
+import { RRule } from "rrule";
+import { z } from "zod";
 
 import type { ParseRefreshTokenResponse } from "../../_utils/oauth/parseRefreshTokenResponse";
 import parseRefreshTokenResponse from "../../_utils/oauth/parseRefreshTokenResponse";
 import { findFieldValueByIdentifier } from "../../routing-forms/lib/findFieldValueByIdentifier";
 import { default as appMeta } from "../config.json";
-import type { writeToRecordDataSchema, appDataSchema, writeToBookingEntry } from "../zod";
+import type { appDataSchema, writeToBookingEntry, writeToRecordDataSchema } from "../zod";
 import {
-  SalesforceRecordEnum,
-  SalesforceFieldType,
-  WhenToWriteToRecord,
   DateFieldTypeData,
   RoutingReasons,
+  SalesforceFieldType,
+  SalesforceRecordEnum,
+  WhenToWriteToRecord,
 } from "./enums";
 import { getSalesforceAppKeys } from "./getSalesforceAppKeys";
 import { SalesforceGraphQLClient } from "./graphql/SalesforceGraphQLClient";
 import getAllPossibleWebsiteValuesFromEmailDomain from "./utils/getAllPossibleWebsiteValuesFromEmailDomain";
-import getDominantAccountId from "./utils/getDominantAccountId";
 import type { GetDominantAccountIdInput } from "./utils/getDominantAccountId";
+import getDominantAccountId from "./utils/getDominantAccountId";
 
 class SFObjectToUpdateNotFoundError extends RetryableError {
   constructor(message: string) {
@@ -223,7 +222,7 @@ export default class SalesforceCRMService implements CRM {
     const writeToEventRecord = await this.generateWriteToEventBody(event);
     log.info(`Writing to event fields: ${Object.keys(writeToEventRecord)} `);
 
-    let ownerId: string | undefined = undefined;
+    let ownerId: string | undefined;
     if (event?.organizer?.email) {
       ownerId = await this.getSalesforceUserIdFromEmail(event.organizer.email);
     } else {
@@ -555,7 +554,7 @@ export default class SalesforceCRMService implements CRM {
   }) {
     // Escape SOSL reserved characters: ? & | ! { } [ ] ( ) ^ ~ * : \ " ' + -
     // eslint-disable-next-line no-useless-escape
-    const escapedEmail = email.replace(/([?&|!{}[\]()^~*:\\"'+\-])/g, "\\$1");
+    const escapedEmail = email.replace(/([?&|!{}[\]()^~*:\\"'+-])/g, "\\$1");
     const searchResult = await conn.search(
       `FIND {${escapedEmail}} IN EMAIL FIELDS RETURNING Lead(Id, Email, OwnerId, Owner.Email), Contact(Id, Email, OwnerId, Owner.Email)`
     );
@@ -764,7 +763,7 @@ export default class SalesforceCRMService implements CRM {
         records: { WhoId: string }[];
       };
 
-      let salesforceAttendeeEmail: string | undefined = undefined;
+      let salesforceAttendeeEmail: string | undefined;
       // Figure out if the attendee is a contact or lead
       const contactQuery = (await conn.query(
         `SELECT Email FROM Contact WHERE Id = '${salesforceEvent.records[0].WhoId}'`

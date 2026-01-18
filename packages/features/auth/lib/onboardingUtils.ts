@@ -51,9 +51,8 @@ export async function checkOnboardingRedirect(
   const featuresRepository = new FeaturesRepository(prisma);
 
   if (options?.checkEmailVerification) {
-    const emailVerificationEnabled = await featuresRepository.checkIfFeatureIsEnabledGlobally(
-      "email-verification"
-    );
+    const emailVerificationEnabled =
+      await featuresRepository.checkIfFeatureIsEnabledGlobally("email-verification");
 
     if (!user.emailVerified && user.identityProvider === "CAL" && emailVerificationEnabled) {
       // User needs email verification, redirect to verification page

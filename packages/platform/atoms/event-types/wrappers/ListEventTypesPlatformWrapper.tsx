@@ -1,12 +1,10 @@
-import { AtomsWrapper } from "@/components/atoms-wrapper";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-
-import { EventTypeListItem } from "../components/EventTypeListItem";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { EmptyScreen } from "@calcom/ui/components/empty-screen";
-
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { AtomsWrapper } from "@/components/atoms-wrapper";
 import { useDeleteEventTypeById } from "../../hooks/event-types/private/useDeleteEventTypeById";
 import { useToast } from "../../src/components/ui/use-toast";
+import { EventTypeListItem } from "../components/EventTypeListItem";
 import { useAtomGetAllEventTypes } from "../hooks/useAtomGetAllEventTypes";
 
 interface ListEventTypesPlatformWrapperProps {

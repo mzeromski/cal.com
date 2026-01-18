@@ -1,7 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
 import { WatchlistErrors } from "@calcom/features/watchlist/lib/errors/WatchlistErrors";
 import { WatchlistType } from "@calcom/prisma/enums";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { addToWatchlistHandler } from "./addToWatchlist.handler";
 

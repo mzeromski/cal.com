@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-
 import dayjs from "@calcom/dayjs";
 import { useBookerStoreContext } from "@calcom/features/bookings/Booker/BookerStoreProvider";
+import { useEffect } from "react";
 
 export const useInitializeWeekStart = (isPlatform: boolean, isCalendarView: boolean) => {
   const today = dayjs();

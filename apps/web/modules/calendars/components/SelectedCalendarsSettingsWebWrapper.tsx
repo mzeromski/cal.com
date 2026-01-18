@@ -1,8 +1,4 @@
-import Link from "next/link";
-import React from "react";
-
-import AppListCard from "@calcom/web/modules/apps/components/AppListCard";
-import CredentialActionsDropdown from "@calcom/web/modules/apps/components/CredentialActionsDropdown";
+import { SelectedCalendarsSettings } from "@calcom/atoms/selected-calendars/SelectedCalendarsSettings";
 import AdditionalCalendarSelector from "@calcom/features/calendars/AdditionalCalendarSelector";
 import { CalendarSwitch } from "@calcom/features/calendars/CalendarSwitch";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
@@ -11,8 +7,10 @@ import { trpc } from "@calcom/trpc/react";
 import { Alert } from "@calcom/ui/components/alert";
 import { Select } from "@calcom/ui/components/form";
 import { List } from "@calcom/ui/components/list";
-
-import { SelectedCalendarsSettings } from "@calcom/atoms/selected-calendars/SelectedCalendarsSettings";
+import AppListCard from "@calcom/web/modules/apps/components/AppListCard";
+import CredentialActionsDropdown from "@calcom/web/modules/apps/components/CredentialActionsDropdown";
+import Link from "next/link";
+import React from "react";
 
 export enum SelectedCalendarSettingsScope {
   User = "user",

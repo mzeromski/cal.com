@@ -1,3 +1,8 @@
+import process from "node:process";
+import { getRecurringBookingService } from "@calcom/features/bookings/di/RecurringBookingService.container";
+import { WEBAPP_URL, WEBSITE_URL } from "@calcom/lib/constants";
+import logger from "@calcom/lib/logger";
+import { BookingStatus } from "@calcom/prisma/enums";
 import {
   createBookingScenario,
   getBooker,
@@ -17,15 +22,9 @@ import {
 } from "@calcom/testing/lib/bookingScenario/expects";
 import { getMockRequestDataForBooking } from "@calcom/testing/lib/bookingScenario/getMockRequestDataForBooking";
 import { setupAndTeardown } from "@calcom/testing/lib/bookingScenario/setupAndTeardown";
-
+import { test } from "@calcom/testing/lib/fixtures/fixtures";
 import { v4 as uuidv4 } from "uuid";
 import { describe, expect } from "vitest";
-
-import { getRecurringBookingService } from "@calcom/features/bookings/di/RecurringBookingService.container";
-import { WEBAPP_URL, WEBSITE_URL } from "@calcom/lib/constants";
-import logger from "@calcom/lib/logger";
-import { BookingStatus } from "@calcom/prisma/enums";
-import { test } from "@calcom/testing/lib/fixtures/fixtures";
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 

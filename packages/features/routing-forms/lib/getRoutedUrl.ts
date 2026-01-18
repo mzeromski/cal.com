@@ -1,10 +1,6 @@
 // !IMPORTANT! changes to this file requires publishing new version of platform libraries in order for the changes to be applied to APIV2
 import { createHash } from "node:crypto";
-import type { GetServerSidePropsContext } from "next";
 import { stringify } from "node:querystring";
-import { v4 as uuidv4 } from "uuid";
-import z from "zod";
-
 import { enrichFormWithMigrationData } from "@calcom/app-store/routing-forms/enrichFormWithMigrationData";
 import { getAbsoluteEventTypeRedirectUrlWithEmbedSupport } from "@calcom/app-store/routing-forms/getEventTypeRedirectUrl";
 import { getResponseToStore } from "@calcom/app-store/routing-forms/lib/getResponseToStore";
@@ -23,8 +19,10 @@ import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";
 import { withReporting } from "@calcom/lib/sentryWrapper";
 import prisma from "@calcom/prisma";
-
 import { TRPCError } from "@trpc/server";
+import type { GetServerSidePropsContext } from "next";
+import { v4 as uuidv4 } from "uuid";
+import z from "zod";
 
 import { getUrlSearchParamsToForward } from "./getUrlSearchParamsToForward";
 import { handleResponse } from "./handleResponse";

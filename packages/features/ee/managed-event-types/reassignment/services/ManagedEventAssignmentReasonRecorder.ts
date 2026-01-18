@@ -1,7 +1,7 @@
+import type { AssignmentReasonRepository } from "@calcom/features/assignment-reason/repositories/AssignmentReasonRepository";
+import type { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { withReporting } from "@calcom/lib/sentryWrapper";
 import { AssignmentReasonEnum } from "@calcom/prisma/enums";
-import type { UserRepository } from "@calcom/features/users/repositories/UserRepository";
-import type { AssignmentReasonRepository } from "@calcom/features/assignment-reason/repositories/AssignmentReasonRepository";
 
 export enum ManagedEventReassignmentType {
   MANUAL = "manual",
@@ -28,7 +28,7 @@ export class ManagedEventAssignmentReasonService {
 
   /**
    * Record a managed event reassignment reason
-   * 
+   *
    * @param newBookingId - The ID of the NEW booking created during reassignment
    * @param reassignById - The ID of the user who performed the reassignment
    * @param reassignReason - Optional reason for the reassignment

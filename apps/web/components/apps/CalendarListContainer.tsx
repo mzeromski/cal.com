@@ -1,27 +1,25 @@
 "use client";
 
-import { useEffect, Suspense } from "react";
-
 import { InstallAppButton } from "@calcom/app-store/InstallAppButton";
-import { DestinationCalendarSettingsWebWrapper } from "./DestinationCalendarSettingsWebWrapper";
-import { SelectedCalendarsSettingsWebWrapper } from "@calcom/web/modules/calendars/components/SelectedCalendarsSettingsWebWrapper";
-import AppListCard from "@calcom/web/modules/apps/components/AppListCard";
-import { SkeletonLoader } from "@calcom/web/modules/apps/components/SkeletonLoader";
 import SettingsHeader from "@calcom/features/settings/appDir/SettingsHeader";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import { trpc } from "@calcom/trpc/react";
 import type { RouterOutputs } from "@calcom/trpc/react";
+import { trpc } from "@calcom/trpc/react";
 import { Button } from "@calcom/ui/components/button";
 import { EmptyScreen } from "@calcom/ui/components/empty-screen";
 import { ShellSubHeading } from "@calcom/ui/components/layout";
 import { List } from "@calcom/ui/components/list";
 import { showToast } from "@calcom/ui/components/toast";
 import { revalidateSettingsCalendars } from "@calcom/web/app/cache/path/settings/my-account";
-
-import { QueryCell } from "@lib/QueryCell";
+import AppListCard from "@calcom/web/modules/apps/components/AppListCard";
+import { SkeletonLoader } from "@calcom/web/modules/apps/components/SkeletonLoader";
+import { SelectedCalendarsSettingsWebWrapper } from "@calcom/web/modules/calendars/components/SelectedCalendarsSettingsWebWrapper";
+import SubHeadingTitleWithConnections from "@components/integrations/SubHeadingTitleWithConnections";
 import useRouterQuery from "@lib/hooks/useRouterQuery";
 
-import SubHeadingTitleWithConnections from "@components/integrations/SubHeadingTitleWithConnections";
+import { QueryCell } from "@lib/QueryCell";
+import { Suspense, useEffect } from "react";
+import { DestinationCalendarSettingsWebWrapper } from "./DestinationCalendarSettingsWebWrapper";
 
 type Props = {
   onChanged: () => unknown | Promise<unknown>;

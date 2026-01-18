@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import type { ValidatorConstraintInterface, ValidationOptions } from "class-validator";
-import { IsBoolean, IsInt, IsOptional, Min, ValidatorConstraint, registerDecorator } from "class-validator";
+import type { ValidationOptions, ValidatorConstraintInterface } from "class-validator";
+import { IsBoolean, IsInt, IsOptional, Min, registerDecorator, ValidatorConstraint } from "class-validator";
 
 import type { Disabled_2024_06_14 } from "./disabled.input";
 
@@ -95,7 +95,7 @@ class BookingLimitsDurationValidator implements ValidatorConstraintInterface {
 }
 
 export function ValidateBookingLimistsDuration(validationOptions?: ValidationOptions) {
-  return function (object: any, propertyName: string) {
+  return (object: any, propertyName: string) => {
     registerDecorator({
       name: "ValidateBookingLimistsDuration",
       target: object.constructor,

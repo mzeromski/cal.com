@@ -1,8 +1,7 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-
-import { DEFAULT_WEBHOOK_VERSION } from "./interface/IWebhookRepository";
-import { handleWebhookScheduledTriggers } from "./handleWebhookScheduledTriggers";
 import type { PrismaClient } from "@calcom/prisma";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { handleWebhookScheduledTriggers } from "./handleWebhookScheduledTriggers";
+import { DEFAULT_WEBHOOK_VERSION } from "./interface/IWebhookRepository";
 
 describe("handleWebhookScheduledTriggers - X-Cal-Webhook-Version header", () => {
   const mockFetch = vi.fn();
@@ -81,7 +80,7 @@ describe("handleWebhookScheduledTriggers - X-Cal-Webhook-Version header", () => 
     };
 
     await handleWebhookScheduledTriggers(mockPrisma as unknown as PrismaClient);
-  
+
     expect(mockFetch).toHaveBeenCalledTimes(1);
     const [, options] = mockFetch.mock.calls[0];
 

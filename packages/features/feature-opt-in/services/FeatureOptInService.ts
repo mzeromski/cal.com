@@ -281,7 +281,13 @@ export class FeatureOptInService implements IFeatureOptInService {
    */
   async setTeamFeatureState(
     input:
-      | { teamId: number; featureId: FeatureId; state: "enabled" | "disabled"; assignedBy: number; scope?: OptInFeatureScope }
+      | {
+          teamId: number;
+          featureId: FeatureId;
+          state: "enabled" | "disabled";
+          assignedBy: number;
+          scope?: OptInFeatureScope;
+        }
       | { teamId: number; featureId: FeatureId; state: "inherit"; scope?: OptInFeatureScope }
   ): Promise<void> {
     const { teamId, featureId, state } = input;

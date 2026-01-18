@@ -1,19 +1,19 @@
-import {
-  createCredentials,
-  addTeamsToDb,
-  addEventTypesToDb,
-  addUsersToDb,
-} from "@calcom/testing/lib/bookingScenario/bookingScenario";
-
-import { describe, test, expect, vi } from "vitest";
-
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
+import {
+  addEventTypesToDb,
+  addTeamsToDb,
+  addUsersToDb,
+  createCredentials,
+} from "@calcom/testing/lib/bookingScenario/bookingScenario";
+import { describe, expect, test, vi } from "vitest";
 
 vi.mock("@calcom/features/users/repositories/UserRepository", () => {
   return {
-    UserRepository: vi.fn().mockImplementation(function() { return {
-      enrichUserWithItsProfile: vi.fn(),
-    }; }),
+    UserRepository: vi.fn().mockImplementation(function () {
+      return {
+        enrichUserWithItsProfile: vi.fn(),
+      };
+    }),
   };
 });
 

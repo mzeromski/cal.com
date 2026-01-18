@@ -1,5 +1,5 @@
 import { beforeEach, vi } from "vitest";
-import { mockReset, mockDeep } from "vitest-mock-extended";
+import { mockDeep, mockReset } from "vitest-mock-extended";
 
 import type * as CalendarManager from "../CalendarManager";
 

@@ -1,12 +1,9 @@
-import {
-  CALENDARS_QUEUE,
-  DEFAULT_CALENDARS_JOB,
-} from "@/ee/calendars/processors/calendars.processor";
+import { getQueueToken } from "@nestjs/bull";
+import { Logger } from "@nestjs/common";
+import { Test, TestingModule } from "@nestjs/testing";
+import { CALENDARS_QUEUE, DEFAULT_CALENDARS_JOB } from "@/ee/calendars/processors/calendars.processor";
 import { OrganizationsDelegationCredentialRepository } from "@/modules/organizations/delegation-credentials/organizations-delegation-credential.repository";
 import { OrganizationsDelegationCredentialService } from "@/modules/organizations/delegation-credentials/services/organizations-delegation-credential.service";
-import { Logger } from "@nestjs/common";
-import { getQueueToken } from "@nestjs/bull";
-import { Test, TestingModule } from "@nestjs/testing";
 
 describe("OrganizationsDelegationCredentialService", () => {
   let service: OrganizationsDelegationCredentialService;
@@ -38,9 +35,7 @@ describe("OrganizationsDelegationCredentialService", () => {
       ],
     }).compile();
 
-    service = module.get<OrganizationsDelegationCredentialService>(
-      OrganizationsDelegationCredentialService
-    );
+    service = module.get<OrganizationsDelegationCredentialService>(OrganizationsDelegationCredentialService);
     mockRepository = module.get<OrganizationsDelegationCredentialRepository>(
       OrganizationsDelegationCredentialRepository
     );
@@ -127,9 +122,7 @@ describe("OrganizationsDelegationCredentialService", () => {
     });
 
     it("does not throw when repository fails", async () => {
-      (mockRepository.findDelegatedUserProfiles as jest.Mock).mockRejectedValue(
-        new Error("Database error")
-      );
+      (mockRepository.findDelegatedUserProfiles as jest.Mock).mockRejectedValue(new Error("Database error"));
 
       await expect(service.ensureDefaultCalendars(orgId, domain)).resolves.toBeUndefined();
       expect(mockQueue.add).not.toHaveBeenCalled();

@@ -1,6 +1,6 @@
+import process from "node:process";
+import { afterEach, beforeEach } from "vitest";
 import { enableEmailFeature, mockNoTranslations } from "./bookingScenario";
-
-import { beforeEach, afterEach } from "vitest";
 
 export function setupAndTeardown() {
   beforeEach(() => {

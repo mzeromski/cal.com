@@ -1,17 +1,16 @@
-import type { DeepMockProxy } from "vitest-mock-extended";
-
 import { eventTypeMetaDataSchemaWithTypedApps } from "@calcom/app-store/zod-utils";
 import { sendSlugReplacementEmail } from "@calcom/emails/integration-email-service";
 import { getTranslation } from "@calcom/lib/server/i18n";
 import type { PrismaClient } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
 import { SchedulingType } from "@calcom/prisma/enums";
+import { EventTypeSchema } from "@calcom/prisma/zod/modelSchema/EventTypeSchema";
 import {
   allManagedEventTypeProps,
   allManagedEventTypePropsForZod,
   unlockedManagedEventTypePropsForZod,
 } from "@calcom/prisma/zod-utils";
-import { EventTypeSchema } from "@calcom/prisma/zod/modelSchema/EventTypeSchema";
+import type { DeepMockProxy } from "vitest-mock-extended";
 
 interface handleChildrenEventTypesProps {
   eventTypeId: number;
@@ -186,7 +185,7 @@ export default async function handleChildrenEventTypes({
   const currentWorkflowIds = eventType.workflows?.map((wf) => wf.workflowId);
 
   // Store result for existent event types deletion process
-  let deletedExistentEventTypes = undefined;
+  let deletedExistentEventTypes;
 
   // New users added
   if (newUserIds?.length) {
@@ -290,8 +289,8 @@ export default async function handleChildrenEventTypes({
             key === "afterBufferTime"
               ? "afterEventBuffer"
               : key === "beforeBufferTime"
-              ? "beforeEventBuffer"
-              : key;
+                ? "beforeEventBuffer"
+                : key;
           // @ts-expect-error Element implicitly has any type
           acc[filteredKey] = true;
           return acc;

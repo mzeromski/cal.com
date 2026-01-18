@@ -6,8 +6,8 @@ import type {
   IOrganizationWatchlistRepository,
 } from "../interface/IWatchlistRepositories";
 import type { IWatchlistService } from "../interface/IWatchlistService";
-import type { WatchlistEntry, CreateWatchlistEntryData, UpdateWatchlistEntryData } from "../types";
-import { normalizeEmail, normalizeDomain } from "../utils/normalization";
+import type { CreateWatchlistEntryData, UpdateWatchlistEntryData, WatchlistEntry } from "../types";
+import { normalizeDomain, normalizeEmail } from "../utils/normalization";
 
 type Deps = {
   globalRepo: IGlobalWatchlistRepository;

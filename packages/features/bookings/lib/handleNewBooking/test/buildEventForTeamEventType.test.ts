@@ -1,7 +1,7 @@
 // or wherever it's from
-import { vi, describe, it, expect, beforeEach } from "vitest";
 
 import { SchedulingType } from "@calcom/prisma/enums";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { buildEventForTeamEventType } from "../../service/RegularBookingService";
 
@@ -25,7 +25,7 @@ vi.mock("@calcom/features/CalendarEventBuilder", () => {
       fromEvent: vi.fn().mockImplementation((_evt) => ({
         withDestinationCalendar: withDestinationCalendarSpy,
         withTeam: withTeamSpy,
-        build: vi.fn().mockImplementation(function() {
+        build: vi.fn().mockImplementation(function () {
           return {
             destinationCalendar: [],
             team: {}, // <- you won't use this result anyway

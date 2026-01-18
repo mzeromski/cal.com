@@ -1,7 +1,6 @@
-import { vi, beforeEach } from "vitest";
-import { mockDeep, mockReset } from "vitest-mock-extended";
-
 import type { OrganizationRepository } from "@calcom/features/ee/organizations/repositories/OrganizationRepository";
+import { beforeEach, vi } from "vitest";
+import { mockDeep, mockReset } from "vitest-mock-extended";
 
 const mockedSingleton = mockDeep<OrganizationRepository>();
 
@@ -18,16 +17,14 @@ export const organizationScenarios = {
     findUniqueNonPlatformOrgsByMatchingAutoAcceptEmail: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       fakeReturnOrganization: (org: any, forInput: any) => {
-        mockedSingleton.findUniqueNonPlatformOrgsByMatchingAutoAcceptEmail.mockImplementation(
-          (arg) => {
-            if (forInput.email === arg.email) {
-              return org;
-            }
-            const errorMsg = "Mock Error-fakeReturnOrganization: Unhandled input";
-            console.log(errorMsg, { arg, forInput });
-            throw new Error(errorMsg);
+        mockedSingleton.findUniqueNonPlatformOrgsByMatchingAutoAcceptEmail.mockImplementation((arg) => {
+          if (forInput.email === arg.email) {
+            return org;
           }
-        );
+          const errorMsg = "Mock Error-fakeReturnOrganization: Unhandled input";
+          console.log(errorMsg, { arg, forInput });
+          throw new Error(errorMsg);
+        });
       },
       fakeNoMatch: () => {
         mockedSingleton.findUniqueNonPlatformOrgsByMatchingAutoAcceptEmail.mockResolvedValue(null);

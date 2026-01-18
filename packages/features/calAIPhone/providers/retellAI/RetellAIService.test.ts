@@ -1,13 +1,12 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-
 import { checkRateLimitAndThrowError } from "@calcom/lib/checkRateLimitAndThrowError";
 import { PhoneNumberSubscriptionStatus } from "@calcom/prisma/enums";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { AgentRepositoryInterface } from "../interfaces/AgentRepositoryInterface";
 import type { PhoneNumberRepositoryInterface } from "../interfaces/PhoneNumberRepositoryInterface";
 import type { TransactionInterface } from "../interfaces/TransactionInterface";
-import { RetellAIService } from "./RetellAIService";
 import { RetellAIError } from "./errors";
+import { RetellAIService } from "./RetellAIService";
 import { createMockDatabaseAgent } from "./services/__tests__/test-utils";
 import type { RetellAIRepository } from "./types";
 
@@ -34,7 +33,7 @@ vi.mock("@calcom/features/ee/payments/server/stripe", () => ({
 
 const mockGetAllCredits = vi.fn();
 const mockHasAvailableCredits = vi.fn();
-const mockCreditService = vi.fn().mockImplementation(function() {
+const mockCreditService = vi.fn().mockImplementation(function () {
   return {
     getAllCredits: mockGetAllCredits,
     hasAvailableCredits: mockHasAvailableCredits,
@@ -851,7 +850,7 @@ describe("RetellAIService", () => {
       const { CreditService } = await import("@calcom/features/ee/billing/credit-service");
 
       const mockHasAvailableCredits = vi.fn().mockResolvedValue(true);
-      (CreditService as any).mockImplementation(function() {
+      (CreditService as any).mockImplementation(function () {
         return {
           hasAvailableCredits: mockHasAvailableCredits,
         };
@@ -935,7 +934,7 @@ describe("RetellAIService", () => {
 
       // Mock credit service to return false (no credits)
       const mockHasAvailableCredits = vi.fn().mockResolvedValue(false);
-      (CreditService as any).mockImplementation(function() {
+      (CreditService as any).mockImplementation(function () {
         return {
           hasAvailableCredits: mockHasAvailableCredits,
         };
@@ -958,7 +957,7 @@ describe("RetellAIService", () => {
 
       // Mock sufficient credits to get past credit check
       const mockHasAvailableCredits = vi.fn().mockResolvedValue(true);
-      (CreditService as any).mockImplementation(function() {
+      (CreditService as any).mockImplementation(function () {
         return {
           hasAvailableCredits: mockHasAvailableCredits,
         };
@@ -982,7 +981,7 @@ describe("RetellAIService", () => {
 
       // Mock sufficient credits
       const mockHasAvailableCredits = vi.fn().mockResolvedValue(true);
-      (CreditService as any).mockImplementation(function() {
+      (CreditService as any).mockImplementation(function () {
         return {
           hasAvailableCredits: mockHasAvailableCredits,
         };
@@ -1008,7 +1007,7 @@ describe("RetellAIService", () => {
 
       // Mock sufficient credits
       const mockHasAvailableCredits = vi.fn().mockResolvedValue(true);
-      (CreditService as any).mockImplementation(function() {
+      (CreditService as any).mockImplementation(function () {
         return {
           hasAvailableCredits: mockHasAvailableCredits,
         };

@@ -60,9 +60,13 @@ export async function fetchSignup(data: SignupData, cfToken?: string): Promise<S
 }
 
 export function isUserAlreadyExistsError(result: SignupResult): boolean {
-  return !result.ok && result.status === 409 && result.error.message === SIGNUP_ERROR_CODES.USER_ALREADY_EXISTS;
+  return (
+    !result.ok && result.status === 409 && result.error.message === SIGNUP_ERROR_CODES.USER_ALREADY_EXISTS
+  );
 }
 
-export function hasCheckoutSession(result: SignupResult): result is { ok: false; status: number; error: SignupErrorResponse & { checkoutSessionId: string } } {
+export function hasCheckoutSession(
+  result: SignupResult
+): result is { ok: false; status: number; error: SignupErrorResponse & { checkoutSessionId: string } } {
   return !result.ok && !!result.error.checkoutSessionId;
 }

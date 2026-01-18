@@ -1,13 +1,12 @@
-import {
-  BaseWorkflowStepOutputDto,
-  WorkflowTriggerOffsetOutputDto,
-  BaseWorkflowOutput,
-} from "@/modules/workflows/outputs/base-workflow.output";
+import { ERROR_STATUS, SUCCESS_STATUS } from "@calcom/platform-constants";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Expose, Type } from "class-transformer";
 import { IsArray, IsEnum, IsIn, IsString, ValidateNested } from "class-validator";
-
-import { SUCCESS_STATUS, ERROR_STATUS } from "@calcom/platform-constants";
+import {
+  BaseWorkflowOutput,
+  BaseWorkflowStepOutputDto,
+  WorkflowTriggerOffsetOutputDto,
+} from "@/modules/workflows/outputs/base-workflow.output";
 
 import { EMAIL_HOST, STEP_ACTIONS, StepAction } from "../inputs/workflow-step.input";
 import {

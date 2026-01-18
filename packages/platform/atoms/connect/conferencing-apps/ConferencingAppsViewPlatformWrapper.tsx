@@ -1,11 +1,6 @@
 "use client";
 
-import { useQueryClient } from "@tanstack/react-query";
-import { useReducer, useState } from "react";
-
 import AccountDialog from "@calcom/app-store/office365video/components/AccountDialog";
-import { AppList } from "@calcom/web/modules/apps/components/AppList";
-import DisconnectIntegrationModal from "@calcom/web/modules/apps/components/DisconnectIntegrationModal";
 import SettingsHeader from "@calcom/features/settings/appDir/SettingsHeader";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { GOOGLE_MEET, OFFICE_365_VIDEO, ZOOM } from "@calcom/platform-constants";
@@ -14,13 +9,17 @@ import type { App } from "@calcom/types/App";
 import { Button } from "@calcom/ui/components/button";
 import {
   Dropdown,
-  DropdownMenuTrigger,
+  DropdownItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownItem,
+  DropdownMenuTrigger,
 } from "@calcom/ui/components/dropdown";
 import { EmptyScreen } from "@calcom/ui/components/empty-screen";
 import { SkeletonContainer, SkeletonText } from "@calcom/ui/components/skeleton";
+import { AppList } from "@calcom/web/modules/apps/components/AppList";
+import DisconnectIntegrationModal from "@calcom/web/modules/apps/components/DisconnectIntegrationModal";
+import { useQueryClient } from "@tanstack/react-query";
+import { useReducer, useState } from "react";
 
 import { AtomsWrapper } from "../../src/components/atoms-wrapper";
 import { useToast } from "../../src/components/ui/use-toast";
@@ -31,14 +30,14 @@ import type {
 import { useAtomBulkUpdateEventTypesToDefaultLocation } from "./hooks/useAtomBulkUpdateEventTypesToDefaultLocation";
 import { useAtomGetEventTypes } from "./hooks/useAtomGetEventTypes";
 import {
-  useAtomsGetInstalledConferencingApps,
   QUERY_KEY as atomsConferencingAppsQueryKey,
+  useAtomsGetInstalledConferencingApps,
 } from "./hooks/useAtomsGetInstalledConferencingApps";
 import { useConnect } from "./hooks/useConnect";
 import { useDeleteCredential } from "./hooks/useDeleteCredential";
 import {
-  useGetDefaultConferencingApp,
   QUERY_KEY as defaultConferencingAppQueryKey,
+  useGetDefaultConferencingApp,
 } from "./hooks/useGetDefaultConferencingApp";
 import { useUpdateUserDefaultConferencingApp } from "./hooks/useUpdateUserDefaultConferencingApp";
 

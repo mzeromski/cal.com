@@ -1,10 +1,9 @@
+import cx from "@calcom/ui/classNames";
 import { useId } from "@radix-ui/react-id";
 import * as Label from "@radix-ui/react-label";
 import * as PrimitiveSwitch from "@radix-ui/react-switch";
+import type React from "react";
 import type { ReactNode } from "react";
-import React from "react";
-
-import cx from "@calcom/ui/classNames";
 
 import { Tooltip } from "../../tooltip";
 

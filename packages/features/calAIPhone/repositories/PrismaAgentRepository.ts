@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@calcom/prisma/client";
+import { Prisma, type PrismaClient } from "@calcom/prisma/client";
 import { MembershipRole } from "@calcom/prisma/enums";
 
 interface _AgentRawResult {
@@ -293,21 +293,24 @@ export class PrismaAgentRepository {
         : [];
 
     // Map phone numbers to agents
-    const phoneNumbersByAgent = phoneNumbers.reduce((acc, pn) => {
-      const agentId = pn.outboundAgentId;
-      if (agentId) {
-        if (!acc[agentId]) {
-          acc[agentId] = [];
+    const phoneNumbersByAgent = phoneNumbers.reduce(
+      (acc, pn) => {
+        const agentId = pn.outboundAgentId;
+        if (agentId) {
+          if (!acc[agentId]) {
+            acc[agentId] = [];
+          }
+          acc[agentId].push({
+            id: pn.id,
+            phoneNumber: pn.phoneNumber,
+            subscriptionStatus: pn.subscriptionStatus,
+            provider: pn.provider,
+          });
         }
-        acc[agentId].push({
-          id: pn.id,
-          phoneNumber: pn.phoneNumber,
-          subscriptionStatus: pn.subscriptionStatus,
-          provider: pn.provider,
-        });
-      }
-      return acc;
-    }, {} as Record<string, _PhoneNumberRawResult[]>);
+        return acc;
+      },
+      {} as Record<string, _PhoneNumberRawResult[]>
+    );
 
     // Transform results to match expected format
     return agents.map((agent) => ({

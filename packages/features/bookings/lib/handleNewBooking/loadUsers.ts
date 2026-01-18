@@ -1,10 +1,10 @@
 import { getOrgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
 import {
-  getRoutedUsersWithContactOwnerAndFixedUsers,
   findMatchingHostsWithEventSegment,
   getNormalizedHosts,
+  getRoutedUsersWithContactOwnerAndFixedUsers,
 } from "@calcom/features/users/lib/getRoutedUsers";
-import { withSelectedCalendars, UserRepository } from "@calcom/features/users/repositories/UserRepository";
+import { UserRepository, withSelectedCalendars } from "@calcom/features/users/repositories/UserRepository";
 import { HttpError } from "@calcom/lib/http-error";
 import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";

@@ -1,10 +1,10 @@
 import type { RoutingFormResponse } from "@calcom/features/bookings/lib/getLuckyUser";
 import type { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
+import type { EventType } from "@calcom/features/users/lib/getRoutedUsers";
 import {
   findMatchingHostsWithEventSegment,
   getNormalizedHostsWithDelegationCredentials,
 } from "@calcom/features/users/lib/getRoutedUsers";
-import type { EventType } from "@calcom/features/users/lib/getRoutedUsers";
 import { withReporting } from "@calcom/lib/sentryWrapper";
 import type { SelectedCalendar } from "@calcom/prisma/client";
 import { SchedulingType } from "@calcom/prisma/enums";
@@ -61,9 +61,9 @@ const isWithinRRHostSubset = <T extends { isFixed: boolean; user: { id: number }
     rrHostSubsetEnabled,
     schedulingType,
   }: { rrHostSubsetEnabled: boolean; schedulingType?: SchedulingType } = {
-      rrHostSubsetEnabled: false,
-      schedulingType: undefined,
-    }
+    rrHostSubsetEnabled: false,
+    schedulingType: undefined,
+  }
 ): host is T & { isFixed: false } => {
   if (rrHostSubsetIds.length === 0 || !rrHostSubsetEnabled || schedulingType !== SchedulingType.ROUND_ROBIN) {
     return true;
@@ -72,7 +72,7 @@ const isWithinRRHostSubset = <T extends { isFixed: boolean; user: { id: number }
 };
 
 export class QualifiedHostsService {
-  constructor(public readonly dependencies: IQualifiedHostsService) { }
+  constructor(public readonly dependencies: IQualifiedHostsService) {}
 
   async _findQualifiedHostsWithDelegationCredentials<
     T extends {
@@ -81,7 +81,7 @@ export class QualifiedHostsService {
       uuid: string;
       credentials: CredentialPayload[];
       userLevelSelectedCalendars: SelectedCalendar[];
-    } & Record<string, unknown>
+    } & Record<string, unknown>,
   >({
     eventType,
     rescheduleUid,

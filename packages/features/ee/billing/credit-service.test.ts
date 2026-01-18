@@ -1,5 +1,3 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-
 import dayjs from "@calcom/dayjs";
 import * as EmailManager from "@calcom/emails/billing-email-service";
 import { CreditsRepository } from "@calcom/features/credits/repositories/CreditsRepository";
@@ -7,6 +5,7 @@ import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepos
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import getOrgIdFromMemberOrTeamId from "@calcom/lib/getOrgIdFromMemberOrTeamId";
 import { CreditType } from "@calcom/prisma/enums";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { CreditService } from "./credit-service";
 import { SubscriptionStatus } from "./repository/billing/IBillingRepository";
@@ -469,7 +468,9 @@ describe("CreditService", () => {
             members: [{ accepted: true }],
           }),
         };
-        vi.mocked(TeamRepository).mockImplementation(function() { return mockTeamRepo as unknown as TeamRepository; });
+        vi.mocked(TeamRepository).mockImplementation(function () {
+          return mockTeamRepo as unknown as TeamRepository;
+        });
 
         const mockTeamBillingService = {
           getSubscriptionStatus: vi.fn().mockResolvedValue(SubscriptionStatus.TRIALING),
@@ -493,7 +494,9 @@ describe("CreditService", () => {
             members: [{ accepted: true }, { accepted: true }, { accepted: true }],
           }),
         };
-        vi.mocked(TeamRepository).mockImplementation(function() { return mockTeamRepo as unknown as TeamRepository; });
+        vi.mocked(TeamRepository).mockImplementation(function () {
+          return mockTeamRepo as unknown as TeamRepository;
+        });
 
         const mockTeamBillingService = {
           getSubscriptionStatus: vi.fn().mockResolvedValue(SubscriptionStatus.ACTIVE),
@@ -524,7 +527,9 @@ describe("CreditService", () => {
             members: [{ accepted: true }, { accepted: true }],
           }),
         };
-        vi.mocked(TeamRepository).mockImplementation(function() { return mockTeamRepo as unknown as TeamRepository; });
+        vi.mocked(TeamRepository).mockImplementation(function () {
+          return mockTeamRepo as unknown as TeamRepository;
+        });
 
         const mockTeamBillingService = {
           getSubscriptionStatus: vi.fn().mockResolvedValue(SubscriptionStatus.ACTIVE),
@@ -549,7 +554,9 @@ describe("CreditService", () => {
             members: [{ accepted: true }, { accepted: true }, { accepted: true }],
           }),
         };
-        vi.mocked(TeamRepository).mockImplementation(function() { return mockTeamRepo as unknown as TeamRepository; });
+        vi.mocked(TeamRepository).mockImplementation(function () {
+          return mockTeamRepo as unknown as TeamRepository;
+        });
 
         const mockTeamBillingService = {
           getSubscriptionStatus: vi.fn().mockResolvedValue(SubscriptionStatus.ACTIVE),
@@ -842,9 +849,9 @@ describe("CreditService", () => {
       ]);
 
       const mockTeamRepoInstance = {
-        findTeamsForCreditCheck: vi.fn().mockResolvedValue([
-          { id: 2, isOrganization: false, parentId: null, parent: null },
-        ]),
+        findTeamsForCreditCheck: vi
+          .fn()
+          .mockResolvedValue([{ id: 2, isOrganization: false, parentId: null, parent: null }]),
       };
       vi.mocked(TeamRepository).mockImplementation(function () {
         return mockTeamRepoInstance as unknown as TeamRepository;
@@ -960,9 +967,9 @@ describe("CreditService", () => {
         ]);
 
         const mockTeamRepoInstance = {
-          findTeamsForCreditCheck: vi.fn().mockResolvedValue([
-            { id: 2, isOrganization: false, parentId: null, parent: null },
-          ]),
+          findTeamsForCreditCheck: vi
+            .fn()
+            .mockResolvedValue([{ id: 2, isOrganization: false, parentId: null, parent: null }]),
         };
         vi.mocked(TeamRepository).mockImplementation(function () {
           return mockTeamRepoInstance as unknown as TeamRepository;

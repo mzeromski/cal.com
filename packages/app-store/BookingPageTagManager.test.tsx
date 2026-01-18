@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
 import BookingPageTagManager, { handleEvent } from "./BookingPageTagManager";
@@ -23,7 +23,7 @@ function setOnWindow(prop: any, value: any) {
 afterEach(() => {
   windowProps.forEach((prop) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
+    //@ts-expect-error
     delete window[prop];
   });
   windowProps.splice(0);

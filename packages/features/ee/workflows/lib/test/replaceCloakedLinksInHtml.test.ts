@@ -19,7 +19,9 @@ describe("replaceCloakedLinksInHtml", () => {
     test("should handle links with additional attributes", () => {
       const html = '<a href="https://example.com" target="_blank" rel="noopener">Click here</a>';
       const result = replaceCloakedLinksInHtml(html);
-      expect(result).toBe('<a href="https://example.com" target="_blank" rel="noopener">https://example.com</a>');
+      expect(result).toBe(
+        '<a href="https://example.com" target="_blank" rel="noopener">https://example.com</a>'
+      );
     });
   });
 
@@ -162,7 +164,9 @@ describe("replaceCloakedLinksInHtml", () => {
       // Test case for potential XSS vector where href contains HTML special characters
       const html = '<a href="https://example.com?foo=1&bar=2">Click here</a>';
       const result = replaceCloakedLinksInHtml(html);
-      expect(result).toBe('<a href="https://example.com?foo=1&bar=2">https://example.com?foo=1&amp;bar=2</a>');
+      expect(result).toBe(
+        '<a href="https://example.com?foo=1&bar=2">https://example.com?foo=1&amp;bar=2</a>'
+      );
     });
 
     test("should escape angle brackets in href", () => {

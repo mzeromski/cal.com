@@ -1,16 +1,15 @@
 "use client";
 
-import type { RowSelectionState } from "@tanstack/react-table";
-import { getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
-import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
-
-import { DataTableSelectionBar, DataTableWrapper } from "~/data-table/components";
 import { IS_CALCOM } from "@calcom/lib/constants";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { Button } from "@calcom/ui/components/button";
 import { ConfirmationDialogContent, Dialog } from "@calcom/ui/components/dialog";
 import { EmptyScreen } from "@calcom/ui/components/empty-screen";
+import type { RowSelectionState } from "@tanstack/react-table";
+import { getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import type { ReactNode } from "react";
+import { useMemo, useState } from "react";
+import { DataTableSelectionBar, DataTableWrapper } from "~/data-table/components";
 
 import type { BlocklistEntry, BlocklistPermissions, BlocklistScope } from "../types";
 import { useBlockedEntriesColumns } from "./BlockedEntriesColumns";
@@ -208,7 +207,9 @@ export function BlockedEntriesTable<T extends BlocklistEntry>({
           isPending={isDeleting}
           onConfirm={confirmDelete}>
           {t(
-            isSystem ? "remove_value_from_system_blocklist_description" : "remove_value_from_blocklist_description"
+            isSystem
+              ? "remove_value_from_system_blocklist_description"
+              : "remove_value_from_blocklist_description"
           )}
         </ConfirmationDialogContent>
       </Dialog>

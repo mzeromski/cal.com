@@ -1,5 +1,3 @@
-import { cloneDeep } from "lodash";
-
 import { enrichUserWithDelegationCredentialsIncludeServiceAccountKey } from "@calcom/app-store/delegationCredential";
 import { eventTypeAppMetadataOptionalSchema } from "@calcom/app-store/zod-utils";
 import dayjs from "@calcom/dayjs";
@@ -20,8 +18,8 @@ import AssignmentReasonRecorder, {
 } from "@calcom/features/ee/round-robin/assignmentReason/AssignmentReasonRecorder";
 import { BookingLocationService } from "@calcom/features/ee/round-robin/lib/bookingLocationService";
 import {
-  scheduleEmailReminder,
   deleteScheduledEmailReminder,
+  scheduleEmailReminder,
 } from "@calcom/features/ee/workflows/lib/reminders/emailReminderManager";
 import { scheduleWorkflowReminders } from "@calcom/features/ee/workflows/lib/reminders/reminderScheduler";
 import { getEventName } from "@calcom/features/eventtypes/lib/eventNaming";
@@ -36,6 +34,7 @@ import { prisma } from "@calcom/prisma";
 import { WorkflowActions, WorkflowMethods, WorkflowTriggerEvents } from "@calcom/prisma/enums";
 import type { EventTypeMetadata, PlatformClientParams } from "@calcom/prisma/zod-utils";
 import type { CalendarEvent } from "@calcom/types/Calendar";
+import { cloneDeep } from "lodash";
 
 import { handleRescheduleEventManager } from "./handleRescheduleEventManager";
 import type { BookingSelectResult } from "./utils/bookingSelect";
@@ -152,7 +151,7 @@ export const roundRobinManualReassignment = async ({
   let bookingLocation = booking.location;
   let conferenceCredentialId: number | null = null;
 
-  const organizer = hasOrganizerChanged ? newUser : booking.user ?? newUser;
+  const organizer = hasOrganizerChanged ? newUser : (booking.user ?? newUser);
 
   const teamMembers = await getTeamMembers({
     eventTypeHosts,

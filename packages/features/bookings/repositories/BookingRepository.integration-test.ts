@@ -1,7 +1,6 @@
-import { describe, it, expect, beforeAll, beforeEach, afterAll, afterEach, vi } from "vitest";
 import { prisma } from "@calcom/prisma";
-
 import { BookingStatus, RRTimestampBasis } from "@calcom/prisma/enums";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { BookingRepository } from "./BookingRepository";
 
 // ------------
@@ -339,9 +338,7 @@ describe("BookingRepository (Integration Tests)", () => {
       });
 
       expect(bookings).toHaveLength(1);
-      expect(bookings[0].startTime.toISOString()).toBe(
-        "2025-06-26T00:00:00.000Z"
-      );
+      expect(bookings[0].startTime.toISOString()).toBe("2025-06-26T00:00:00.000Z");
     });
   });
 });

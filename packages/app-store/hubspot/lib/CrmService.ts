@@ -1,4 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
+import getLabelValueMapFromResponses from "@calcom/lib/bookings/getLabelValueMapFromResponses";
+import { getLocation } from "@calcom/lib/CalEventParser";
+import { WEBAPP_URL } from "@calcom/lib/constants";
+import { HttpError } from "@calcom/lib/http-error";
+import logger from "@calcom/lib/logger";
+import { PrismaTrackingRepository } from "@calcom/lib/server/repository/PrismaTrackingRepository";
+import prisma from "@calcom/prisma";
+import type { CalEventResponses, CalendarEvent } from "@calcom/types/Calendar";
+import type { CredentialPayload } from "@calcom/types/Credential";
+import type { Contact, ContactCreateInput, CRM, CrmEvent } from "@calcom/types/CrmService";
 import * as hubspot from "@hubspot/api-client";
 import type { BatchInputPublicAssociation } from "@hubspot/api-client/lib/codegen/crm/associations";
 import type { PublicObjectSearchRequest } from "@hubspot/api-client/lib/codegen/crm/contacts";
@@ -7,22 +19,9 @@ import type {
   SimplePublicObjectInput,
 } from "@hubspot/api-client/lib/codegen/crm/objects/meetings";
 import type { z } from "zod";
-
-import { getLocation } from "@calcom/lib/CalEventParser";
-import getLabelValueMapFromResponses from "@calcom/lib/bookings/getLabelValueMapFromResponses";
-import { WEBAPP_URL } from "@calcom/lib/constants";
-import { HttpError } from "@calcom/lib/http-error";
-import logger from "@calcom/lib/logger";
-import prisma from "@calcom/prisma";
-import type { CalendarEvent, CalEventResponses } from "@calcom/types/Calendar";
-import type { CredentialPayload } from "@calcom/types/Credential";
-import type { CRM, ContactCreateInput, Contact, CrmEvent } from "@calcom/types/CrmService";
-
 import { CrmFieldType, DateFieldType } from "../../_lib/crm-enums";
 import getAppKeysFromSlug from "../../_utils/getAppKeysFromSlug";
 import refreshOAuthTokens from "../../_utils/oauth/refreshOAuthTokens";
-import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
-import { PrismaTrackingRepository } from "@calcom/lib/server/repository/PrismaTrackingRepository";
 import type { HubspotToken } from "../api/callback";
 import type { appDataSchema } from "../zod";
 
@@ -64,15 +63,19 @@ export default class HubspotCalendarService implements CRM {
       .join("<br><br>");
 
     const organizerName = event.organizer.name || event.organizer.email;
-    const organizerInfo = `<b>${event.organizer.language.translate("organizer")}:</b> ${organizerName} (${event.organizer.email
-      })`;
+    const organizerInfo = `<b>${event.organizer.language.translate("organizer")}:</b> ${organizerName} (${
+      event.organizer.email
+    })`;
 
-    return `${organizerInfo}<br><br><b>${event.organizer.language.translate("invitee_timezone")}:</b> ${event.attendees[0].timeZone
-      }<br><br>${event.additionalNotes
-        ? `<b>${event.organizer.language.translate("share_additional_notes")}</b><br>${event.additionalNotes
-        }<br><br>`
+    return `${organizerInfo}<br><br><b>${event.organizer.language.translate("invitee_timezone")}:</b> ${
+      event.attendees[0].timeZone
+    }<br><br>${
+      event.additionalNotes
+        ? `<b>${event.organizer.language.translate("share_additional_notes")}</b><br>${
+            event.additionalNotes
+          }<br><br>`
         : ""
-      }
+    }
     ${userFieldsHtml}<br><br>
     <b>${event.organizer.language.translate("where")}:</b> ${location}<br><br>
     ${plainText ? `<b>${event.organizer.language.translate("description")}</b><br>${plainText}` : ""}
@@ -82,7 +85,7 @@ export default class HubspotCalendarService implements CRM {
   private async ensureFieldsExistOnMeeting(fieldsToTest: string[]) {
     const log = logger.getSubLogger({ prefix: [`[ensureFieldsExistOnMeeting]`] });
     const fieldSet = new Set(fieldsToTest);
-    const foundFields: Array<{ name: string; type: string;[key: string]: any }> = [];
+    const foundFields: Array<{ name: string; type: string; [key: string]: any }> = [];
 
     try {
       const properties = await this.hubspotClient.crm.properties.coreApi.getAll("meetings");
@@ -385,11 +388,7 @@ export default class HubspotCalendarService implements CRM {
     let currentToken = credential.key as unknown as HubspotToken;
 
     const isTokenValid = (token: HubspotToken) =>
-      token &&
-      token.tokenType &&
-      token.accessToken &&
-      token.expiryDate &&
-      token.expiryDate > Date.now();
+      token && token.tokenType && token.accessToken && token.expiryDate && token.expiryDate > Date.now();
 
     const refreshAccessToken = async (refreshToken: string) => {
       try {

@@ -1,17 +1,17 @@
 import { Button, ContextMenu, Host, HStack, Image } from "@expo/ui/swift-ui";
 import { buttonStyle, frame } from "@expo/ui/swift-ui/modifiers";
-import { isLiquidGlassAvailable } from "expo-glass-effect";
 import { Ionicons } from "@expo/vector-icons";
+import { isLiquidGlassAvailable } from "expo-glass-effect";
 import React from "react";
-import { Pressable, Text, TouchableOpacity, View, Linking } from "react-native";
+import { Linking, Pressable, Text, TouchableOpacity, View } from "react-native";
 import type { SFSymbols7_0 } from "sf-symbols-typescript";
+import { SvgImage } from "@/components/SvgImage";
 import type { Booking } from "@/services/calcom";
+import { showErrorAlert } from "@/utils/alerts";
+import { getBookingActions } from "@/utils/booking-actions";
 import type { RecurringBookingGroup } from "@/utils/bookings-utils";
 import { formatDate, formatTime, getHostAndAttendeesDisplay } from "@/utils/bookings-utils";
 import { getMeetingInfo } from "@/utils/meetings-utils";
-import { SvgImage } from "@/components/SvgImage";
-import { showErrorAlert } from "@/utils/alerts";
-import { getBookingActions } from "@/utils/booking-actions";
 
 export interface RecurringBookingListItemProps {
   group: RecurringBookingGroup;

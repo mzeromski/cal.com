@@ -1,6 +1,6 @@
 import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
 
-import { expect, test, vi, describe } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 import { OAuthManager } from "../../_utils/oauth/OAuthManager";
 import { internalServerErrorResponse, successResponse } from "../../_utils/testUtils";
@@ -34,7 +34,7 @@ vi.mock("../../_utils/getParsedAppKeysFromSlug", () => ({
 
 const mockRequestRaw = vi.fn();
 vi.mock("../../_utils/oauth/OAuthManager", () => ({
-  OAuthManager: vi.fn().mockImplementation(function() {
+  OAuthManager: vi.fn().mockImplementation(function () {
     return { requestRaw: mockRequestRaw };
   }),
 }));
@@ -60,7 +60,6 @@ const testCredential = {
 
 describe("createMeeting", () => {
   test("Successful `createMeeting` call", async () => {
-
     const videoApi = VideoApiAdapter(testCredential);
 
     mockRequestRaw.mockImplementation(({ url }) => {
@@ -108,7 +107,6 @@ describe("createMeeting", () => {
   });
 
   test(" `createMeeting` when there is no joinWebUrl and only joinUrl", async () => {
-
     const videoApi = VideoApiAdapter(testCredential);
 
     mockRequestRaw.mockImplementation(({ url }) => {

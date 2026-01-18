@@ -1,10 +1,8 @@
-import prismock from "@calcom/testing/lib/__mocks__/prisma";
-
-import { describe, expect, it, vi, beforeEach } from "vitest";
-
 import prisma from "@calcom/prisma";
 import type { AttributeOption } from "@calcom/prisma/client";
 import { AttributeType, MembershipRole } from "@calcom/prisma/enums";
+import prismock from "@calcom/testing/lib/__mocks__/prisma";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { assignValueToUserInOrgBulk, buildPrismaQueriesForAttributeOptionToUser } from "./assignValueToUser";
 

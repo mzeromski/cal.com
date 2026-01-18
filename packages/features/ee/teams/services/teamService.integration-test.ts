@@ -1,8 +1,7 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-
 import prisma from "@calcom/prisma";
 import type { Team, User } from "@calcom/prisma/client";
 import { MembershipRole } from "@calcom/prisma/enums";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { TeamService } from "./teamService";
 
@@ -34,7 +33,9 @@ const createTestUser = async (overrides?: {
     data: {
       email: overrides?.email ?? `test-user-${timestamp}-${randomSuffix}@example.com`,
       username:
-        overrides?.username === null ? null : overrides?.username ?? `testuser-${timestamp}-${randomSuffix}`,
+        overrides?.username === null
+          ? null
+          : (overrides?.username ?? `testuser-${timestamp}-${randomSuffix}`),
       name: "Test User",
       organizationId: overrides?.organizationId ?? undefined,
     },

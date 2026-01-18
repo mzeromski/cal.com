@@ -1,6 +1,6 @@
 import type z from "zod";
 
-import type { zodNonRouterField, routingFormResponseInDbSchema } from "./zod";
+import type { routingFormResponseInDbSchema, zodNonRouterField } from "./zod";
 
 export type FormResponse = Record<
   // Field ID
@@ -19,4 +19,3 @@ export type RoutingFormResponseData = {
   fields: z.infer<typeof zodNonRouterField>[];
   response: z.infer<typeof routingFormResponseInDbSchema>;
 };
-

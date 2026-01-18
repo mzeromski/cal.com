@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { WebhookTriggerEvents } from "@calcom/prisma/enums";
+import { describe, expect, it } from "vitest";
 
 import type { FormSubmittedDTO, FormSubmittedNoEventDTO } from "../../dto/types";
 import { FormPayloadBuilder } from "../versioned/v2021-10-20/FormPayloadBuilder";
@@ -8,7 +8,9 @@ describe("FormPayloadBuilder (v2021-10-20)", () => {
   const builder = new FormPayloadBuilder();
 
   const createMockDTO = (
-    triggerEvent: typeof WebhookTriggerEvents.FORM_SUBMITTED | typeof WebhookTriggerEvents.FORM_SUBMITTED_NO_EVENT
+    triggerEvent:
+      | typeof WebhookTriggerEvents.FORM_SUBMITTED
+      | typeof WebhookTriggerEvents.FORM_SUBMITTED_NO_EVENT
   ): FormSubmittedDTO | FormSubmittedNoEventDTO =>
     ({
       triggerEvent,

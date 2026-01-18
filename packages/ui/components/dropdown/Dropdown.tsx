@@ -1,13 +1,12 @@
+import classNames from "@calcom/ui/classNames";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { forwardRef } from "react";
 
-import classNames from "@calcom/ui/classNames";
-
 import type { ButtonColor } from "../button";
-import { Icon } from "../icon";
 import type { IconName } from "../icon";
+import { Icon } from "../icon";
 
 export const Dropdown = DropdownMenuPrimitive.Root;
 

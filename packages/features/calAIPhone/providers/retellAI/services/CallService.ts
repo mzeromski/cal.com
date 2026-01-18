@@ -3,11 +3,11 @@ import { HttpError } from "@calcom/lib/http-error";
 import logger from "@calcom/lib/logger";
 
 import type {
-  AIPhoneServiceProviderType,
   AIPhoneServiceCall,
+  AIPhoneServiceProviderType,
 } from "../../../interfaces/AIPhoneService.interface";
 import type { AgentRepositoryInterface } from "../../interfaces/AgentRepositoryInterface";
-import type { RetellAIRepository, RetellDynamicVariables, RetellCallListResponse } from "../types";
+import type { RetellAIRepository, RetellCallListResponse, RetellDynamicVariables } from "../types";
 
 interface RetellAIServiceInterface {
   updateToolsFromAgentId(

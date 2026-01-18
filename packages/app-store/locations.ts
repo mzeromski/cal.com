@@ -1,20 +1,20 @@
 /**
  * TODO: Consolidate this file with BookingLocationService and add tests
  */
-import type { TFunction } from "i18next";
-import { isValidPhoneNumber } from "libphonenumber-js/max";
-import { z } from "zod";
 
 import { appStoreMetadata } from "@calcom/app-store/bookerAppsMetaData";
 import logger from "@calcom/lib/logger";
 import { BookingStatus } from "@calcom/prisma/enums";
 import type { Ensure, Optional } from "@calcom/types/utils";
+import type { TFunction } from "i18next";
+import { isValidPhoneNumber } from "libphonenumber-js/max";
+import { z } from "zod";
 
 import type { EventLocationTypeFromAppMeta } from "../types/App";
 import {
+  DailyLocationType as importedDailyLocationType,
   MeetLocationType as importedMeetLocationType,
   MSTeamsLocationType as importedMSTeamsLocationType,
-  DailyLocationType as importedDailyLocationType,
 } from "./constants";
 
 export const MeetLocationType = importedMeetLocationType;
@@ -242,7 +242,7 @@ for (const [appName, meta] of Object.entries(appStoreMetadata)) {
     for (const [key, value] of Object.entries(location)) {
       if (typeof value === "string") {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         location[key] = value.replace(/{SLUG}/g, meta.slug).replace(/{TITLE}/g, meta.name);
       }
     }
@@ -397,7 +397,7 @@ export const getLocationValueForDB = (
   eventLocations: LocationObject[]
 ) => {
   let bookingLocation = bookingLocationTypeOrValue;
-  let conferenceCredentialId: number | undefined = undefined;
+  let conferenceCredentialId: number | undefined;
 
   eventLocations.forEach((location) => {
     if (location.type === bookingLocationTypeOrValue) {
@@ -481,8 +481,8 @@ export const getTranslatedLocation = (
   const translatedLocation = location.type.startsWith("integrations:")
     ? eventLocationType.label
     : translateAbleKeys.includes(locationKey)
-    ? t(locationKey)
-    : locationKey;
+      ? t(locationKey)
+      : locationKey;
 
   return translatedLocation;
 };

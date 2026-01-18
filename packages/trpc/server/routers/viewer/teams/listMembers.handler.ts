@@ -1,9 +1,9 @@
 import { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getBookerBaseUrlSync";
 import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
 import {
-  Resource,
   CustomAction,
-  PermissionString,
+  type PermissionString,
+  Resource,
 } from "@calcom/features/pbac/domain/types/permission-registry";
 import { getSpecificPermissions } from "@calcom/features/pbac/lib/resource-permissions";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
@@ -79,7 +79,7 @@ export const listMembersHandler = async ({ ctx, input }: ListMembersHandlerOptio
     orderBy: { id: "asc" },
   });
 
-  let nextCursor: typeof cursor | undefined = undefined;
+  let nextCursor: typeof cursor | undefined;
   if (teamMembers.length > limit) {
     const nextItem = teamMembers.pop();
     nextCursor = nextItem?.id;
@@ -96,10 +96,13 @@ export const listMembersHandler = async ({ ctx, input }: ListMembersHandlerOptio
     const roleManager = await RoleManagementFactory.getInstance().createRoleManager(organizationId);
     if (roleManager.isPBACEnabled) {
       const roles = await roleManager.getTeamRoles(teamId);
-      customRoles = roles.reduce((acc, role) => {
-        acc[role.id] = role;
-        return acc;
-      }, {} as { [key: string]: { id: string; name: string } });
+      customRoles = roles.reduce(
+        (acc, role) => {
+          acc[role.id] = role;
+          return acc;
+        },
+        {} as { [key: string]: { id: string; name: string } }
+      );
     }
   } catch (error) {
     // PBAC not enabled or error occurred, continue with traditional roles

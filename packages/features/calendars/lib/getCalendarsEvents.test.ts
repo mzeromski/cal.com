@@ -1,7 +1,5 @@
 import "@calcom/testing/lib/__mocks__/prisma";
 
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-
 import GoogleCalendarService from "@calcom/app-store/googlecalendar/lib/CalendarService";
 import OfficeCalendarService from "@calcom/app-store/office365calendar/lib/CalendarService";
 import { symmetricDecrypt } from "@calcom/lib/crypto";
@@ -9,10 +7,11 @@ import logger from "@calcom/lib/logger";
 import type { SelectedCalendar } from "@calcom/prisma/client";
 import type { EventBusyDate } from "@calcom/types/Calendar";
 import type { CredentialForCalendarService, CredentialPayload } from "@calcom/types/Credential";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import getCalendarsEvents, {
-  getCalendarsEventsWithTimezones,
   filterSelectedCalendarsForCredential,
+  getCalendarsEventsWithTimezones,
 } from "./getCalendarsEvents";
 
 vi.mock("@calcom/lib/crypto", () => ({

@@ -2,44 +2,44 @@ import {
   BookerLayoutsInputEnum_2024_06_14,
   BookerLayoutsOutputEnum_2024_06_14,
   ConfirmationPolicyEnum,
-  NoticeThresholdUnitEnum,
   FrequencyInput,
+  NoticeThresholdUnitEnum,
 } from "@calcom/platform-enums";
 import type {
-  InputBookingField_2024_06_14,
-  InputLocation_2024_06_14,
+  BookerLayouts_2024_06_14,
   BookingLimitsCount_2024_06_14,
   BookingWindow_2024_06_14,
-  BookerLayouts_2024_06_14,
   ConfirmationPolicy_2024_06_14,
-  EventTypeColor_2024_06_14,
-  Recurrence_2024_06_14,
   CreateEventTypeInput_2024_06_14,
-  SeatOptionsTransformedSchema,
-  SeatOptionsDisabledSchema,
+  EventTypeColor_2024_06_14,
   InputAttendeeAddressLocation_2024_06_14,
-  InputAttendeePhoneLocation_2024_06_14,
   InputAttendeeDefinedLocation_2024_06_14,
+  InputAttendeePhoneLocation_2024_06_14,
+  InputBookingField_2024_06_14,
+  InputLocation_2024_06_14,
   InputTeamLocation_2024_06_14,
+  Recurrence_2024_06_14,
+  SeatOptionsDisabledSchema,
+  SeatOptionsTransformedSchema,
 } from "@calcom/platform-types";
 
 import {
-  systemBeforeFieldEmail,
-  systemBeforeFieldName,
   type CustomField,
   type SystemField,
+  systemBeforeFieldEmail,
+  systemBeforeFieldName,
 } from "../internal-to-api/booking-fields";
 import {
-  transformLocationsApiToInternal,
+  transformBookerLayoutsApiToInternal,
   transformBookingFieldsApiToInternal,
-  transformSelectOptionsApiToInternal,
-  transformIntervalLimitsApiToInternal,
+  transformConfirmationPolicyApiToInternal,
+  transformEventColorsApiToInternal,
   transformFutureBookingLimitsApiToInternal,
+  transformIntervalLimitsApiToInternal,
+  transformLocationsApiToInternal,
   transformRecurrenceApiToInternal,
   transformSeatsApiToInternal,
-  transformEventColorsApiToInternal,
-  transformBookerLayoutsApiToInternal,
-  transformConfirmationPolicyApiToInternal,
+  transformSelectOptionsApiToInternal,
   transformTeamLocationsApiToInternal,
 } from "./index";
 
@@ -182,10 +182,10 @@ describe("transformBookingFieldsApiToInternal", () => {
       disableOnPrefill: true,
     };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     expectedField.variantsConfig.variants.fullName.fields[0].label = "Your name number";
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     expectedField.variantsConfig.variants.fullName.fields[0].placeholder = "123456789";
 
     const expectedOutput: SystemField[] = [expectedField];

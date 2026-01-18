@@ -1,9 +1,8 @@
-import type { Logger } from "tslog";
-
 import { SeatChangeLogRepository } from "@calcom/features/ee/billing/repository/seatChangeLogs/SeatChangeLogRepository";
 import logger from "@calcom/lib/logger";
 import type { Prisma } from "@calcom/prisma/client";
 import type { SeatChangeType } from "@calcom/prisma/enums";
+import type { Logger } from "tslog";
 
 const log = logger.getSubLogger({ prefix: ["SeatChangeTrackingService"] });
 

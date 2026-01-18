@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-
 import { showToast } from "@calcom/ui/components/toast";
+import { useEffect, useRef, useState } from "react";
 
 export function useVoicePreview() {
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
@@ -48,7 +47,8 @@ export function useVoicePreview() {
     setCurrentAudio(audio);
     audioRef.current = audio;
 
-    audio.play()
+    audio
+      .play()
       .then(() => {
         setPlayingVoiceId(voiceId || null);
       })

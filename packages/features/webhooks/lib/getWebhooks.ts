@@ -1,6 +1,6 @@
 import { withReporting } from "@calcom/lib/sentryWrapper";
-import defaultPrisma from "@calcom/prisma";
 import type { PrismaClient } from "@calcom/prisma";
+import defaultPrisma from "@calcom/prisma";
 import type { WebhookTriggerEvents } from "@calcom/prisma/enums";
 
 import type { WebhookSubscriber } from "./dto/types";
@@ -14,7 +14,6 @@ export type GetSubscriberOptions = {
   orgId?: number | null;
   oAuthClientId?: string | null;
 };
-
 
 const getWebhooks = async (
   options: GetSubscriberOptions,

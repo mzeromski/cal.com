@@ -1,7 +1,6 @@
-import { useState } from "react";
-
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { Button } from "@calcom/ui/components/button";
+import { useState } from "react";
 
 import { SearchDialog } from "./SearchDialog";
 

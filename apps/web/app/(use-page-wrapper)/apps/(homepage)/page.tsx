@@ -1,13 +1,11 @@
-import { _generateMetadata } from "app/_utils";
-import { cookies, headers } from "next/headers";
-
 import { getAppRegistry, getAppRegistryWithCredentials } from "@calcom/app-store/_appRegistry";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import prisma from "@calcom/prisma";
 import type { AppCategories } from "@calcom/prisma/enums";
-
 import { buildLegacyRequest } from "@lib/buildLegacyCtx";
+import { _generateMetadata } from "app/_utils";
+import { cookies, headers } from "next/headers";
 
 import AppsPage from "~/apps/apps-view";
 
@@ -38,12 +36,15 @@ const ServerPage = async () => {
   const categoryQuery = appStore.map(({ categories }) => ({
     categories: categories || [],
   }));
-  const categories = categoryQuery.reduce((c, app) => {
-    for (const category of app.categories) {
-      c[category] = c[category] ? c[category] + 1 : 1;
-    }
-    return c;
-  }, {} as Record<string, number>);
+  const categories = categoryQuery.reduce(
+    (c, app) => {
+      for (const category of app.categories) {
+        c[category] = c[category] ? c[category] + 1 : 1;
+      }
+      return c;
+    },
+    {} as Record<string, number>
+  );
 
   const props = {
     categories: Object.entries(categories)
@@ -51,9 +52,7 @@ const ServerPage = async () => {
         name: name as AppCategories,
         count,
       }))
-      .sort(function (a, b) {
-        return b.count - a.count;
-      }),
+      .sort((a, b) => b.count - a.count),
     appStore,
     userAdminTeams: userAdminTeamsIds,
   };

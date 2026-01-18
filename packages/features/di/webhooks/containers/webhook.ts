@@ -3,8 +3,8 @@ import { createContainer } from "@evyweb/ioctopus";
 import { moduleLoader as loggerModuleLoader } from "../../shared/services/logger.service";
 import { taskerServiceModule } from "../../shared/services/tasker.service";
 import { SHARED_TOKENS } from "../../shared/shared.tokens";
-import { WEBHOOK_TOKENS } from "../Webhooks.tokens";
 import { webhookModule } from "../modules/Webhook.module";
+import { WEBHOOK_TOKENS } from "../Webhooks.tokens";
 
 export const webhookContainer = createContainer();
 

@@ -1,14 +1,11 @@
-import type { TFunction } from "i18next";
-import { default as cloneDeep } from "lodash/cloneDeep";
-
 import { getRichDescription } from "@calcom/lib/CalEventParser";
 import { EMAIL_FROM_NAME } from "@calcom/lib/constants";
 import { getReplyToHeader } from "@calcom/lib/getReplyToHeader";
 import { TimeFormat } from "@calcom/lib/timeFormat";
 import type { CalendarEvent, Person } from "@calcom/types/Calendar";
-
-import generateIcsFile from "../lib/generateIcsFile";
-import { GenerateIcsRole } from "../lib/generateIcsFile";
+import type { TFunction } from "i18next";
+import { default as cloneDeep } from "lodash/cloneDeep";
+import generateIcsFile, { GenerateIcsRole } from "../lib/generateIcsFile";
 import renderEmail from "../src/renderEmail";
 import BaseEmail from "./_base-email";
 
@@ -94,8 +91,8 @@ ${this.t(
   title
     ? title
     : this.calEvent.recurringEvent?.count
-    ? "new_event_scheduled_recurring"
-    : "new_event_scheduled"
+      ? "new_event_scheduled_recurring"
+      : "new_event_scheduled"
 )}
 ${this.t(subtitle)}
 ${extraInfo}

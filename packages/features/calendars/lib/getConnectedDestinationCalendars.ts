@@ -44,7 +44,7 @@ const _ensureNoConflictingNonDelegatedConnectedCalendar = <
     integration: { slug: string };
     primary?: { email?: string | null | undefined } | undefined;
     delegationCredentialId?: string | null | undefined;
-  }
+  },
 >({
   connectedCalendars,
   loggedInUser,
@@ -216,7 +216,7 @@ function findMatchingCalendar({
   calendar: DestinationCalendar;
 }) {
   // Check if destinationCalendar exists in connectedCalendars
-  const allCals = connectedCalendars.map((cal) => cal.calendars ?? []).flat();
+  const allCals = connectedCalendars.flatMap((cal) => cal.calendars ?? []);
   const matchingCalendar = allCals.find(
     (cal) => cal.externalId === calendar.externalId && cal.integration === calendar.integration
   );

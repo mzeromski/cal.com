@@ -2,8 +2,8 @@ import { EventTypeRepository } from "@calcom/features/eventtypes/repositories/ev
 import { hasFilter } from "@calcom/features/filters/lib/hasFilter";
 import { checkRateLimitAndThrowError } from "@calcom/lib/checkRateLimitAndThrowError";
 import logger from "@calcom/lib/logger";
-import { prisma } from "@calcom/prisma";
 import type { PrismaClient } from "@calcom/prisma";
+import { prisma } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
 
 import type { TrpcSessionUser } from "../../../types";
@@ -144,7 +144,7 @@ export const getEventTypesFromGroup = async ({
     eventTypes.push(...teamEventTypes);
   }
 
-  let nextCursor: number | null | undefined = undefined;
+  let nextCursor: number | null | undefined;
   if (eventTypes.length > limit) {
     const nextItem = eventTypes.pop();
     nextCursor = nextItem?.id;

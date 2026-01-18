@@ -1,5 +1,3 @@
-import type { z } from "zod";
-
 import { enrichUserWithDelegationCredentialsIncludeServiceAccountKey } from "@calcom/app-store/delegationCredential";
 import { eventTypeAppMetadataOptionalSchema } from "@calcom/app-store/zod-utils";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
@@ -7,6 +5,7 @@ import prisma from "@calcom/prisma";
 import { credentialForCalendarServiceSelect } from "@calcom/prisma/selects/credential";
 import type { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import type { CredentialPayload } from "@calcom/types/Credential";
+import type { z } from "zod";
 
 export type EventType = {
   userId?: number | null;
@@ -24,7 +23,7 @@ export const getAllCredentialsIncludeServiceAccountKey = async (
   eventType: EventType
 ) => {
   let allCredentials = Array.isArray(user.credentials) ? user.credentials : [];
- 
+
   if (eventType?.team?.id) {
     const teamCredentialsQuery = await prisma.credential.findMany({
       where: {
@@ -33,10 +32,10 @@ export const getAllCredentialsIncludeServiceAccountKey = async (
       select: credentialForCalendarServiceSelect,
     });
     if (Array.isArray(teamCredentialsQuery)) {
-    allCredentials.push(...teamCredentialsQuery);
+      allCredentials.push(...teamCredentialsQuery);
     }
   }
-  
+
   if (eventType?.parentId) {
     const teamCredentialsQuery = await prisma.team.findFirst({
       where: {
@@ -60,7 +59,7 @@ export const getAllCredentialsIncludeServiceAccountKey = async (
   const { profile } = await new UserRepository(prisma).enrichUserWithItsProfile({
     user: user,
   });
-  
+
   if (profile?.organizationId) {
     const org = await prisma.team.findUnique({
       where: {

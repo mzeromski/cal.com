@@ -1,5 +1,3 @@
-import { sortBy } from "lodash";
-
 import { getCalendar } from "@calcom/app-store/_utils/getCalendar";
 import { MeetLocationType } from "@calcom/app-store/locations";
 import getApps from "@calcom/app-store/utils";
@@ -7,8 +5,7 @@ import dayjs from "@calcom/dayjs";
 import getCalendarsEvents, {
   getCalendarsEventsWithTimezones,
 } from "@calcom/features/calendars/lib/getCalendarsEvents";
-import { getUid } from "@calcom/lib/CalEventParser";
-import { getRichDescription } from "@calcom/lib/CalEventParser";
+import { getRichDescription, getUid } from "@calcom/lib/CalEventParser";
 import { CalendarAppDelegationCredentialError } from "@calcom/lib/CalendarAppError";
 import { ORGANIZER_EMAIL_EXEMPT_DOMAINS } from "@calcom/lib/constants";
 import { buildNonDelegationCredentials } from "@calcom/lib/delegationCredential";
@@ -27,6 +24,7 @@ import type {
 } from "@calcom/types/Calendar";
 import type { CredentialForCalendarService, CredentialPayload } from "@calcom/types/Credential";
 import type { EventResult } from "@calcom/types/EventManager";
+import { sortBy } from "lodash";
 
 const log = logger.getSubLogger({ prefix: ["CalendarManager"] });
 
@@ -298,7 +296,7 @@ export const createEvent = async (
   const uid: string = getUid(formattedEvent);
   const calendar = await getCalendar(credential, "booking");
   let success = true;
-  let calError: string | undefined = undefined;
+  let calError: string | undefined;
 
   log.debug(
     "Creating calendar event",
@@ -397,7 +395,7 @@ export const updateEvent = async (
   const uid = getUid(calEvent);
   const calendar = await getCalendar(credential, "booking");
   let success = false;
-  let calError: string | undefined = undefined;
+  let calError: string | undefined;
   let calWarnings: string[] | undefined = [];
   log.debug(
     "Updating calendar event",

@@ -3,8 +3,8 @@ import type { ParsedUrlQuery } from "node:querystring";
 /* eslint-disable */
 import { getCRMContactOwnerForRRLeadSkip } from "@calcom/app-store/_utils/CRMRoundRobinSkip";
 import {
-  ROUTING_FORM_RESPONSE_ID_QUERY_STRING,
   ROUTING_FORM_QUEUED_RESPONSE_ID_QUERY_STRING,
+  ROUTING_FORM_RESPONSE_ID_QUERY_STRING,
 } from "@calcom/app-store/routing-forms/lib/constants";
 import { enabledAppSlugs } from "@calcom/app-store/routing-forms/lib/enabledApps";
 import type { AttributeRoutingConfig, LocalRoute } from "@calcom/app-store/routing-forms/types/types";
@@ -79,8 +79,8 @@ async function getAttributeRoutingConfig(
   const routingFormResponseQuery = routingFormResponseId
     ? await routingFormResponseRepository.findFormResponseIncludeForm({ routingFormResponseId })
     : queuedFormResponseId
-    ? await routingFormResponseRepository.findQueuedFormResponseIncludeForm({ queuedFormResponseId })
-    : null;
+      ? await routingFormResponseRepository.findQueuedFormResponseIncludeForm({ queuedFormResponseId })
+      : null;
 
   if (!routingFormResponseQuery || !routingFormResponseQuery?.form.routes) return null;
   const parsedRoutes = routesSchema.safeParse(routingFormResponseQuery?.form.routes);
@@ -232,8 +232,8 @@ async function getTeamMemberEmailForResponseOrContact({
     routingFormResponseId || queuedFormResponseId
       ? { routingFormResponseId, queuedFormResponseId, eventTypeId }
       : chosenRoute
-      ? { route: chosenRoute }
-      : null;
+        ? { route: chosenRoute }
+        : null;
 
   // If we have found crmAppSlug, it means that the CRM App in the routing-form will handle the logic
   if (attributeRoutingConfigGetterData && crmAppSlug) {

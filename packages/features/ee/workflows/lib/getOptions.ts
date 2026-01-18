@@ -1,21 +1,20 @@
-import type { TFunction } from "i18next";
-
 import type { WorkflowActions } from "@calcom/prisma/enums";
 import { WorkflowTemplates, WorkflowTriggerEvents } from "@calcom/prisma/enums";
+import type { TFunction } from "i18next";
 
 import {
+  isCalAIAction,
+  isEmailToAttendeeAction,
+  isFormTrigger,
   isSMSOrWhatsappAction,
   isWhatsappAction,
-  isEmailToAttendeeAction,
-  isCalAIAction,
-  isFormTrigger,
 } from "./actionHelperFunctions";
 import {
+  ATTENDEE_WORKFLOW_TEMPLATES,
+  BASIC_WORKFLOW_TEMPLATES,
   WHATSAPP_WORKFLOW_TEMPLATES,
   WORKFLOW_ACTIONS,
-  BASIC_WORKFLOW_TEMPLATES,
   WORKFLOW_TRIGGER_EVENTS,
-  ATTENDEE_WORKFLOW_TEMPLATES,
 } from "./constants";
 
 export function getWorkflowActionOptions(t: TFunction, isOrgsPlan?: boolean) {
@@ -75,7 +74,12 @@ function convertToTemplateOptions(
       value: template,
       needsTeamsUpgrade,
       upgradeTeamsBadgeProps: needsTeamsUpgrade ? { hasPaidPlan, hasActiveTeamPlan, isTrial } : undefined,
-    } as { label: string; value: WorkflowTemplates; needsTeamsUpgrade: boolean; upgradeTeamsBadgeProps?: PlanState };
+    } as {
+      label: string;
+      value: WorkflowTemplates;
+      needsTeamsUpgrade: boolean;
+      upgradeTeamsBadgeProps?: PlanState;
+    };
   });
 }
 
@@ -93,8 +97,8 @@ export function getWorkflowTemplateOptions(
     action && isWhatsappAction(action)
       ? WHATSAPP_WORKFLOW_TEMPLATES
       : action && isEmailToAttendeeAction(action)
-      ? ATTENDEE_WORKFLOW_TEMPLATES
-      : BASIC_WORKFLOW_TEMPLATES;
+        ? ATTENDEE_WORKFLOW_TEMPLATES
+        : BASIC_WORKFLOW_TEMPLATES;
 
   return convertToTemplateOptions(t, planState, TEMPLATES);
 }

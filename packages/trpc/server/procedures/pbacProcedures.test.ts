@@ -1,13 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
 import type { PermissionString } from "@calcom/features/pbac/domain/types/permission-registry";
 import type { MembershipRole } from "@calcom/prisma/enums";
-
 import { TRPCError } from "@trpc/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import authedProcedure from "./authedProcedure";
 // Import after mocks are set up
-import { createTeamPbacProcedure, createOrgPbacProcedure } from "./pbacProcedures";
+import { createOrgPbacProcedure, createTeamPbacProcedure } from "./pbacProcedures";
 
 // Mock dependencies - use factory functions to avoid hoisting issues
 const mockCheckPermission = vi.fn();
@@ -134,7 +132,8 @@ describe("Feature Opt-In PBAC Procedures", () => {
       permissions.forEach(({ permission, operation }) => {
         it(`should use ${permission} for ${operation} operations`, async () => {
           createTeamPbacProcedure(permission);
-          const middleware = mockAuthedProcedure.use.mock.calls[mockAuthedProcedure.use.mock.calls.length - 1][0];
+          const middleware =
+            mockAuthedProcedure.use.mock.calls[mockAuthedProcedure.use.mock.calls.length - 1][0];
 
           mockCheckPermission.mockResolvedValue(true);
 
@@ -298,7 +297,8 @@ describe("Feature Opt-In PBAC Procedures", () => {
       permissions.forEach(({ permission, operation }) => {
         it(`should use ${permission} for ${operation} operations`, async () => {
           createOrgPbacProcedure(permission);
-          const middleware = mockAuthedProcedure.use.mock.calls[mockAuthedProcedure.use.mock.calls.length - 1][0];
+          const middleware =
+            mockAuthedProcedure.use.mock.calls[mockAuthedProcedure.use.mock.calls.length - 1][0];
 
           const mockCtx = {
             user: {

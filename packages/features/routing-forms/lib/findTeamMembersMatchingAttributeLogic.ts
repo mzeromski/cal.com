@@ -1,14 +1,13 @@
-import async from "async";
-import type { ImmutableTree, JsonLogicResult, JsonTree } from "react-awesome-query-builder";
-import type { Config } from "react-awesome-query-builder/lib";
-import { Utils as QbUtils } from "react-awesome-query-builder/lib";
-
 import { acrossQueryValueCompatiblity, raqbQueryValueUtils } from "@calcom/app-store/_utils/raqb/raqbUtils";
 import type { Attribute } from "@calcom/app-store/routing-forms/types/types";
 import { getAttributesAssignmentData } from "@calcom/features/attributes/lib/getAttributes";
 import { RaqbLogicResult } from "@calcom/lib/raqb/evaluateRaqbLogic";
 import jsonLogic from "@calcom/lib/raqb/jsonLogic";
-import type { dynamicFieldValueOperands, AttributesQueryValue } from "@calcom/lib/raqb/types";
+import type { AttributesQueryValue, dynamicFieldValueOperands } from "@calcom/lib/raqb/types";
+import async from "async";
+import type { ImmutableTree, JsonLogicResult, JsonTree } from "react-awesome-query-builder";
+import type { Config } from "react-awesome-query-builder/lib";
+import { Utils as QbUtils } from "react-awesome-query-builder/lib";
 
 const {
   getAttributesData: getAttributes,
@@ -36,7 +35,7 @@ type RunAttributeLogicOptions = {
   enableTroubleshooter: boolean;
 };
 
-export const enum TroubleshooterCase {
+export enum TroubleshooterCase {
   IS_A_ROUTER = "is-a-router",
   NO_LOGIC_FOUND = "no-logic-found",
   MATCH_RESULTS_READY = "match-results-ready",

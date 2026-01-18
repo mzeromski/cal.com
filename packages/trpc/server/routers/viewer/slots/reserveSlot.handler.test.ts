@@ -1,4 +1,5 @@
-import { vi, describe, it, expect, afterEach } from "vitest";
+import process from "node:process";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 // We want to test that the UID cookie set by reserveSlotHandler is configured with the correct
 // SameSite and Secure attributes depending on the environment (http vs https).
@@ -13,9 +14,11 @@ const dynamicImportHandler = async () => await import("./reserveSlot.handler");
 // The repository instance method is used to check for an existing reservation by someone else.
 // To keep this unit test isolated from the database layer, we stub this to always resolve falsey.
 vi.mock("@calcom/features/selectedSlots/repositories/PrismaSelectedSlotRepository", () => ({
-  PrismaSelectedSlotRepository: vi.fn().mockImplementation(function() { return {
-    findReservedByOthers: vi.fn().mockResolvedValue(null),
-  }; }),
+  PrismaSelectedSlotRepository: vi.fn().mockImplementation(function () {
+    return {
+      findReservedByOthers: vi.fn().mockResolvedValue(null),
+    };
+  }),
 }));
 
 // A tiny helper to build a canned handler context with stubbed Prisma methods.

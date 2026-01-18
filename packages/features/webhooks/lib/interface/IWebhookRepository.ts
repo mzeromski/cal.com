@@ -1,6 +1,6 @@
-import type { WebhookTriggerEvents, UserPermissionRole } from "@calcom/prisma/enums";
+import type { UserPermissionRole, WebhookTriggerEvents } from "@calcom/prisma/enums";
 
-import type { Webhook, WebhookSubscriber, WebhookGroup } from "../dto/types";
+import type { Webhook, WebhookGroup, WebhookSubscriber } from "../dto/types";
 
 /**
  * Webhook Version enum - defines the payload format versions.
@@ -20,7 +20,6 @@ export type WebhookVersion = (typeof WebhookVersion)[keyof typeof WebhookVersion
 export const DEFAULT_WEBHOOK_VERSION = WebhookVersion.V_2021_10_20;
 
 const VALID_WEBHOOK_VERSIONS = new Set<string>(Object.values(WebhookVersion));
-
 
 export function isValidWebhookVersion(value: string): value is WebhookVersion {
   return VALID_WEBHOOK_VERSIONS.has(value);
@@ -84,4 +83,3 @@ export interface IWebhookRepository {
   }>;
   listWebhooks(options: ListWebhooksOptions): Promise<Webhook[]>;
 }
-

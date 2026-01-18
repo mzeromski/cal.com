@@ -1,8 +1,7 @@
-import { describe, expect, it, beforeAll, vi } from "vitest";
-
+import process from "node:process";
 import dayjs from "@calcom/dayjs";
 import type { DateRange } from "@calcom/features/schedules/lib/date-ranges";
-
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import getSlots from "./slots";
 
 let dateRangesNextDay: DateRange[];
@@ -886,7 +885,7 @@ describe("Tests the date-range slot logic with showOptimizedSlots", () => {
     });
 
     expect(day2Slots.length).toBeGreaterThan(0);
-    
+
     // Day 2 slots should be marked as away
     day2Slots.forEach((slot) => {
       expect(slot.away).toBe(true);

@@ -1,10 +1,9 @@
+import ServerTrans from "@calcom/lib/components/ServerTrans";
+import { APP_NAME, IS_PRODUCTION, WEBAPP_URL } from "@calcom/lib/constants";
 import type { TFunction } from "i18next";
 
-import ServerTrans from "@calcom/lib/components/ServerTrans";
-import { APP_NAME, WEBAPP_URL, IS_PRODUCTION } from "@calcom/lib/constants";
-
 import { getSubject, getTypeOfInvite } from "../../lib/utils/team-invite-utils";
-import { V2BaseEmailHtml, CallToAction } from "../components";
+import { CallToAction, V2BaseEmailHtml } from "../components";
 
 type TeamInvite = {
   language: TFunction;
@@ -136,7 +135,7 @@ export const TeamInviteEmail = (
       parentTeamName: props.parentTeamName,
       prevLink: props.prevLink,
       newLink: props.newLink,
-      orgName: props.parentTeamName ?? props.isOrg ? props.teamName : "",
+      orgName: (props.parentTeamName ?? props.isOrg) ? props.teamName : "",
       prevLinkWithoutProtocol: props.prevLink?.replace(/https?:\/\//, ""),
       newLinkWithoutProtocol: props.newLink?.replace(/https?:\/\//, ""),
     };

@@ -1,10 +1,9 @@
-import { describe, it, expect, vi, beforeEach, test } from "vitest";
-
 import { useIsEmbed } from "@calcom/embed-core/embed-iframe";
 import { useCompatSearchParams } from "@calcom/lib/hooks/useCompatSearchParams";
 import { navigateInTopWindow } from "@calcom/lib/navigateInTopWindow";
+import { beforeEach, describe, expect, it, test, vi } from "vitest";
 
-import { useBookingSuccessRedirect, getNewSearchParams } from "./bookingSuccessRedirect";
+import { getNewSearchParams, useBookingSuccessRedirect } from "./bookingSuccessRedirect";
 
 const mockPush = vi.fn();
 

@@ -1,6 +1,5 @@
+import type { Schedule } from "@calcom/lib/schedules/transformers/getTransformedSchedles";
 import { useEffect, useRef } from "react";
-
-import { Schedule } from "@calcom/lib/schedules/transformers/getTransformedSchedles";
 
 export function useEnsureDefaultSchedule(
   schedules: Schedule[],

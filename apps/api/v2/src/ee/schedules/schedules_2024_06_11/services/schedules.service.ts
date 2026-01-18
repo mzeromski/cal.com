@@ -1,15 +1,14 @@
-import { SchedulesRepository_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/schedules.repository";
-import { InputSchedulesService_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/services/input-schedules.service";
-import { OutputSchedulesService_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/services/output-schedules.service";
-import { UsersRepository } from "@/modules/users/users.repository";
-import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common";
-
 import type {
   CreateScheduleInput_2024_06_11,
   ScheduleOutput_2024_06_11,
   UpdateScheduleInput_2024_06_11,
 } from "@calcom/platform-types";
 import type { Schedule } from "@calcom/prisma/client";
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common";
+import { SchedulesRepository_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/schedules.repository";
+import { InputSchedulesService_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/services/input-schedules.service";
+import { OutputSchedulesService_2024_06_11 } from "@/ee/schedules/schedules_2024_06_11/services/output-schedules.service";
+import { UsersRepository } from "@/modules/users/users.repository";
 
 @Injectable()
 export class SchedulesService_2024_06_11 {

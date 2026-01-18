@@ -1,16 +1,16 @@
-import type { PrismaClient } from "@calcom/prisma";
-import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
-import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
-import { EventTypeRepository } from "@calcom/features/eventtypes/repositories/eventTypeRepository";
 import { AssignmentReasonRepository } from "@calcom/features/assignment-reason/repositories/AssignmentReasonRepository";
 import type { LuckyUserService } from "@calcom/features/bookings/lib/getLuckyUser";
+import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
+import { EventTypeRepository } from "@calcom/features/eventtypes/repositories/eventTypeRepository";
+import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
+import type { PrismaClient } from "@calcom/prisma";
+import { ManagedEventAssignmentReasonService } from "./ManagedEventAssignmentReasonRecorder";
 import { ManagedEventManualReassignmentService } from "./ManagedEventManualReassignmentService";
 import { ManagedEventReassignmentService } from "./ManagedEventReassignmentService";
-import { ManagedEventAssignmentReasonService } from "./ManagedEventAssignmentReasonRecorder";
 
 /**
  * Dependency Injection Container for Reassignment Services
- * 
+ *
  * This ensures:
  * - Repositories are only instantiated once per request
  * - Services receive explicit dependencies via constructor
@@ -97,4 +97,3 @@ export function createManagedEventReassignmentService(
   const container = new ReassignmentServiceContainer(prisma);
   return container.getManagedEventReassignmentService(luckyUserService);
 }
-

@@ -4,8 +4,8 @@ import { prisma } from "@calcom/prisma";
 import { LegacyRoleManager } from "./legacy-role-manager.service";
 import { PBACRoleManager } from "./pbac-role-manager.service";
 import { PermissionCheckService } from "./permission-check.service";
-import { IRoleManager } from "./role-manager.interface";
 import { RoleService } from "./role.service";
+import type { IRoleManager } from "./role-manager.interface";
 
 export class RoleManagementFactory {
   private static instance: RoleManagementFactory;

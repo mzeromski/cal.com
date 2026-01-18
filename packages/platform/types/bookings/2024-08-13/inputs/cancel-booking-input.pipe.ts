@@ -1,5 +1,5 @@
 import type { PipeTransform } from "@nestjs/common";
-import { Injectable, BadRequestException } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { plainToClass } from "class-transformer";
 import type { ValidationError } from "class-validator";
 import { validateSync } from "class-validator";
@@ -77,6 +77,6 @@ export class CancelBookingInputPipe implements PipeTransform {
   private isCancelSeatedBookingInput(
     value: CancelBookingInput
   ): value is CancelSeatedBookingInput_2024_08_13 {
-    return value.hasOwnProperty("seatUid");
+    return Object.hasOwn(value, "seatUid");
   }
 }

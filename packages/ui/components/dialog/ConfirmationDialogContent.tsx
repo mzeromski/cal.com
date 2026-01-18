@@ -1,8 +1,7 @@
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import type { PropsWithChildren, ReactElement } from "react";
-import React from "react";
-
 import { useLocale } from "@calcom/lib/hooks/useLocale";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import type React from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 
 import { Icon } from "../icon";
 import { DialogClose, DialogContent } from "./Dialog";
@@ -20,9 +19,7 @@ export type ConfirmationDialogContentProps = {
   variety?: "danger" | "warning" | "success";
 } & ConfirmBtnType;
 
-export function ConfirmationDialogContent(
-  props: PropsWithChildren<ConfirmationDialogContentProps>
-) {
+export function ConfirmationDialogContent(props: PropsWithChildren<ConfirmationDialogContentProps>) {
   return (
     <DialogContent type="creation">
       <ConfirmationContent {...props} />
@@ -30,9 +27,7 @@ export function ConfirmationDialogContent(
   );
 }
 
-export const ConfirmationContent = (
-  props: PropsWithChildren<ConfirmationDialogContentProps>
-) => {
+export const ConfirmationContent = (props: PropsWithChildren<ConfirmationDialogContentProps>) => {
   const { t } = useLocale();
   const {
     title,
@@ -53,10 +48,7 @@ export const ConfirmationContent = (
           <div className="mt-0.5 ltr:mr-3">
             {variety === "danger" && (
               <div className="bg-error mx-auto rounded-full p-2 text-center">
-                <Icon
-                  name="circle-alert"
-                  className="h-5 w-5 text-red-600 dark:text-red-100"
-                />
+                <Icon name="circle-alert" className="h-5 w-5 text-red-600 dark:text-red-100" />
               </div>
             )}
             {variety === "warning" && (
@@ -88,8 +80,7 @@ export const ConfirmationContent = (
             color="primary"
             loading={isPending}
             onClick={(e) => onConfirm && onConfirm(e)}
-            data-testid="dialog-confirmation"
-          >
+            data-testid="dialog-confirmation">
             {isPending ? loadingText : confirmBtnText}
           </DialogClose>
         )}

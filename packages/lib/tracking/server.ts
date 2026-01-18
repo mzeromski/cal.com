@@ -1,3 +1,4 @@
+import process from "node:process";
 import type { NextApiRequest } from "next";
 
 export type GoogleAdsTrackingData = {
@@ -14,7 +15,6 @@ export type TrackingData = {
   googleAds?: GoogleAdsTrackingData;
   linkedInAds?: LinkedInAdsTrackingData;
 };
-
 
 export function getTrackingFromCookies(cookies?: NextApiRequest["cookies"]): TrackingData {
   const tracking: TrackingData = {};

@@ -1,5 +1,11 @@
 "use client";
 
+import { useLocale } from "@calcom/lib/hooks/useLocale";
+import { Button } from "@calcom/ui/components/button";
+import { Form, PasswordField, TextField } from "@calcom/ui/components/form";
+import type { FC } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -8,15 +14,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { FC } from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-
-import { useLocale } from "@calcom/lib/hooks/useLocale";
-import { Button } from "@calcom/ui/components/button";
-import { Form } from "@calcom/ui/components/form";
-import { PasswordField } from "@calcom/ui/components/form";
-import { TextField } from "@calcom/ui/components/form";
 
 import { SUCCESS_STATUS } from "../../../constants/api";
 import { useCheck } from "../../hooks/connect/useCheck";
@@ -24,8 +21,8 @@ import { useSaveCalendarCredentials } from "../../hooks/connect/useConnect";
 import { AtomsWrapper } from "../../src/components/atoms-wrapper";
 import { useToast } from "../../src/components/ui/use-toast";
 import { cn } from "../../src/lib/utils";
-import { ConnectedCalendarsTooltip } from "../OAuthConnect";
 import type { OAuthConnectProps } from "../OAuthConnect";
+import { ConnectedCalendarsTooltip } from "../OAuthConnect";
 
 export const AppleConnect: FC<Partial<Omit<OAuthConnectProps, "redir">>> = ({
   label,

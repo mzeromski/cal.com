@@ -4,7 +4,7 @@ import { eventTypeMetaDataSchemaWithTypedApps } from "@calcom/app-store/zod-util
 import type { Fields } from "@calcom/features/bookings/lib/getBookingFields";
 import { fieldTypesConfigMap } from "@calcom/features/form-builder/fieldTypes";
 import { convertToSmallestCurrencyUnit } from "@calcom/lib/currencyConversions";
-import type { AppCategories, Prisma, EventType } from "@calcom/prisma/client";
+import type { AppCategories, EventType, Prisma } from "@calcom/prisma/client";
 import type { CalendarEvent } from "@calcom/types/Calendar";
 import type { IAbstractPaymentService } from "@calcom/types/PaymentService";
 
@@ -141,8 +141,8 @@ const handlePayment = async ({
           const selectedValues = Array.isArray(responseValue)
             ? responseValue
             : responseValue
-            ? [responseValue]
-            : [];
+              ? [responseValue]
+              : [];
 
           selectedValues.forEach((value) => {
             const option = typedInput.options?.find((opt) => opt.value === value);

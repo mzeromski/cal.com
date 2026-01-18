@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { normalizeEmail, normalizeDomain, extractDomainFromEmail, normalizeUsername } from "./normalization";
+import { extractDomainFromEmail, normalizeDomain, normalizeEmail, normalizeUsername } from "./normalization";
 
 describe("normalization", () => {
   describe("normalizeEmail", () => {

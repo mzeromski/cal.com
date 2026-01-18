@@ -1,6 +1,5 @@
-import { describe, expect, it } from "vitest";
-
 import { BookerLayouts } from "@calcom/prisma/zod-utils";
+import { describe, expect, it } from "vitest";
 
 import { getPrefetchMonthCount } from "./getPrefetchMonthCount";
 
@@ -84,7 +83,13 @@ describe("getPrefetchMonthCount", () => {
     });
 
     it("should return undefined when both months are invalid", () => {
-      const result = getPrefetchMonthCount(BookerLayouts.COLUMN_VIEW, "selecting_time", Infinity, -Infinity, false);
+      const result = getPrefetchMonthCount(
+        BookerLayouts.COLUMN_VIEW,
+        "selecting_time",
+        Infinity,
+        -Infinity,
+        false
+      );
       expect(result).toBe(undefined);
     });
   });

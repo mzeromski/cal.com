@@ -10,9 +10,9 @@ import { createAProfileForAnExistingUser } from "@calcom/features/profile/lib/cr
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";
 import { WEBAPP_URL } from "@calcom/lib/constants";
 import { deleteDomain } from "@calcom/lib/domainManager/organization";
-import logger from "@calcom/lib/logger";
 import { ErrorCode } from "@calcom/lib/errorCodes";
 import { ErrorWithCode } from "@calcom/lib/errors";
+import logger from "@calcom/lib/logger";
 import { prisma } from "@calcom/prisma";
 import type { Membership } from "@calcom/prisma/client";
 import { Prisma } from "@calcom/prisma/client";

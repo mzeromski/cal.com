@@ -1,7 +1,6 @@
-import type z from "zod";
-
 import type { useLocale } from "@calcom/lib/hooks/useLocale";
 import type { fieldSchema } from "@calcom/prisma/zod-utils";
+import type z from "zod";
 
 import { fieldTypesConfigMap } from "../fieldTypes";
 
@@ -10,23 +9,26 @@ type Field = z.infer<typeof fieldSchema>;
 type Translate = ReturnType<typeof useLocale>["t"];
 
 function getTranslatedConfigVariants(configVariants: ConfigVariants, translate: Translate) {
-  return Object.entries(configVariants).reduce((variantsConfigVariants, [variantName, variant]) => {
-    const translatedFields = variant.fields.map((field) => {
-      const label = field.label ?? "";
-      const placeholder = field.placeholder ?? "";
-      return {
-        ...field,
-        label: translate(label),
-        placeholder: translate(placeholder),
+  return Object.entries(configVariants).reduce(
+    (variantsConfigVariants, [variantName, variant]) => {
+      const translatedFields = variant.fields.map((field) => {
+        const label = field.label ?? "";
+        const placeholder = field.placeholder ?? "";
+        return {
+          ...field,
+          label: translate(label),
+          placeholder: translate(placeholder),
+        };
+      });
+      variantsConfigVariants[variantName] = {
+        ...variant,
+        fields: translatedFields,
       };
-    });
-    variantsConfigVariants[variantName] = {
-      ...variant,
-      fields: translatedFields,
-    };
 
-    return variantsConfigVariants;
-  }, {} as typeof configVariants);
+      return variantsConfigVariants;
+    },
+    {} as typeof configVariants
+  );
 }
 
 /**

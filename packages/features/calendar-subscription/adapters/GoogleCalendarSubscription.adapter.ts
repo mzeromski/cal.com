@@ -1,18 +1,17 @@
-import type { calendar_v3 } from "@googleapis/calendar";
-import { v4 as uuid } from "uuid";
-
+import process from "node:process";
 import { CalendarAuth } from "@calcom/app-store/googlecalendar/lib/CalendarAuth";
 import dayjs from "@calcom/dayjs";
 import { CalendarCacheEventService } from "@calcom/features/calendar-subscription/lib/cache/CalendarCacheEventService";
 import logger from "@calcom/lib/logger";
 import type { SelectedCalendar } from "@calcom/prisma/client";
-
+import type { calendar_v3 } from "@googleapis/calendar";
+import { v4 as uuid } from "uuid";
 import type {
-  ICalendarSubscriptionPort,
-  CalendarSubscriptionResult,
+  CalendarCredential,
   CalendarSubscriptionEvent,
   CalendarSubscriptionEventItem,
-  CalendarCredential,
+  CalendarSubscriptionResult,
+  ICalendarSubscriptionPort,
 } from "../lib/CalendarSubscriptionPort.interface";
 
 const log = logger.getSubLogger({ prefix: ["GoogleCalendarSubscriptionAdapter"] });
@@ -174,14 +173,14 @@ export class GoogleCalendarSubscriptionAdapter implements ICalendarSubscriptionP
         const start = event.start?.dateTime
           ? new Date(event.start.dateTime)
           : event.start?.date
-          ? new Date(event.start.date)
-          : new Date();
+            ? new Date(event.start.date)
+            : new Date();
 
         const end = event.end?.dateTime
           ? new Date(event.end.dateTime)
           : event.end?.date
-          ? new Date(event.end.date)
-          : new Date();
+            ? new Date(event.end.date)
+            : new Date();
 
         return {
           id: event.id as string,
@@ -201,8 +200,8 @@ export class GoogleCalendarSubscriptionAdapter implements ICalendarSubscriptionP
           originalStartDate: event.originalStartTime?.dateTime
             ? new Date(event.originalStartTime.dateTime)
             : event.originalStartTime?.date
-            ? new Date(event.originalStartTime.date)
-            : null,
+              ? new Date(event.originalStartTime.date)
+              : null,
           createdAt: event.created ? new Date(event.created) : null,
           updatedAt: event.updated ? new Date(event.updated) : null,
         };

@@ -7,9 +7,9 @@ import logger from "@calcom/lib/logger";
 import { getTimeFormatStringFromUserTimeFormat } from "@calcom/lib/timeFormat";
 import prisma from "@calcom/prisma";
 import type { TimeUnit } from "@calcom/prisma/enums";
-import { WorkflowMethods, WorkflowTemplates, WorkflowTriggerEvents } from "@calcom/prisma/enums";
+import { WorkflowMethods, type WorkflowTemplates, type WorkflowTriggerEvents } from "@calcom/prisma/enums";
 
-import type { BookingInfo, ScheduleEmailReminderAction, FormSubmissionData } from "../types";
+import type { BookingInfo, FormSubmissionData, ScheduleEmailReminderAction } from "../types";
 import { sendOrScheduleWorkflowEmails } from "./providers/emailProvider";
 import type { WorkflowContextData } from "./reminderScheduler";
 import type { VariablesType } from "./templates/customTemplate";
@@ -64,7 +64,7 @@ type SendEmailReminderParams = {
 const sendOrScheduleWorkflowEmailWithReminder = async (params: SendEmailReminderParams) => {
   const { mailData, sendTo, scheduledDate, uid, workflowStepId } = params;
 
-  let reminderUid = undefined;
+  let reminderUid;
   if (scheduledDate) {
     const reminder = await prisma.workflowReminder.create({
       data: {

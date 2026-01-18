@@ -1,6 +1,6 @@
 import logger from "@calcom/lib/logger";
-import db from "@calcom/prisma";
 import type { PrismaClient as PrismaClientWithExtensions } from "@calcom/prisma";
+import db from "@calcom/prisma";
 import type { MembershipRole } from "@calcom/prisma/enums";
 
 import { PermissionMapper } from "../../domain/mappers/PermissionMapper";
@@ -8,9 +8,9 @@ import type { TeamPermissions } from "../../domain/models/Permission";
 import type { IPermissionRepository } from "../../domain/repositories/IPermissionRepository";
 import type { CrudAction, CustomAction } from "../../domain/types/permission-registry";
 import {
-  Resource,
   type PermissionString,
   parsePermissionString,
+  Resource,
 } from "../../domain/types/permission-registry";
 
 export class PermissionRepository implements IPermissionRepository {

@@ -1,9 +1,6 @@
 import "@calcom/lib/__mocks__/logger";
 
 import { createHash } from "node:crypto";
-import type { GetServerSidePropsContext } from "next";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-
 import { getAbsoluteEventTypeRedirectUrlWithEmbedSupport } from "@calcom/app-store/routing-forms/getEventTypeRedirectUrl";
 import { getResponseToStore } from "@calcom/app-store/routing-forms/lib/getResponseToStore";
 import { getSerializableForm } from "@calcom/app-store/routing-forms/lib/getSerializableForm";
@@ -14,6 +11,8 @@ import { isAuthorizedToViewFormOnOrgDomain } from "@calcom/features/routing-form
 import { PrismaRoutingFormRepository } from "@calcom/features/routing-forms/repositories/PrismaRoutingFormRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { checkRateLimitAndThrowError } from "@calcom/lib/checkRateLimitAndThrowError";
+import type { GetServerSidePropsContext } from "next";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { getRoutedUrl } from "./getRoutedUrl";
 import { getUrlSearchParamsToForward } from "./getUrlSearchParamsToForward";
@@ -26,9 +25,11 @@ vi.mock("@calcom/lib/checkRateLimitAndThrowError");
 vi.mock("@calcom/features/routing-forms/repositories/PrismaRoutingFormRepository");
 vi.mock("@calcom/features/users/repositories/UserRepository", () => {
   return {
-    UserRepository: vi.fn().mockImplementation(function() { return {
-      enrichUserWithItsProfile: vi.fn(),
-    }; }),
+    UserRepository: vi.fn().mockImplementation(function () {
+      return {
+        enrichUserWithItsProfile: vi.fn(),
+      };
+    }),
   };
 });
 vi.mock("@calcom/features/ee/organizations/lib/orgDomains");

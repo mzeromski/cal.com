@@ -1,9 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
 import type { FeatureState } from "@calcom/features/flags/config";
 import type { FeaturesRepository } from "@calcom/features/flags/features.repository";
 import { ErrorCode } from "@calcom/lib/errorCodes";
 import { ErrorWithCode } from "@calcom/lib/errors";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { FeatureOptInService } from "./FeatureOptInService";
 
@@ -13,9 +12,24 @@ vi.mock("../config", () => {
   const mockFeatures = [
     { slug: "test-feature-1", titleI18nKey: "test_feature_1", descriptionI18nKey: "test_feature_1_desc" },
     { slug: "test-feature-2", titleI18nKey: "test_feature_2", descriptionI18nKey: "test_feature_2_desc" },
-    { slug: "org-only-feature", titleI18nKey: "org_only", descriptionI18nKey: "org_only_desc", scope: ["org"] },
-    { slug: "team-only-feature", titleI18nKey: "team_only", descriptionI18nKey: "team_only_desc", scope: ["team"] },
-    { slug: "user-only-feature", titleI18nKey: "user_only", descriptionI18nKey: "user_only_desc", scope: ["user"] },
+    {
+      slug: "org-only-feature",
+      titleI18nKey: "org_only",
+      descriptionI18nKey: "org_only_desc",
+      scope: ["org"],
+    },
+    {
+      slug: "team-only-feature",
+      titleI18nKey: "team_only",
+      descriptionI18nKey: "team_only_desc",
+      scope: ["team"],
+    },
+    {
+      slug: "user-only-feature",
+      titleI18nKey: "user_only",
+      descriptionI18nKey: "user_only_desc",
+      scope: ["user"],
+    },
   ];
   return {
     OPT_IN_FEATURES: mockFeatures,
@@ -81,7 +95,13 @@ describe("FeatureOptInService", () => {
       // Verify that only the team ID was queried (no parent org)
       expect(mockFeaturesRepository.getTeamsFeatureStates).toHaveBeenCalledWith({
         teamIds: [1],
-        featureIds: ["test-feature-1", "test-feature-2", "org-only-feature", "team-only-feature", "user-only-feature"],
+        featureIds: [
+          "test-feature-1",
+          "test-feature-2",
+          "org-only-feature",
+          "team-only-feature",
+          "user-only-feature",
+        ],
       });
     });
 
@@ -116,14 +136,18 @@ describe("FeatureOptInService", () => {
       // Verify that both team ID and parent org ID were queried
       expect(mockFeaturesRepository.getTeamsFeatureStates).toHaveBeenCalledWith({
         teamIds: [1, 100],
-        featureIds: ["test-feature-1", "test-feature-2", "org-only-feature", "team-only-feature", "user-only-feature"],
+        featureIds: [
+          "test-feature-1",
+          "test-feature-2",
+          "org-only-feature",
+          "team-only-feature",
+          "user-only-feature",
+        ],
       });
     });
 
     it("should return inherit for org state when parent org has no explicit state", async () => {
-      mockFeaturesRepository.getAllFeatures.mockResolvedValue([
-        { slug: "test-feature-1", enabled: true },
-      ]);
+      mockFeaturesRepository.getAllFeatures.mockResolvedValue([{ slug: "test-feature-1", enabled: true }]);
 
       // Team ID is 1, Parent Org ID is 100, but org has no explicit state
       mockFeaturesRepository.getTeamsFeatureStates.mockResolvedValue({
@@ -159,9 +183,7 @@ describe("FeatureOptInService", () => {
     });
 
     it("should return inherit for team state when team has no explicit state", async () => {
-      mockFeaturesRepository.getAllFeatures.mockResolvedValue([
-        { slug: "test-feature-1", enabled: true },
-      ]);
+      mockFeaturesRepository.getAllFeatures.mockResolvedValue([{ slug: "test-feature-1", enabled: true }]);
 
       mockFeaturesRepository.getTeamsFeatureStates.mockResolvedValue({
         "test-feature-1": {},
@@ -179,9 +201,7 @@ describe("FeatureOptInService", () => {
     });
 
     it("should handle null parentOrgId the same as undefined", async () => {
-      mockFeaturesRepository.getAllFeatures.mockResolvedValue([
-        { slug: "test-feature-1", enabled: true },
-      ]);
+      mockFeaturesRepository.getAllFeatures.mockResolvedValue([{ slug: "test-feature-1", enabled: true }]);
 
       mockFeaturesRepository.getTeamsFeatureStates.mockResolvedValue({
         "test-feature-1": { 1: "enabled" as FeatureState },
@@ -195,7 +215,13 @@ describe("FeatureOptInService", () => {
       // Verify that only the team ID was queried (no parent org)
       expect(mockFeaturesRepository.getTeamsFeatureStates).toHaveBeenCalledWith({
         teamIds: [1],
-        featureIds: ["test-feature-1", "test-feature-2", "org-only-feature", "team-only-feature", "user-only-feature"],
+        featureIds: [
+          "test-feature-1",
+          "test-feature-2",
+          "org-only-feature",
+          "team-only-feature",
+          "user-only-feature",
+        ],
       });
     });
   });

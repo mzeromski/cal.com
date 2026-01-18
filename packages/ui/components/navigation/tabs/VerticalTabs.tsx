@@ -16,7 +16,7 @@ export interface NavTabProps {
   iconClassName?: string;
 }
 
-const NavTabs = function ({
+const NavTabs = ({
   tabs,
   className = "",
   sticky,
@@ -25,33 +25,31 @@ const NavTabs = function ({
   itemClassname,
   iconClassName,
   ...props
-}: NavTabProps) {
-  return (
-    <nav
-      className={classNames(
-        `no-scrollbar flex flex-col stack-y-1 overflow-scroll ${className}`,
-        sticky && "sticky top-0 -mt-7"
-      )}
-      style={{
-        maxWidth: "256px",
-      }}
-      aria-label="Tabs"
-      {...props}>
-      {/* padding top for sticky */}
-      {sticky && <div className="pt-6" />}
-      {props.children}
-      {tabs.map((tab, idx) => (
-        <VerticalTabItem
-          {...tab}
-          key={idx}
-          linkShallow={linkShallow}
-          linkScroll={linkScroll}
-          className={itemClassname}
-          iconClassName={iconClassName}
-        />
-      ))}
-    </nav>
-  );
-};
+}: NavTabProps) => (
+  <nav
+    className={classNames(
+      `no-scrollbar flex flex-col stack-y-1 overflow-scroll ${className}`,
+      sticky && "sticky top-0 -mt-7"
+    )}
+    style={{
+      maxWidth: "256px",
+    }}
+    aria-label="Tabs"
+    {...props}>
+    {/* padding top for sticky */}
+    {sticky && <div className="pt-6" />}
+    {props.children}
+    {tabs.map((tab, idx) => (
+      <VerticalTabItem
+        {...tab}
+        key={idx}
+        linkShallow={linkShallow}
+        linkScroll={linkScroll}
+        className={itemClassname}
+        iconClassName={iconClassName}
+      />
+    ))}
+  </nav>
+);
 
 export default NavTabs;

@@ -1,22 +1,21 @@
-import { Retell } from "retell-sdk";
-import { describe, it, expect, beforeEach, vi, beforeAll } from "vitest";
-
+import process from "node:process";
 import logger from "@calcom/lib/logger";
-
+import { Retell } from "retell-sdk";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type {
-  CreateLLMRequest,
-  UpdateLLMRequest,
   CreateAgentRequest,
-  UpdateAgentRequest,
+  CreateLLMRequest,
   CreatePhoneNumberParams,
   ImportPhoneNumberParams,
   RetellDynamicVariables,
+  UpdateAgentRequest,
+  UpdateLLMRequest,
 } from "./types";
 
 let RetellSDKClient: typeof import("./RetellSDKClient").RetellSDKClient;
 
 vi.mock("retell-sdk", () => ({
-  Retell: vi.fn().mockImplementation(function() {
+  Retell: vi.fn().mockImplementation(function () {
     return {
       llm: {
         create: vi.fn(),
@@ -109,7 +108,9 @@ describe("RetellSDKClient", () => {
       },
     };
 
-    (Retell as any).mockImplementation(function() { return mockRetellInstance; });
+    (Retell as any).mockImplementation(function () {
+      return mockRetellInstance;
+    });
   });
 
   describe("constructor", () => {

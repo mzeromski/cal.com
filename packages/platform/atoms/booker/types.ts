@@ -1,16 +1,15 @@
-import type React from "react";
-
 import type { BookerProps } from "@calcom/features/bookings/Booker";
 import type { BookerStore, CountryCode } from "@calcom/features/bookings/Booker/store";
 import type { Timezone, VIEW_TYPE } from "@calcom/features/bookings/Booker/types";
 import type { BookingCreateBody } from "@calcom/features/bookings/lib/bookingCreateBodySchema";
 import type { BookingResponse } from "@calcom/platform-libraries";
 import type {
-  ApiSuccessResponse,
   ApiErrorResponse,
+  ApiSuccessResponse,
   ApiSuccessResponseWithoutData,
   RoutingFormSearchParams,
 } from "@calcom/platform-types";
+import type React from "react";
 
 import type { UseCreateBookingInput } from "../hooks/bookings/useCreateBooking";
 

@@ -1,10 +1,10 @@
-import type { MultiValue, SingleValue } from "react-select";
+import type { Attribute } from "@calcom/app-store/routing-forms/types/types";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import type { Attribute } from "@calcom/app-store/routing-forms/types/types";
 import { Button } from "@calcom/ui/components/button";
 import { Input, Select } from "@calcom/ui/components/form";
 import { Icon } from "@calcom/ui/components/icon";
+import type { MultiValue, SingleValue } from "react-select";
 
 import {
   formatConditionValue,
@@ -309,7 +309,9 @@ const AttributeConditionFields = ({
         }));
 
         const selectedValues = isMulti
-          ? valueOptions.filter((opt: { value: string; label: string }) => condition.value.includes(opt.value))
+          ? valueOptions.filter((opt: { value: string; label: string }) =>
+              condition.value.includes(opt.value)
+            )
           : valueOptions.find((opt: { value: string; label: string }) => condition.value[0] === opt.value);
 
         return (
@@ -442,7 +444,9 @@ export const RuleBuilder = ({
         <div className="border-subtle rounded-lg border p-1">
           <Icon name="filter" className="text-subtle h-4 w-4" />
         </div>
-        <span className="text-emphasis ml-2 text-sm font-medium">{t("attribute_sync_user_filter_rules")}</span>
+        <span className="text-emphasis ml-2 text-sm font-medium">
+          {t("attribute_sync_user_filter_rules")}
+        </span>
       </div>
 
       <div className="mt-2 flex flex-wrap items-center gap-2 px-2">
@@ -460,9 +464,7 @@ export const RuleBuilder = ({
 
       <div className="bg-muted mt-2 space-y-2 rounded-xl p-2">
         {value.conditions.length === 0 ? (
-          <div className="text-subtle py-6 text-center text-sm">
-            {t("attribute_sync_no_conditions")}
-          </div>
+          <div className="text-subtle py-6 text-center text-sm">{t("attribute_sync_no_conditions")}</div>
         ) : (
           value.conditions.map((condition, index) => {
             const conditionWithId = ensureConditionHasId(condition);

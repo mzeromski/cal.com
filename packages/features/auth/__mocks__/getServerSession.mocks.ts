@@ -1,9 +1,8 @@
-import type { Mock } from "vitest";
-import { vi } from "vitest";
-import { mockDeep, mockReset, type DeepMockProxy } from "vitest-mock-extended";
-
 import type { PrismaClient } from "@calcom/prisma";
 import type { User } from "@calcom/prisma/client";
+import type { Mock } from "vitest";
+import { vi } from "vitest";
+import { type DeepMockProxy, mockDeep, mockReset } from "vitest-mock-extended";
 
 // Types
 type LoggerInstance = {
@@ -77,7 +76,9 @@ function createDeploymentRepositoryMock(): {
 }
 
 function createUserRepositoryMock(): {
-  UserRepository: new (_prisma: PrismaClient) => {
+  UserRepository: new (
+    _prisma: PrismaClient
+  ) => {
     enrichUserWithTheProfile: (params: { user: User }) => Promise<User & { profile: null }>;
   };
 } {

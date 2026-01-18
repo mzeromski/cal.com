@@ -1,11 +1,11 @@
 import { prisma } from "@calcom/prisma";
 import type {
-  Booking,
-  EventType,
-  BookingReference,
   Attendee,
+  Booking,
+  BookingReference,
   Credential,
   DestinationCalendar,
+  EventType,
   User,
 } from "@calcom/prisma/client";
 import { MembershipRole, SchedulingType } from "@calcom/prisma/enums";
@@ -68,7 +68,7 @@ export const bookingsProcedure = authedProcedure
       include: bookingInclude,
     });
 
-    if (!!bookingByBeingAdmin) {
+    if (bookingByBeingAdmin) {
       return next({ ctx: { booking: bookingByBeingAdmin } });
     }
 

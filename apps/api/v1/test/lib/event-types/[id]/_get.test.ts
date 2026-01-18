@@ -1,12 +1,10 @@
+import { buildEventType } from "@calcom/lib/test/builder";
+import { MembershipRole } from "@calcom/prisma/enums";
 import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
-
 import type { Request, Response } from "express";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createMocks } from "node-mocks-http";
 import { describe, expect, test } from "vitest";
-
-import { buildEventType } from "@calcom/lib/test/builder";
-import { MembershipRole } from "@calcom/prisma/enums";
 
 import handler from "../../../../pages/api/event-types/[id]/_get";
 

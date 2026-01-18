@@ -1,16 +1,15 @@
-import React, { Suspense } from "react";
-
 import { getPaymentAppData } from "@calcom/app-store/_utils/payments/getPaymentAppData";
 import { getSuccessPageLocationMessage } from "@calcom/app-store/locations";
 import dayjs from "@calcom/dayjs";
-import { PayIcon } from "@calcom/web/modules/bookings/components/event-meta/PayIcon";
-import { Price } from "@calcom/web/modules/bookings/components/event-meta/Price";
 import type { PaymentPageProps } from "@calcom/features/ee/payments/pages/payment";
 import { APP_NAME, WEBSITE_URL } from "@calcom/lib/constants";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { isBrowserLocale24h } from "@calcom/lib/timeFormat";
 import { CURRENT_TIMEZONE } from "@calcom/lib/timezoneConstants";
 import { localStorage } from "@calcom/lib/webstorage";
+import { PayIcon } from "@calcom/web/modules/bookings/components/event-meta/PayIcon";
+import { Price } from "@calcom/web/modules/bookings/components/event-meta/Price";
+import React, { Suspense } from "react";
 
 import { AtomsWrapper } from "../../src/components/atoms-wrapper";
 import { cn } from "../../src/lib/utils";

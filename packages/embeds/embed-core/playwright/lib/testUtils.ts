@@ -1,7 +1,6 @@
-import type { Page, Frame } from "@playwright/test";
-import { expect } from "@playwright/test";
-
 import prisma from "@calcom/prisma";
+import type { Frame, Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 
 export async function getQueuedFormResponse(queuedFormResponseId: string) {
   return prisma.app_RoutingForms_QueuedFormResponse.findFirst({
@@ -78,7 +77,7 @@ export const getEmbedIframe = async ({
     () => {
       const iframe = document.querySelector<HTMLIFrameElement>(".cal-embed");
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       return iframe && iframe.contentWindow && window.iframeReady;
     },
     { polling: 500 }

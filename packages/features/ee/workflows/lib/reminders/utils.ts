@@ -1,9 +1,9 @@
+import process from "node:process";
 import dayjs from "@calcom/dayjs";
 import { dub } from "@calcom/features/auth/lib/dub";
 import { WEBSITE_URL } from "@calcom/lib/constants";
 import { WorkflowActions, WorkflowTriggerEvents } from "@calcom/prisma/enums";
 import { bookingMetadataSchema } from "@calcom/prisma/zod-utils";
-
 import { IMMEDIATE_WORKFLOW_TRIGGER_EVENTS } from "../constants";
 import { getWorkflowRecipientEmail } from "../getWorkflowReminders";
 import type { AttendeeInBookingInfo, BookingInfo } from "../types";
@@ -119,11 +119,7 @@ export const getAttendeeToBeUsedInSMS = (
  * Escapes HTML special characters to prevent XSS when inserting text into HTML.
  */
 const escapeHtml = (str: string): string =>
-  str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /**
  * Replaces cloaked links in HTML content with visible URLs.

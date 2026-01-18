@@ -12,13 +12,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { FullScreenModal } from "@/components/FullScreenModal";
 import { BookingListItem } from "@/components/booking-list-item/BookingListItem";
 import { BookingListSkeleton } from "@/components/booking-list-item/BookingListItemSkeleton";
 import { RecurringBookingListItem } from "@/components/booking-list-item/RecurringBookingListItem";
 import { BookingModals } from "@/components/booking-modals/BookingModals";
 import { EmptyScreen } from "@/components/EmptyScreen";
-import { showErrorAlert, showInfoAlert, showSuccessAlert } from "@/utils/alerts";
+import { FullScreenModal } from "@/components/FullScreenModal";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,6 +40,7 @@ import {
   useRescheduleBooking,
 } from "@/hooks";
 import type { Booking, EventType } from "@/services/calcom";
+import { showErrorAlert, showInfoAlert, showSuccessAlert } from "@/utils/alerts";
 import type { ListItem, RecurringBookingGroup } from "@/utils/bookings-utils";
 import {
   filterByEventType,

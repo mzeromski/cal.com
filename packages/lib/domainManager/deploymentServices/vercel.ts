@@ -1,8 +1,7 @@
-import z from "zod";
-
+import process from "node:process";
 import { HttpError } from "@calcom/lib/http-error";
 import { safeStringify } from "@calcom/lib/safeStringify";
-
+import z from "zod";
 import logger from "../../logger";
 
 const log = logger.getSubLogger({ prefix: ["Vercel/DomainManager"] });
@@ -81,7 +80,7 @@ function handleDomainCreationError(error: {
   domain?: string | null;
   message?: string | null;
   invalidToken?: boolean | null;
-}){
+}) {
   // Vercel returns "forbidden" for various permission issues, not just domain ownership
   if (error.code === "forbidden") {
     const errorMessage =
@@ -130,7 +129,7 @@ function handleDomainDeletionError(error: {
   domain?: string | null;
   message?: string | null;
   invalidToken?: boolean | null;
-}){
+}) {
   if (error.code === "not_found") {
     // Domain is already deleted
     return true;

@@ -1,11 +1,9 @@
+import { buildEventType } from "@calcom/lib/test/builder";
 import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
-
 import type { Request, Response } from "express";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createMocks } from "node-mocks-http";
-import { describe, expect, test, vi, afterEach } from "vitest";
-
-import { buildEventType } from "@calcom/lib/test/builder";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import handler from "../../../pages/api/event-types/_post";
 import checkParentEventOwnership from "../../../pages/api/event-types/_utils/checkParentEventOwnership";

@@ -1,6 +1,3 @@
-import type { GetServerSidePropsContext } from "next";
-import { z } from "zod";
-
 import { filterEventTypesWhereLocationUpdateIsAllowed } from "@calcom/app-store/_utils/getBulkEventTypes";
 import { appStoreMetadata } from "@calcom/app-store/appStoreMetaData";
 import type { LocationObject } from "@calcom/app-store/locations";
@@ -14,6 +11,8 @@ import { getPlaceholderAvatar } from "@calcom/lib/defaultAvatarImage";
 import prisma from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
 import { eventTypeBookingFields } from "@calcom/prisma/zod-utils";
+import type { GetServerSidePropsContext } from "next";
+import { z } from "zod";
 
 import { STEPS } from "~/apps/installation/[[...step]]/constants";
 import type { OnboardingPageProps, TEventTypeGroup } from "~/apps/installation/[[...step]]/step-view";
@@ -268,7 +267,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       const teamIds = userTeams.map((item) => item.id);
       eventTypeGroups = await getEventTypes({ userId: user.id, teamIds, isConferencing });
     } else if (parsedTeamIdParam) {
-      eventTypeGroups = await getEventTypes({ userId: user.id, teamIds: [parsedTeamIdParam], isConferencing });
+      eventTypeGroups = await getEventTypes({
+        userId: user.id,
+        teamIds: [parsedTeamIdParam],
+        isConferencing,
+      });
     } else {
       eventTypeGroups = await getEventTypes({ userId: user.id, isConferencing });
     }

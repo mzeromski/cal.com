@@ -2,7 +2,7 @@ import { CredentialRepository } from "@calcom/features/credentials/repositories/
 
 import type { AttributeRoutingConfig } from "../../routing-forms/types/types";
 import SalesforceCRMService from "./CrmService";
-import { SalesforceRecordEnum, RoutingReasons } from "./enums";
+import { RoutingReasons, SalesforceRecordEnum } from "./enums";
 import { EventTypeService } from "./eventTypeService";
 
 const routingFormBookingFormHandler = async (

@@ -2,7 +2,7 @@ import { PrismaAttributeRepository } from "@calcom/features/attributes/repositor
 import { moduleLoader as prismaModuleLoader } from "@calcom/features/di/modules/Prisma";
 import { DI_TOKENS } from "@calcom/features/di/tokens";
 
-import { createModule, bindModuleToClassOnToken, type ModuleLoader } from "../di";
+import { bindModuleToClassOnToken, createModule, type ModuleLoader } from "../di";
 
 export const attributeRepositoryModule = createModule();
 const token = DI_TOKENS.ATTRIBUTE_REPOSITORY;

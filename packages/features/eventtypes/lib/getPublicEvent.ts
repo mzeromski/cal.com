@@ -8,15 +8,12 @@ import { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getB
 import { getSlugOrRequestedSlug } from "@calcom/features/ee/organizations/lib/orgDomains";
 import { getDefaultEvent, getUsernameList } from "@calcom/features/eventtypes/lib/defaultEvents";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
-import { getOrgOrTeamAvatar } from "@calcom/lib/defaultAvatarImage";
-import { getPlaceholderAvatar } from "@calcom/lib/defaultAvatarImage";
+import { getOrgOrTeamAvatar, getPlaceholderAvatar } from "@calcom/lib/defaultAvatarImage";
 import { getUserAvatarUrl } from "@calcom/lib/getAvatarUrl";
 import { isRecurringEvent, parseRecurringEvent } from "@calcom/lib/isRecurringEvent";
 import { markdownToSafeHTML } from "@calcom/lib/markdownToSafeHTML";
 import type { PrismaClient } from "@calcom/prisma";
-import type { User as UserType } from "@calcom/prisma/client";
-import type { Prisma } from "@calcom/prisma/client";
-import type { Team } from "@calcom/prisma/client";
+import type { Prisma, Team, User as UserType } from "@calcom/prisma/client";
 import type { BookerLayoutSettings } from "@calcom/prisma/zod-utils";
 import {
   BookerLayouts,
@@ -655,7 +652,7 @@ export async function getUsersFromEvent(
     // getOwnerFromUsersArray is used here for backward compatibility when team event type has users[] but not hosts[]
     return eventHosts.length
       ? eventHosts.filter((host) => host.user.username).map(mapHostsToUsers)
-      : (await getOwnerFromUsersArray(prisma, id)) ?? [];
+      : ((await getOwnerFromUsersArray(prisma, id)) ?? []);
   }
   if (!owner) {
     return null;

@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { whereClauseForOrgWithSlugOrRequestedSlug } from "@calcom/ee/organizations/lib/orgDomains";
 import { getOrgUsernameFromEmail } from "@calcom/features/auth/signup/utils/getOrgUsernameFromEmail";
 import { getParsedTeam } from "@calcom/features/ee/teams/lib/getParsedTeam";
@@ -7,12 +5,11 @@ import { DATABASE_CHUNK_SIZE } from "@calcom/lib/constants";
 import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";
 import prisma from "@calcom/prisma";
-import type { User as PrismaUser } from "@calcom/prisma/client";
-import type { Prisma } from "@calcom/prisma/client";
-import type { Team } from "@calcom/prisma/client";
+import type { Prisma, User as PrismaUser, Team } from "@calcom/prisma/client";
 import { MembershipRole } from "@calcom/prisma/enums";
 import { userMetadata } from "@calcom/prisma/zod-utils";
 import type { UpId, UserAsPersonalProfile, UserProfile } from "@calcom/types/UserProfile";
+import { v4 as uuidv4 } from "uuid";
 
 const userSelect = {
   name: true,
@@ -527,7 +524,7 @@ export class ProfileRepository {
         }
       }
 
-      const user = await this.findUserByid({ id: targetUserId });
+      const user = await ProfileRepository.findUserByid({ id: targetUserId });
       if (!user) {
         return null;
       }
@@ -631,7 +628,7 @@ export class ProfileRepository {
 
     if (profile.organization?.isPlatform && !user.isPlatformManaged) {
       return {
-        ...this.buildPersonalProfileFromUser({ user }),
+        ...ProfileRepository.buildPersonalProfileFromUser({ user }),
         ...ProfileRepository.getInheritedDataFromUser({ user }),
       };
     }
@@ -1031,7 +1028,7 @@ export const normalizeProfile = <
     organization: Pick<Team, keyof typeof organizationSelect>;
     createdAt?: Date;
     updatedAt?: Date;
-  }
+  },
 >(
   profile: T
 ) => {

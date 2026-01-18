@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import type { ICalendarSwitchProps } from "@calcom/features/calendars/CalendarSwitch";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import type { CALENDARS } from "@calcom/platform-constants";
@@ -14,6 +12,7 @@ import { DisconnectIntegrationComponent } from "@calcom/ui/components/disconnect
 import { Dropdown, DropdownMenuContent, DropdownMenuTrigger } from "@calcom/ui/components/dropdown";
 import { Switch } from "@calcom/ui/components/form";
 import { List } from "@calcom/ui/components/list";
+import { useState } from "react";
 
 import * as Connect from "../../connect";
 import { AppleConnect } from "../../connect/apple/AppleConnect";

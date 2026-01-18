@@ -1,12 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-
-import { TRPCError } from "@trpc/server";
-import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-
-import { type TraceContext } from "@calcom/lib/tracing";
+import process from "node:process";
+import type { TraceContext } from "@calcom/lib/tracing";
 import { TracedError } from "@calcom/lib/tracing/error";
 import { distributedTracing } from "@calcom/lib/tracing/factory";
-
+import { TRPCError } from "@trpc/server";
+import { getHTTPStatusCodeFromError } from "@trpc/server/http";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { HttpError } from "../http-error";
 import { safeStringify } from "../safeStringify";
 import { getServerErrorFromUnknown } from "./getServerErrorFromUnknown";

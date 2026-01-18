@@ -1,7 +1,6 @@
-import { describe, it, vi, expect, beforeAll, afterAll, afterEach } from "vitest";
-
 import { prisma } from "@calcom/prisma";
 import { BookingStatus, SchedulingType } from "@calcom/prisma/enums";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
 const mockEventManagerCreate = vi.fn().mockResolvedValue({ referencesToCreate: [] });
 const mockEventManagerDelete = vi.fn().mockResolvedValue({});
@@ -468,7 +467,7 @@ describe("managedEventManualReassignment - Integration Tests", () => {
     const newBooking = await prisma.booking.findFirst({
       where: { userId: newUser.id, eventTypeId: childEventTypes[1].id },
     });
-    
+
     expect(newBooking).toBeTruthy();
     expect(newBooking?.userId).toBe(newUser.id);
   });
@@ -499,4 +498,3 @@ describe("managedEventManualReassignment - Integration Tests", () => {
     ).rejects.toThrow();
   });
 });
-

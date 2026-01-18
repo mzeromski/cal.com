@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { IsString, IsOptional, MinLength } from "class-validator";
+import { IsOptional, IsString, MinLength } from "class-validator";
 
 import { BaseTeamRoleInput } from "./base-team-role.input";
 

@@ -1,8 +1,6 @@
-import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
-
-import { describe, it, beforeEach, vi, expect } from "vitest";
-
 import type { Schedule } from "@calcom/prisma/client";
+import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TrpcSessionUser } from "../../../../types";
 import { getAllSchedulesByUserIdHandler } from "./getAllSchedulesByUserId.handler";
@@ -14,9 +12,11 @@ vi.mock("@calcom/lib/hasEditPermissionForUser", () => ({
 }));
 
 vi.mock("@calcom/features/schedules/repositories/ScheduleRepository", () => ({
-  ScheduleRepository: vi.fn().mockImplementation(function() { return {
-    getDefaultScheduleId: vi.fn().mockResolvedValue(DEFAULT_SCHEDULE_ID),
-  }; }),
+  ScheduleRepository: vi.fn().mockImplementation(function () {
+    return {
+      getDefaultScheduleId: vi.fn().mockResolvedValue(DEFAULT_SCHEDULE_ID),
+    };
+  }),
 }));
 
 import { hasReadPermissionsForUserId } from "@calcom/lib/hasEditPermissionForUser";

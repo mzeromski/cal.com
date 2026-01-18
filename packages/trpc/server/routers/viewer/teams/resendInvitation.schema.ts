@@ -1,6 +1,5 @@
-import { z } from "zod";
-
 import { emailSchema } from "@calcom/lib/emailSchema";
+import { z } from "zod";
 
 export type TResendInvitationInputSchemaInput = {
   teamId: number;
@@ -16,7 +15,11 @@ export type TResendInvitationInputSchema = {
   isOrg: boolean;
 };
 
-export const ZResendInvitationInputSchema: z.ZodType<TResendInvitationInputSchema, z.ZodTypeDef, TResendInvitationInputSchemaInput> = z.object({
+export const ZResendInvitationInputSchema: z.ZodType<
+  TResendInvitationInputSchema,
+  z.ZodTypeDef,
+  TResendInvitationInputSchemaInput
+> = z.object({
   teamId: z.number(),
   email: emailSchema,
   language: z.string(),

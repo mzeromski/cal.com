@@ -1,5 +1,5 @@
 import { getTeamBillingServiceFactory } from "@calcom/ee/billing/di/containers/Billing";
-import { Resource, CustomAction } from "@calcom/features/pbac/domain/types/permission-registry";
+import { CustomAction, Resource } from "@calcom/features/pbac/domain/types/permission-registry";
 import { getSpecificPermissions } from "@calcom/features/pbac/lib/resource-permissions";
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";
 import { prisma } from "@calcom/prisma";

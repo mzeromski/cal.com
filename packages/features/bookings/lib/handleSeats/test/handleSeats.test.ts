@@ -1,29 +1,25 @@
+import { appStoreMetadata } from "@calcom/app-store/apps.metadata.generated";
+import { ErrorCode } from "@calcom/lib/errorCodes";
+import { BookingStatus, SchedulingType } from "@calcom/prisma/enums";
 import prismaMock from "@calcom/testing/lib/__mocks__/prisma";
-
 import {
-  getBooker,
-  TestData,
-  getOrganizer,
+  BookingLocations,
   createBookingScenario,
+  getBooker,
+  getDate,
   getGoogleCalendarCredential,
-  Timezones,
+  getMockBookingAttendee,
+  getOrganizer,
   getScenarioData,
   mockSuccessfulVideoMeetingCreation,
-  BookingLocations,
-  getDate,
-  getMockBookingAttendee,
+  TestData,
+  Timezones,
 } from "@calcom/testing/lib/bookingScenario/bookingScenario";
 import { createMockNextJsRequest } from "@calcom/testing/lib/bookingScenario/createMockNextJsRequest";
 import { getMockRequestDataForBooking } from "@calcom/testing/lib/bookingScenario/getMockRequestDataForBooking";
 import { getMockRequestDataForCancelBooking } from "@calcom/testing/lib/bookingScenario/getMockRequestDataForCancelBooking";
 import { setupAndTeardown } from "@calcom/testing/lib/bookingScenario/setupAndTeardown";
-
-import { describe, test, vi, expect } from "vitest";
-
-import { appStoreMetadata } from "@calcom/app-store/apps.metadata.generated";
-import { ErrorCode } from "@calcom/lib/errorCodes";
-import { SchedulingType } from "@calcom/prisma/enums";
-import { BookingStatus } from "@calcom/prisma/enums";
+import { describe, expect, test, vi } from "vitest";
 
 import { getNewBookingHandler } from "../../handleNewBooking/test/getNewBookingHandler";
 import * as handleSeatsModule from "../handleSeats";

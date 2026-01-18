@@ -2,15 +2,18 @@ import { lookup } from "node:dns";
 
 import { getOrgFullOrigin } from "@calcom/ee/organizations/lib/orgDomains";
 import { isNotACompanyEmail } from "@calcom/ee/organizations/lib/server/orgCreationUtils";
-import { sendAdminOrganizationNotification, sendOrganizationCreationEmail } from "@calcom/emails/organization-email-service";
+import {
+  sendAdminOrganizationNotification,
+  sendOrganizationCreationEmail,
+} from "@calcom/emails/organization-email-service";
 import { sendEmailVerification } from "@calcom/features/auth/lib/verifyEmail";
 import { getOrganizationRepository } from "@calcom/features/ee/organizations/di/OrganizationRepository.container";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { DEFAULT_SCHEDULE, getAvailabilityFromSchedule } from "@calcom/lib/availability";
 import {
-  RESERVED_SUBDOMAINS,
-  ORG_SELF_SERVE_ENABLED,
   ORG_MINIMUM_PUBLISHED_TEAMS_SELF_SERVE,
+  ORG_SELF_SERVE_ENABLED,
+  RESERVED_SUBDOMAINS,
   WEBAPP_URL,
 } from "@calcom/lib/constants";
 import { createDomain } from "@calcom/lib/domainManager/organization";
@@ -21,8 +24,8 @@ import { UserPermissionRole } from "@calcom/prisma/enums";
 import { TRPCError } from "@trpc/server";
 
 import type { TrpcSessionUser } from "../../../types";
-import { BillingPeriod } from "./create.schema";
 import type { TCreateInputSchema } from "./create.schema";
+import { BillingPeriod } from "./create.schema";
 
 type CreateOptions = {
   ctx: {

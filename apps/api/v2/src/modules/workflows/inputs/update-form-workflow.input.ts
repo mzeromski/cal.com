@@ -1,7 +1,7 @@
-import { WorkflowFormActivationDto } from "@/modules/workflows/inputs/create-form-workflow";
 import { ApiExtraModels, ApiPropertyOptional, getSchemaPath } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsString, IsOptional, ValidateNested, ArrayMinSize } from "class-validator";
+import { ArrayMinSize, IsOptional, IsString, ValidateNested } from "class-validator";
+import { WorkflowFormActivationDto } from "@/modules/workflows/inputs/create-form-workflow";
 
 import {
   BaseFormWorkflowStepDto,
@@ -19,11 +19,11 @@ import {
   UpdateWhatsAppAttendeePhoneWorkflowStepDto,
 } from "./workflow-step.input";
 import {
-  OnFormSubmittedTriggerDto,
-  OnFormSubmittedNoEventTriggerDto,
   FORM_SUBMITTED,
   FORM_SUBMITTED_NO_EVENT,
   FORM_WORKFLOW_TRIGGER_TYPES,
+  OnFormSubmittedNoEventTriggerDto,
+  OnFormSubmittedTriggerDto,
   RoutingFormWorkflowTriggerDto,
 } from "./workflow-trigger.input";
 

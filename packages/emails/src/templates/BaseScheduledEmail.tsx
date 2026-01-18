@@ -1,19 +1,18 @@
-import type { TFunction } from "i18next";
-
 import dayjs from "@calcom/dayjs";
 import { formatPrice } from "@calcom/lib/currencyConversions";
 import { TimeFormat } from "@calcom/lib/timeFormat";
 import type { CalendarEvent, Person } from "@calcom/types/Calendar";
+import type { TFunction } from "i18next";
 
 import {
+  AppsStatus,
   BaseEmailHtml,
   Info,
   LocationInfo,
   ManageLink,
+  UserFieldsResponses,
   WhenInfo,
   WhoInfo,
-  AppsStatus,
-  UserFieldsResponses,
 } from "../components";
 import { PersonInfo } from "../components/WhoInfo";
 
@@ -71,8 +70,8 @@ export const BaseScheduledEmail = (
         props.title
           ? props.title
           : props.calEvent.recurringEvent?.count
-          ? "your_event_has_been_scheduled_recurring"
-          : "your_event_has_been_scheduled"
+            ? "your_event_has_been_scheduled_recurring"
+            : "your_event_has_been_scheduled"
       )}
       callToAction={
         props.callToAction === null

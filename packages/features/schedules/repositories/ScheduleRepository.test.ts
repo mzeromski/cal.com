@@ -1,8 +1,6 @@
-import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
-
-import { describe, expect, it, vi, beforeEach } from "vitest";
-
 import type { Schedule, User } from "@calcom/prisma/client";
+import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ScheduleRepository } from "./ScheduleRepository";
 

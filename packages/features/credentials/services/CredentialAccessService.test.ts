@@ -1,9 +1,8 @@
-import { describe, expect, test, vi, beforeEach } from "vitest";
-
 import { CredentialRepository } from "@calcom/features/credentials/repositories/CredentialRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { HttpError } from "@calcom/lib/http-error";
 import { prisma } from "@calcom/prisma";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import { CredentialAccessService } from "./CredentialAccessService";
 
@@ -27,9 +26,11 @@ vi.mock("@calcom/features/credentials/repositories/CredentialRepository", () => 
 
 vi.mock("@calcom/features/users/repositories/UserRepository", () => {
   return {
-    UserRepository: vi.fn().mockImplementation(function() { return {
-      getUserOrganizationAndTeams: vi.fn(),
-    }; }),
+    UserRepository: vi.fn().mockImplementation(function () {
+      return {
+        getUserOrganizationAndTeams: vi.fn(),
+      };
+    }),
   };
 });
 
@@ -123,7 +124,9 @@ describe("CredentialAccessService", () => {
       }),
     };
 
-    vi.mocked(UserRepository).mockImplementation(function() { return mockUserRepo as any; });
+    vi.mocked(UserRepository).mockImplementation(function () {
+      return mockUserRepo as any;
+    });
 
     const service = new CredentialAccessService();
     await expect(
@@ -168,7 +171,9 @@ describe("CredentialAccessService", () => {
         }),
     };
 
-    vi.mocked(UserRepository).mockImplementation(function() { return mockUserRepo as any; });
+    vi.mocked(UserRepository).mockImplementation(function () {
+      return mockUserRepo as any;
+    });
 
     const service = new CredentialAccessService();
     await expect(
@@ -207,7 +212,9 @@ describe("CredentialAccessService", () => {
       }),
     };
 
-    vi.mocked(UserRepository).mockImplementation(function() { return mockUserRepo as any; });
+    vi.mocked(UserRepository).mockImplementation(function () {
+      return mockUserRepo as any;
+    });
 
     const service = new CredentialAccessService();
     await expect(
@@ -273,7 +280,9 @@ describe("CredentialAccessService", () => {
         }),
     };
 
-    vi.mocked(UserRepository).mockImplementation(function() { return mockUserRepo as any; });
+    vi.mocked(UserRepository).mockImplementation(function () {
+      return mockUserRepo as any;
+    });
 
     const service = new CredentialAccessService();
     const error = await service

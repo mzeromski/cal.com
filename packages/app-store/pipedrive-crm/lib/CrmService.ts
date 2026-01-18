@@ -1,3 +1,4 @@
+import process from "node:process";
 import { getLocation } from "@calcom/lib/CalEventParser";
 import logger from "@calcom/lib/logger";
 import type {
@@ -7,8 +8,7 @@ import type {
   NewCalendarEventType,
 } from "@calcom/types/Calendar";
 import type { CredentialPayload } from "@calcom/types/Credential";
-import type { ContactCreateInput, CRM, Contact } from "@calcom/types/CrmService";
-
+import type { Contact, ContactCreateInput, CRM } from "@calcom/types/CrmService";
 import appConfig from "../config.json";
 
 type ContactSearchResult = {
@@ -52,7 +52,7 @@ export default class PipedriveCrmService implements CRM {
       headers.append("x-revert-t-id", this.tenantId);
       headers.append("Content-Type", "application/json");
 
-      const [firstname, lastname] = !!attendee.name ? attendee.name.split(" ") : [attendee.email, "-"];
+      const [firstname, lastname] = attendee.name ? attendee.name.split(" ") : [attendee.email, "-"];
       const bodyRaw = JSON.stringify({
         firstName: firstname,
         lastName: lastname || "-",

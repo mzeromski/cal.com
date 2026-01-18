@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getBrandingForEventType, getBrandingForUser, getBrandingForTeam } from "./getBranding";
+import { getBrandingForEventType, getBrandingForTeam, getBrandingForUser } from "./getBranding";
 
 describe("getBranding", () => {
   describe("getBrandingForEventType", () => {

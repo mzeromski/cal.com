@@ -11,8 +11,8 @@ vi.mock("./HolidayServiceCachingProxy", () => ({
   HolidayServiceCachingProxy: vi.fn(),
 }));
 
-import { getHolidayServiceCachingProxy } from "./HolidayServiceCachingProxy";
 import { HolidayService } from "./HolidayService";
+import { getHolidayServiceCachingProxy } from "./HolidayServiceCachingProxy";
 
 const mockHolidays: CachedHoliday[] = [
   {

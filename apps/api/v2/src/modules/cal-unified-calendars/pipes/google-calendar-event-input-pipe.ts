@@ -1,9 +1,9 @@
-import { GoogleCalendarEventResponse } from "@/modules/cal-unified-calendars/pipes/get-calendar-event-details-output-pipe";
 import { Injectable } from "@nestjs/common";
+import { GoogleCalendarEventResponse } from "@/modules/cal-unified-calendars/pipes/get-calendar-event-details-output-pipe";
 
 import {
-  UpdateUnifiedCalendarEventInput,
   UpdateDateTimeWithZone,
+  UpdateUnifiedCalendarEventInput,
 } from "../inputs/update-unified-calendar-event.input";
 import {
   CalendarEventResponseStatus,

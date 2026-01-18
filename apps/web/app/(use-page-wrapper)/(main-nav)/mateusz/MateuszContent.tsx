@@ -1,16 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-
-import { Button } from "@calcom/ui/components/button";
-import { Badge } from "@calcom/ui/components/badge";
-import { FormCard, FormCardBody } from "@calcom/ui/components/card";
-import { Input, SelectField, Switch, CheckboxField } from "@calcom/ui/components/form";
 import { Alert } from "@calcom/ui/components/alert";
-import { Tooltip } from "@calcom/ui/components/tooltip";
-import { SkeletonText } from "@calcom/ui/components/skeleton";
+import { Badge } from "@calcom/ui/components/badge";
+import { Button } from "@calcom/ui/components/button";
+import { FormCard, FormCardBody } from "@calcom/ui/components/card";
+import { CheckboxField, Input, SelectField, Switch } from "@calcom/ui/components/form";
 import { Icon } from "@calcom/ui/components/icon";
+import { SkeletonText } from "@calcom/ui/components/skeleton";
+import { Tooltip } from "@calcom/ui/components/tooltip";
+import { useEffect, useState } from "react";
 
 interface ExchangeRate {
   rate: number;
@@ -118,7 +117,10 @@ export function MateuszContent() {
       </FormCard>
 
       {/* Exchange Rate Section */}
-      <FormCard label="USD/PLN Exchange Rate" leftIcon="dollar-sign" badge={{ text: "Live", variant: "green" }}>
+      <FormCard
+        label="USD/PLN Exchange Rate"
+        leftIcon="dollar-sign"
+        badge={{ text: "Live", variant: "green" }}>
         <FormCardBody>
           <div className="space-y-4">
             {isLoadingRate ? (
@@ -156,9 +158,7 @@ export function MateuszContent() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
-            {inputValue && (
-              <p className="text-subtle mt-1 text-sm">You typed: {inputValue}</p>
-            )}
+            {inputValue && <p className="text-subtle mt-1 text-sm">You typed: {inputValue}</p>}
           </div>
 
           {/* Select Field */}

@@ -1,8 +1,5 @@
 import logger from "@calcom/lib/logger";
 import { WebhookTriggerEvents } from "@calcom/prisma/enums";
-
-import type { WebhookVersion } from "../../interface/IWebhookRepository";
-
 import type {
   AfterGuestsNoShowDTO,
   AfterHostsNoShowDTO,
@@ -18,6 +15,7 @@ import type {
   TranscriptionGeneratedDTO,
   WebhookEventDTO,
 } from "../../dto/types";
+import type { WebhookVersion } from "../../interface/IWebhookRepository";
 import type { WebhookPayload } from "../types";
 
 const log = logger.getSubLogger({ prefix: ["WebhookPayloadBuilderFactory"] });

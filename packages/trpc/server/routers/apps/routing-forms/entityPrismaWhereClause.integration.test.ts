@@ -1,7 +1,7 @@
 import { prisma } from "@calcom/prisma/__mocks__/prisma";
-import { describe, expect, it, vi, beforeEach } from "vitest";
-import { formQueryHandler } from "./formQuery.handler";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { deleteFormHandler } from "./deleteForm.handler";
+import { formQueryHandler } from "./formQuery.handler";
 import { formsHandler } from "./forms.handler";
 
 vi.mock("@calcom/prisma", () => ({
@@ -407,7 +407,9 @@ describe("entityPrismaWhereClause Integration Tests", () => {
           ctx: { prisma, user },
           input: { id: "test" },
         });
-      } catch { void 0; }
+      } catch {
+        void 0;
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       whereClause = (prisma.app_RoutingForms_Form.deleteMany as any).mock.calls[0][0].where;
@@ -440,15 +442,16 @@ describe("entityPrismaWhereClause Integration Tests", () => {
         input: { id: "test" },
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const formQueryWhere = (prisma.app_RoutingForms_Form.findFirst as any).mock.calls[0][0].where
-        .AND[0];
+      const formQueryWhere = (prisma.app_RoutingForms_Form.findFirst as any).mock.calls[0][0].where.AND[0];
 
       try {
         await deleteFormHandler({
           ctx: { prisma, user },
           input: { id: "test" },
         });
-      } catch { void 0; }
+      } catch {
+        void 0;
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const deleteFormWhere = (prisma.app_RoutingForms_Form.deleteMany as any).mock.calls[0][0].where;
 

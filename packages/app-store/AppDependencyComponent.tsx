@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
-
 import { WEBAPP_URL } from "@calcom/lib/constants";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import classNames from "@calcom/ui/classNames";
 import { Icon } from "@calcom/ui/components/icon";
+import Link from "next/link";
 
 export const AppDependencyComponent = ({
   appName,
@@ -19,11 +18,7 @@ export const AppDependencyComponent = ({
   const hasUnmetDependencies = dependencyData ? dependencyData.some((dep) => !dep.installed) : false;
 
   return (
-    <div
-      className={classNames(
-        "rounded-md px-4 py-3",
-        hasUnmetDependencies ? "bg-error" : "bg-subtle"
-      )}>
+    <div className={classNames("rounded-md px-4 py-3", hasUnmetDependencies ? "bg-error" : "bg-subtle")}>
       {dependencyData &&
         dependencyData.map((dependency) => {
           return dependency.installed ? (

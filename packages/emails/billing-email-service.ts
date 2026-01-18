@@ -1,14 +1,12 @@
-import type { TFunction } from "i18next";
-
 import type BaseEmail from "@calcom/emails/templates/_base-email";
-import type { CalendarEvent, Person } from "@calcom/types/Calendar";
 import type { CreditUsageType } from "@calcom/prisma/enums";
 import type { EventTypeMetadata } from "@calcom/prisma/zod-utils";
-
-import OrganizerPaymentRefundFailedEmail from "./templates/organizer-payment-refund-failed-email";
-import NoShowFeeChargedEmail from "./templates/no-show-fee-charged-email";
-import CreditBalanceLowWarningEmail from "./templates/credit-balance-low-warning-email";
+import type { CalendarEvent, Person } from "@calcom/types/Calendar";
+import type { TFunction } from "i18next";
 import CreditBalanceLimitReachedEmail from "./templates/credit-balance-limit-reached-email";
+import CreditBalanceLowWarningEmail from "./templates/credit-balance-low-warning-email";
+import NoShowFeeChargedEmail from "./templates/no-show-fee-charged-email";
+import OrganizerPaymentRefundFailedEmail from "./templates/organizer-payment-refund-failed-email";
 
 const sendEmail = (prepare: () => BaseEmail) => {
   return new Promise((resolve, reject) => {

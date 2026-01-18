@@ -1,6 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
 import dayjs from "@calcom/dayjs";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { buildCalEventFromBooking } from "../buildCalEventFromBooking";
 import { parseRecurringEvent } from "../isRecurringEvent";
@@ -61,7 +60,7 @@ describe("buildCalEventFromBooking", () => {
   beforeEach(() => {
     // vi.resetAllMocks();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     getTranslation.mockImplementation((locale: string, namespace: string) => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       const translate = () => {};

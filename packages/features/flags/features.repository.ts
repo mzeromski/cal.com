@@ -1,7 +1,6 @@
-import { captureException } from "@sentry/nextjs";
-
 import type { PrismaClient } from "@calcom/prisma";
 import { Prisma } from "@calcom/prisma/client";
+import { captureException } from "@sentry/nextjs";
 
 import type { AppFlags, FeatureId, FeatureState, TeamFeatures } from "./config";
 import type { IFeaturesRepository } from "./features.repository.interface";
@@ -19,7 +18,7 @@ export class FeaturesRepository implements IFeaturesRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static featuresCache: { data: any[]; expiry: number } | null = null;
 
-  constructor(private prismaClient: PrismaClient) { }
+  constructor(private prismaClient: PrismaClient) {}
 
   private clearCache() {
     FeaturesRepository.featuresCache = null;
@@ -195,10 +194,12 @@ export class FeaturesRepository implements IFeaturesRepository {
         }
       }
 
-      await Promise.all(slugsToCheckAtTeamLevel.map(async (slug) => {
-        const hasTeamFeature = await this.checkIfUserBelongsToTeamWithFeature(userId, slug);
-        featuresStatus[slug] = hasTeamFeature;
-      }))
+      await Promise.all(
+        slugsToCheckAtTeamLevel.map(async (slug) => {
+          const hasTeamFeature = await this.checkIfUserBelongsToTeamWithFeature(userId, slug);
+          featuresStatus[slug] = hasTeamFeature;
+        })
+      );
 
       return featuresStatus;
     } catch (err) {

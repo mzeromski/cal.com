@@ -2,17 +2,19 @@ import { PermissionCheckService } from "@calcom/features/pbac/services/permissio
 import { getPlaceholderAvatar } from "@calcom/lib/defaultAvatarImage";
 import { getUserAvatarUrl } from "@calcom/lib/getAvatarUrl";
 import { withReporting } from "@calcom/lib/sentryWrapper";
-import { prisma as defaultPrisma } from "@calcom/prisma";
 import type { PrismaClient } from "@calcom/prisma";
+import { prisma as defaultPrisma } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";
 import type { TimeUnit, WebhookTriggerEvents } from "@calcom/prisma/enums";
-import { UserPermissionRole, MembershipRole } from "@calcom/prisma/enums";
-
-import { parseWebhookVersion } from "../interface/IWebhookRepository";
-
-import type { Webhook, WebhookSubscriber, WebhookGroup } from "../dto/types";
-import type { IWebhookRepository, WebhookVersion, ListWebhooksOptions } from "../interface/IWebhookRepository";
+import { MembershipRole, UserPermissionRole } from "@calcom/prisma/enums";
+import type { Webhook, WebhookGroup, WebhookSubscriber } from "../dto/types";
 import { WebhookOutputMapper } from "../infrastructure/mappers/WebhookOutputMapper";
+import type {
+  IWebhookRepository,
+  ListWebhooksOptions,
+  WebhookVersion,
+} from "../interface/IWebhookRepository";
+import { parseWebhookVersion } from "../interface/IWebhookRepository";
 import type { GetSubscribersOptions } from "./types";
 
 // Type for raw query results from the database
@@ -28,8 +30,6 @@ interface WebhookQueryResult {
   version: WebhookVersion;
   priority: number; // This field is added by the query and removed before returning
 }
-
-
 
 const filterWebhooks = (webhook: { appId: string | null }) => {
   const appIds = [

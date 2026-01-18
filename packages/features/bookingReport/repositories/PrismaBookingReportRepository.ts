@@ -3,9 +3,9 @@ import type { BookingReportStatus, SystemReportStatus } from "@calcom/prisma/enu
 import type { Prisma } from "@calcom/prisma/generated/prisma/client";
 
 import type {
-  IBookingReportRepository,
-  CreateBookingReportInput,
   BookingReportWithDetails,
+  CreateBookingReportInput,
+  IBookingReportRepository,
   ListBookingReportsFilters,
   SystemBookingReportsFilters,
 } from "./IBookingReportRepository";

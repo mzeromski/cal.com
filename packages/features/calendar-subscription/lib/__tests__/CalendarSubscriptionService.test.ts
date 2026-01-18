@@ -1,13 +1,12 @@
 import "../__mocks__/delegationCredential";
 
-import { describe, test, expect, vi, beforeEach } from "vitest";
-
 import type { AdapterFactory } from "@calcom/features/calendar-subscription/adapters/AdaptersFactory";
 import type { CalendarCacheEventService } from "@calcom/features/calendar-subscription/lib/cache/CalendarCacheEventService";
 import type { CalendarSyncService } from "@calcom/features/calendar-subscription/lib/sync/CalendarSyncService";
 import type { FeaturesRepository } from "@calcom/features/flags/features.repository";
 import type { ISelectedCalendarRepository } from "@calcom/features/selectedCalendar/repositories/SelectedCalendarRepository.interface";
 import type { SelectedCalendar } from "@calcom/prisma/client";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import { CalendarSubscriptionService } from "../CalendarSubscriptionService";
 
@@ -112,12 +111,14 @@ describe("CalendarSubscriptionService", () => {
     mockAdapterFactory = {
       get: vi.fn().mockReturnValue(mockAdapter),
       getProviders: vi.fn().mockReturnValue(["google_calendar", "office365_calendar"]),
-      getGenericCalendarSuffixes: vi.fn().mockReturnValue([
-        "@group.v.calendar.google.com",
-        "@group.calendar.google.com",
-        "@import.calendar.google.com",
-        "@resource.calendar.google.com",
-      ]),
+      getGenericCalendarSuffixes: vi
+        .fn()
+        .mockReturnValue([
+          "@group.v.calendar.google.com",
+          "@group.calendar.google.com",
+          "@import.calendar.google.com",
+          "@resource.calendar.google.com",
+        ]),
     };
 
     mockSelectedCalendarRepository = {

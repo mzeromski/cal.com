@@ -1,10 +1,8 @@
-import { prisma } from "@calcom/prisma/__mocks__/prisma";
-
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-
 import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
 import { WorkflowService } from "@calcom/features/ee/workflows/lib/service/WorkflowService";
 import { deleteDomain } from "@calcom/lib/domainManager/organization";
+import { prisma } from "@calcom/prisma/__mocks__/prisma";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { TeamService } from "./teamService";
 
@@ -50,7 +48,9 @@ const mockTeamRepo = {
     throw new Error(`Team with id ${id} not found`);
   }),
 };
-vi.mocked(TeamRepository).mockImplementation(function() { return mockTeamRepo; });
+vi.mocked(TeamRepository).mockImplementation(function () {
+  return mockTeamRepo;
+});
 
 vi.mocked(deleteDomain).mockImplementation(async (slug) => {
   database.domains.delete(slug);
@@ -63,7 +63,7 @@ vi.mocked(WorkflowService.deleteWorkflowRemindersOfRemovedTeam).mockImplementati
 describe("TeamService", () => {
   beforeEach(async () => {
     database.clear();
-    
+
     const { getTeamBillingServiceFactory } = await import("@calcom/ee/billing/di/containers/Billing");
     vi.mocked(getTeamBillingServiceFactory).mockReturnValue({
       findAndInit: vi.fn().mockImplementation(async (teamId) => {

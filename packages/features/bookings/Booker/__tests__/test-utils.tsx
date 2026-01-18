@@ -1,12 +1,11 @@
-import { render } from "@testing-library/react";
+import dayjs from "@calcom/dayjs";
+import { BookerLayouts } from "@calcom/prisma/zod-utils";
 import type { RenderOptions } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import type React from "react";
 import type { ReactElement } from "react";
 import { vi } from "vitest";
 import type { StoreApi } from "zustand";
-
-import dayjs from "@calcom/dayjs";
-import { BookerLayouts } from "@calcom/prisma/zod-utils";
 
 import { BookerStoreContext } from "../BookerStoreProvider";
 import type { BookerStore } from "../store";

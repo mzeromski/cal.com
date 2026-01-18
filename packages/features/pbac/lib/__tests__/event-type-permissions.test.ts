@@ -1,9 +1,7 @@
-import { prisma } from "@calcom/prisma/__mocks__/prisma";
-
-import { vi, type Mock, describe, it, expect, beforeEach } from "vitest";
-
 import { FeaturesRepository } from "@calcom/features/flags/features.repository";
+import { prisma } from "@calcom/prisma/__mocks__/prisma";
 import { MembershipRole } from "@calcom/prisma/enums";
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 
 import { Resource } from "../../domain/types/permission-registry";
 import { PermissionCheckService } from "../../services/permission-check.service";
@@ -35,8 +33,12 @@ describe("getEventTypePermissions", () => {
       getResourcePermissions: vi.fn(),
     };
 
-    vi.mocked(FeaturesRepository).mockImplementation(function() { return mockFeaturesRepository as any; });
-    vi.mocked(PermissionCheckService).mockImplementation(function() { return mockPermissionCheckService as any; });
+    vi.mocked(FeaturesRepository).mockImplementation(function () {
+      return mockFeaturesRepository as any;
+    });
+    vi.mocked(PermissionCheckService).mockImplementation(function () {
+      return mockPermissionCheckService as any;
+    });
 
     prisma.membership.findFirst = vi.fn();
     prisma.team.findUnique = vi.fn();
@@ -546,8 +548,12 @@ describe("getEventTypePermissions", () => {
       vi.clearAllMocks();
 
       // Re-initialize mocks after clearing
-      vi.mocked(FeaturesRepository).mockImplementation(function() { return mockFeaturesRepository as any; });
-      vi.mocked(PermissionCheckService).mockImplementation(function() { return mockPermissionCheckService as any; });
+      vi.mocked(FeaturesRepository).mockImplementation(function () {
+        return mockFeaturesRepository as any;
+      });
+      vi.mocked(PermissionCheckService).mockImplementation(function () {
+        return mockPermissionCheckService as any;
+      });
       prisma.membership.findFirst = vi.fn();
       prisma.team.findUnique = vi.fn();
 

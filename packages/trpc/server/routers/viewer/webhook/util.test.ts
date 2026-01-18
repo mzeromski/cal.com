@@ -1,10 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
 import type { PermissionString } from "@calcom/features/pbac/domain/types/permission-registry";
 import { prisma } from "@calcom/prisma";
 import type { MembershipRole } from "@calcom/prisma/enums";
-
 import { TRPCError } from "@trpc/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import authedProcedure from "../../../procedures/authedProcedure";
 // Import after mocks are set up
@@ -28,9 +26,11 @@ vi.mock("@calcom/prisma", () => ({
 const mockCheckPermission = vi.fn();
 
 vi.mock("@calcom/features/pbac/services/permission-check.service", () => ({
-  PermissionCheckService: vi.fn().mockImplementation(function() { return {
-    checkPermission: mockCheckPermission,
-  }; }),
+  PermissionCheckService: vi.fn().mockImplementation(function () {
+    return {
+      checkPermission: mockCheckPermission,
+    };
+  }),
 }));
 
 vi.mock("../../../procedures/authedProcedure", () => ({

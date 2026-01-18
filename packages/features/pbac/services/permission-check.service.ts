@@ -8,10 +8,10 @@ import { PermissionMapper } from "../domain/mappers/PermissionMapper";
 import type { PermissionCheck, TeamPermissions } from "../domain/models/Permission";
 import type { IPermissionRepository } from "../domain/repositories/IPermissionRepository";
 import type {
-  PermissionString,
-  Resource,
   CrudAction,
   CustomAction,
+  PermissionString,
+  Resource,
 } from "../domain/types/permission-registry";
 import { PermissionRepository } from "../infrastructure/repositories/PermissionRepository";
 import { PermissionService } from "./permission.service";
@@ -136,7 +136,7 @@ export class PermissionCheckService {
           userId,
           teamId: team.parentId,
         });
-        
+
         // Use the highest role between team and org
         if (orgMembership) {
           effectiveRole = this.getHighestRole(effectiveRole, orgMembership.role);
@@ -200,7 +200,7 @@ export class PermissionCheckService {
           userId,
           teamId: team.parentId,
         });
-        
+
         // Use the highest role between team and org
         if (orgMembership) {
           effectiveRole = this.getHighestRole(effectiveRole, orgMembership.role);
@@ -293,10 +293,7 @@ export class PermissionCheckService {
     return allowedRoles.includes(userRole);
   }
 
-  private getHighestRole(
-    role1: MembershipRole | null,
-    role2: MembershipRole | null
-  ): MembershipRole | null {
+  private getHighestRole(role1: MembershipRole | null, role2: MembershipRole | null): MembershipRole | null {
     if (!role1) return role2;
     if (!role2) return role1;
 

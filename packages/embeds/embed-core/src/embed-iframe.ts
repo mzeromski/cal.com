@@ -1,32 +1,39 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { mapOldToNewCssVars } from "./ui/cssVarsMap";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Message } from "./embed";
-import { embedStore, EMBED_IFRAME_STATE, resetPageData, setReloadInitiated, incrementView } from "./embed-iframe/lib/embedStore";
 import {
-  runAsap,
+  EMBED_IFRAME_STATE,
+  embedStore,
+  incrementView,
+  resetPageData,
+  setReloadInitiated,
+} from "./embed-iframe/lib/embedStore";
+import {
   isBookerReady,
-  isLinkReady,
-  recordResponseIfQueued,
-  keepParentInformedAboutDimensionChanges,
-  isPrerendering,
   isBrowser,
+  isLinkReady,
+  isPrerendering,
+  keepParentInformedAboutDimensionChanges,
   log,
+  recordResponseIfQueued,
+  runAsap,
 } from "./embed-iframe/lib/utils";
 import { sdkActionManager } from "./sdk-event";
 import type {
-  UiConfig,
-  EmbedNonStylesConfig,
   BookerLayouts,
-  EmbedStyles,
   EmbedBookerState,
-  SlotsQuery,
+  EmbedNonStylesConfig,
+  EmbedStyles,
   PrefillAndIframeAttrsConfig,
   SetStyles,
+  SlotsQuery,
   setNonStylesConfig,
+  UiConfig,
 } from "./types";
+import { mapOldToNewCssVars } from "./ui/cssVarsMap";
 import { useCompatSearchParams } from "./useCompatSearchParams";
+
 export { useBookerEmbedEvents } from "./embed-iframe/react-hooks";
 
 // We don't import it from Booker/types because the types from this module are published to npm and we can't import packages that aren't published
@@ -97,15 +104,15 @@ const setEmbedNonStyles = (stylesConfig: EmbedNonStylesConfig) => {
 const registerNewSetter = (
   registration:
     | {
-      elementName: keyof EmbedStyles;
-      setState: SetStyles;
-      styles: true;
-    }
+        elementName: keyof EmbedStyles;
+        setState: SetStyles;
+        styles: true;
+      }
     | {
-      elementName: keyof EmbedNonStylesConfig;
-      setState: setNonStylesConfig;
-      styles: false;
-    }
+        elementName: keyof EmbedNonStylesConfig;
+        setState: setNonStylesConfig;
+        styles: false;
+      }
 ) => {
   // It's possible that 'ui' instruction has already been processed and the registration happened due to some action by the user in iframe.
   // So, we should call the setter immediately with available embedStyles
@@ -337,7 +344,6 @@ async function waitForRenderStateToBeCompleted() {
     })();
   });
 }
-
 
 // It is a map of methods that can be called by parent using doInIframe({method: "methodName", arg: "argument"})
 export const methods = {

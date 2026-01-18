@@ -1,11 +1,8 @@
-import prismock from "@calcom/testing/lib/__mocks__/prisma";
-
-import { describe, expect, it, beforeEach, vi } from "vitest";
-
 import slugify from "@calcom/lib/slugify";
-import { MembershipRole, UserPermissionRole, CreationSource, RedirectType } from "@calcom/prisma/enums";
-
+import { CreationSource, MembershipRole, RedirectType, UserPermissionRole } from "@calcom/prisma/enums";
+import prismock from "@calcom/testing/lib/__mocks__/prisma";
 import { TRPCError } from "@trpc/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createTeamsHandler } from "../createTeams.handler";
 
@@ -43,7 +40,7 @@ async function createTestTeam(data: {
       parentId: data.parentId,
       isOrganization: data.isOrganization ?? false,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       metadata: data.metadata || {},
       isPlatform: data.isPlatform ?? false,
     },

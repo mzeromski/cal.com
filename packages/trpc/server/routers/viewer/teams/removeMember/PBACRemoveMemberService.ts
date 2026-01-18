@@ -1,6 +1,6 @@
 import * as teamQueries from "@calcom/features/ee/teams/lib/queries";
 import { PermissionMapper } from "@calcom/features/pbac/domain/mappers/PermissionMapper";
-import { Resource, CustomAction } from "@calcom/features/pbac/domain/types/permission-registry";
+import { CustomAction, Resource } from "@calcom/features/pbac/domain/types/permission-registry";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { MembershipRole } from "@calcom/prisma/enums";
 

@@ -3,20 +3,20 @@
  * These functions can be safely imported in server-side code (cron jobs, API routes, etc.)
  * without pulling in the client-only RAQB library.
  */
-import type { JsonGroup, JsonItem, JsonRule, JsonTree } from "react-awesome-query-builder";
 
 import { getQueryBuilderConfigForAttributes } from "@calcom/app-store/routing-forms/lib/getQueryBuilderConfig";
 import { resolveQueryValue } from "@calcom/app-store/routing-forms/lib/resolveQueryValue";
 import type {
-  LocalRoute,
   Attribute,
-  AttributeOptionValueWithType,
   AttributeOptionValue,
+  AttributeOptionValueWithType,
+  LocalRoute,
 } from "@calcom/app-store/routing-forms/types/types";
 import type { dynamicFieldValueOperands } from "@calcom/lib/raqb/types";
 import { caseInsensitive } from "@calcom/lib/raqb/utils";
 import { safeStringify } from "@calcom/lib/safeStringify";
 import { AttributeType } from "@calcom/prisma/enums";
+import type { JsonGroup, JsonItem, JsonRule, JsonTree } from "react-awesome-query-builder";
 
 function ensureArray(value: string | string[]) {
   return typeof value === "string" ? [value] : value;
@@ -80,8 +80,7 @@ export function getValueOfAttributeOption(
     return transformAttributeOption(attributeOptions);
   }
   return attributeOptions
-    .map(transformAttributeOption)
-    .flat()
+    .flatMap(transformAttributeOption)
     .filter((value, index, self) => self.indexOf(value) === index);
 
   function transformAttributeOption(

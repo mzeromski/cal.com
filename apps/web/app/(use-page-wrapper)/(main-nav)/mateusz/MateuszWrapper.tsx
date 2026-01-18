@@ -1,10 +1,9 @@
 "use client";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
+import { Button } from "@calcom/ui/components/button";
 import { ShellMainAppDir } from "app/(use-page-wrapper)/(main-nav)/ShellMainAppDir";
 import type { ReactElement } from "react";
-
-import { Button } from "@calcom/ui/components/button";
 
 import { MateuszContent } from "./MateuszContent";
 

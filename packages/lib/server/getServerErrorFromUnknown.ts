@@ -1,9 +1,8 @@
-import type { ZodIssue } from "zod";
-import { ZodError } from "zod";
-
 import { ErrorCode } from "@calcom/lib/errorCodes";
 import { ErrorWithCode } from "@calcom/lib/errors";
 import { Prisma } from "@calcom/prisma/client";
+import type { ZodIssue } from "zod";
+import { ZodError } from "zod";
 
 import { HttpError } from "../http-error";
 import { redactError } from "../redactError";
@@ -22,7 +21,10 @@ function isZodError(cause: unknown): cause is ZodError {
 function isPrismaError(cause: unknown): cause is Prisma.PrismaClientKnownRequestError {
   return (
     cause instanceof Prisma.PrismaClientKnownRequestError ||
-    (cause instanceof Error && "code" in cause && typeof cause.code === "string" && cause.code.startsWith("P"))
+    (cause instanceof Error &&
+      "code" in cause &&
+      typeof cause.code === "string" &&
+      cause.code.startsWith("P"))
   );
 }
 
@@ -32,8 +34,8 @@ function parseZodErrorIssues(issues: ZodIssue[]): string {
       i.code === "invalid_union"
         ? i.unionErrors.map((ue) => parseZodErrorIssues(ue.issues)).join("; ")
         : i.code === "unrecognized_keys"
-        ? i.message
-        : `${i.path.length ? `${i.code} in '${i.path}': ` : ""}${i.message}`
+          ? i.message
+          : `${i.path.length ? `${i.code} in '${i.path}': ` : ""}${i.message}`
     )
     .join("; ");
 }

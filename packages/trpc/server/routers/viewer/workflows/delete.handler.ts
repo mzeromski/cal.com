@@ -9,7 +9,7 @@ import type { TrpcSessionUser } from "@calcom/trpc/server/types";
 import { TRPCError } from "@trpc/server";
 
 import type { TDeleteInputSchema } from "./delete.schema";
-import { removeSmsReminderFieldForEventTypes, removeAIAgentCallPhoneNumberFieldForEventTypes } from "./util";
+import { removeAIAgentCallPhoneNumberFieldForEventTypes, removeSmsReminderFieldForEventTypes } from "./util";
 
 type DeleteOptions = {
   ctx: {

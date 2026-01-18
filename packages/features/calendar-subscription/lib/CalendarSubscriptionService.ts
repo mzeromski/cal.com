@@ -211,9 +211,7 @@ export class CalendarSubscriptionService {
    * @returns Object with counts of events fetched, cached, and synced, plus propagation lag metrics
    */
   // biome-ignore lint/complexity/noExcessiveLinesPerFunction: event processing requires multiple steps
-  async processEvents(
-    selectedCalendar: SelectedCalendar
-  ): Promise<{
+  async processEvents(selectedCalendar: SelectedCalendar): Promise<{
     eventsFetched: number;
     eventsCached: number;
     eventsSynced: number;
@@ -244,7 +242,9 @@ export class CalendarSubscriptionService {
         );
 
         if (!selectedCalendar.credentialId && !selectedCalendar.delegationCredentialId) {
-          log.debug("Selected Calendar doesn't have credentials", { selectedCalendarId: selectedCalendar.id });
+          log.debug("Selected Calendar doesn't have credentials", {
+            selectedCalendarId: selectedCalendar.id,
+          });
           span.setAttribute("skipped", true);
           span.setAttribute("skipReason", "No credentials");
           return result;

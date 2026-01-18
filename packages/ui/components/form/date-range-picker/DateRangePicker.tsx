@@ -1,10 +1,9 @@
 "use client";
 
+import classNames from "@calcom/ui/classNames";
 import * as Popover from "@radix-ui/react-popover";
 import { format, isBefore, isSameDay } from "date-fns";
-import { useState, useMemo, type HTMLAttributes } from "react";
-
-import classNames from "@calcom/ui/classNames";
+import { type HTMLAttributes, useMemo, useState } from "react";
 
 import { Button } from "../../button";
 import { Calendar } from "./Calendar";
@@ -56,7 +55,7 @@ export function DatePickerWithRange({
     setHoveredDate(undefined);
   }
 
-  const fromDate = allowPastDates && minDate === null ? undefined : minDate ?? new Date();
+  const fromDate = allowPastDates && minDate === null ? undefined : (minDate ?? new Date());
 
   const hoverRangeModifier = useMemo(() => {
     if (!dates.startDate || dates.endDate || !hoveredDate) {

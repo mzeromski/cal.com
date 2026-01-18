@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
 import { WebhookTriggerEvents } from "@calcom/prisma/enums";
+import { describe, expect, it } from "vitest";
 
-import type { MeetingStartedDTO, MeetingEndedDTO } from "../../dto/types";
+import type { MeetingEndedDTO, MeetingStartedDTO } from "../../dto/types";
 import { MeetingPayloadBuilder } from "../versioned/v2021-10-20/MeetingPayloadBuilder";
 
 describe("MeetingPayloadBuilder (v2021-10-20)", () => {

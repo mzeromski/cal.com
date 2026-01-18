@@ -1,15 +1,16 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
-
 import type { EventTypeMetadata } from "@calcom/prisma/zod-utils";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { shouldSkipAttendeeEmailWithSettings, fetchOrganizationEmailSettings } from "./email-manager";
+import { fetchOrganizationEmailSettings, shouldSkipAttendeeEmailWithSettings } from "./email-manager";
 
 const mockGetEmailSettings = vi.fn();
 
 vi.mock("@calcom/features/organizations/repositories/OrganizationSettingsRepository", () => ({
-  OrganizationSettingsRepository: vi.fn().mockImplementation(function() { return {
-    getEmailSettings: mockGetEmailSettings,
-  }; }),
+  OrganizationSettingsRepository: vi.fn().mockImplementation(function () {
+    return {
+      getEmailSettings: mockGetEmailSettings,
+    };
+  }),
 }));
 
 vi.mock("@calcom/prisma", () => ({

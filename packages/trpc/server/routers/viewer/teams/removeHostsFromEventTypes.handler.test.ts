@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, it, beforeEach, vi, expect } from "vitest";
 
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import prisma from "@calcom/prisma";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TrpcSessionUser } from "../../../types";
 import removeHostsFromEventTypesHandler from "./removeHostsFromEventTypes.handler";
@@ -130,9 +130,7 @@ describe("removeHostsFromEventTypesHandler", () => {
     });
 
     // Mock that only userId 101 is a team member, 102 is not
-    (MembershipRepository.findAcceptedMembershipsByUserIdsInTeam as any).mockResolvedValue([
-      { userId: 101 },
-    ]);
+    (MembershipRepository.findAcceptedMembershipsByUserIdsInTeam as any).mockResolvedValue([{ userId: 101 }]);
 
     const mockDeleteResult = { count: 1 };
     (prisma.host.deleteMany as any).mockResolvedValue(mockDeleteResult);
@@ -284,9 +282,7 @@ describe("removeHostsFromEventTypesHandler", () => {
     });
 
     // User 999 is a valid team member
-    (MembershipRepository.findAcceptedMembershipsByUserIdsInTeam as any).mockResolvedValue([
-      { userId: 999 },
-    ]);
+    (MembershipRepository.findAcceptedMembershipsByUserIdsInTeam as any).mockResolvedValue([{ userId: 999 }]);
 
     // But they're not a host on any of the event types
     const mockDeleteResult = { count: 0 };

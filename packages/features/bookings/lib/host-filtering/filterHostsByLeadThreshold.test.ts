@@ -1,12 +1,10 @@
-import { prisma } from "@calcom/prisma/__mocks__/prisma";
-
-import type { Mock } from "vitest";
-import { describe, expect, it, vi, afterEach, beforeEach } from "vitest";
-
 import { getLuckyUserService } from "@calcom/features/di/containers/LuckyUser";
+import { prisma } from "@calcom/prisma/__mocks__/prisma";
 import { RRResetInterval, RRTimestampBasis } from "@calcom/prisma/enums";
+import type { Mock } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { filterHostsByLeadThreshold, errorCodes } from "./filterHostsByLeadThreshold";
+import { errorCodes, filterHostsByLeadThreshold } from "./filterHostsByLeadThreshold";
 
 vi.mock("@calcom/prisma", () => ({
   prisma,

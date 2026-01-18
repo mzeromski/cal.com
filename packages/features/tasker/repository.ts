@@ -1,8 +1,8 @@
-import { prisma } from "@calcom/prisma";
 import type { PrismaClient } from "@calcom/prisma";
+import { prisma } from "@calcom/prisma";
 import { Prisma } from "@calcom/prisma/client";
 
-import { type TaskTypes } from "./tasker";
+import type { TaskTypes } from "./tasker";
 import { scanWorkflowBodySchema } from "./tasks/scanWorkflowBody";
 
 const whereSucceeded: Prisma.TaskWhereInput = {
@@ -42,7 +42,7 @@ type Dependencies = {
 };
 
 export class TaskRepository {
-  constructor(private readonly deps: Dependencies) { }
+  constructor(private readonly deps: Dependencies) {}
 
   async create(
     type: TaskTypes,

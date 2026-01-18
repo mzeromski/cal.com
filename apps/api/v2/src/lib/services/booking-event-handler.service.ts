@@ -1,6 +1,5 @@
-import { Injectable } from "@nestjs/common";
-
 import { BookingEventHandlerService as BaseBookingEventHandlerService } from "@calcom/platform-libraries/bookings";
+import { Injectable } from "@nestjs/common";
 
 import { Logger } from "@/lib/logger.bridge";
 
@@ -21,4 +20,3 @@ export class BookingEventHandlerService extends BaseBookingEventHandlerService {
     });
   }
 }
-

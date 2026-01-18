@@ -1,5 +1,3 @@
-import { useSearchParams } from "next/navigation";
-
 import { updateEmbedBookerState } from "@calcom/embed-core/src/embed-iframe";
 import { sdkActionManager } from "@calcom/embed-core/src/sdk-event";
 import { useBookerStore } from "@calcom/features/bookings/Booker/store";
@@ -9,6 +7,7 @@ import { useTimesForSchedule } from "@calcom/features/schedules/lib/use-schedule
 import { getRoutedTeamMemberIdsFromSearchParams } from "@calcom/lib/bookings/getRoutedTeamMemberIdsFromSearchParams";
 import { PUBLIC_QUERY_AVAILABLE_SLOTS_INTERVAL_SECONDS } from "@calcom/lib/constants";
 import { trpc } from "@calcom/trpc/react";
+import { useSearchParams } from "next/navigation";
 
 import { useApiV2AvailableSlots } from "./useApiV2AvailableSlots";
 
@@ -166,10 +165,7 @@ export const useSchedule = ({
     });
 
     if (teamScheduleV2.isSuccess && eventId && eventSlug) {
-      sdkActionManager?.fire(
-        "availabilityLoaded",
-        getAvailabilityLoadedEventPayload({ eventId, eventSlug })
-      );
+      sdkActionManager?.fire("availabilityLoaded", getAvailabilityLoadedEventPayload({ eventId, eventSlug }));
     }
 
     return {
@@ -189,10 +185,7 @@ export const useSchedule = ({
   });
 
   if (schedule.isSuccess && eventId && eventSlug) {
-    sdkActionManager?.fire(
-      "availabilityLoaded",
-      getAvailabilityLoadedEventPayload({ eventId, eventSlug })
-    );
+    sdkActionManager?.fire("availabilityLoaded", getAvailabilityLoadedEventPayload({ eventId, eventSlug }));
   }
 
   return {

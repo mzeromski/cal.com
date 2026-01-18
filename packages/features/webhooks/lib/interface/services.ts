@@ -3,16 +3,16 @@ import type { WebhookTriggerEvents } from "@calcom/prisma/enums";
 import type { WebhookSubscriber } from "../dto/types";
 import type { WebhookPayload } from "../factory/types";
 import type {
-  BookingPaymentInitiatedParams,
-  BookingCreatedParams,
   BookingCancelledParams,
+  BookingCreatedParams,
+  BookingNoShowParams,
+  BookingPaidParams,
+  BookingPaymentInitiatedParams,
+  BookingRejectedParams,
   BookingRequestedParams,
   BookingRescheduledParams,
-  BookingPaidParams,
-  BookingNoShowParams,
-  BookingRejectedParams,
-  ScheduleMeetingWebhooksParams,
   CancelScheduledMeetingWebhooksParams,
+  ScheduleMeetingWebhooksParams,
   ScheduleNoShowWebhooksParams,
 } from "../types/params";
 

@@ -1,5 +1,3 @@
-import { type TFunction } from "i18next";
-
 import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
 import { BookingAccessService } from "@calcom/features/bookings/services/BookingAccessService";
 import { CreditService } from "@calcom/features/ee/billing/credit-service";
@@ -18,6 +16,7 @@ import { prisma } from "@calcom/prisma";
 import { WebhookTriggerEvents, WorkflowTriggerEvents } from "@calcom/prisma/enums";
 import { bookingMetadataSchema, type PlatformClientParams } from "@calcom/prisma/zod-utils";
 import type { TNoShowInputSchema } from "@calcom/trpc/server/routers/loggedInViewer/markNoShow.schema";
+import type { TFunction } from "i18next";
 
 import handleSendingAttendeeNoShowDataToApps from "./noShow/handleSendingAttendeeNoShowDataToApps";
 
@@ -251,8 +250,8 @@ const handleMarkNoShow = async ({
             const destinationCalendar = booking.destinationCalendar
               ? [booking.destinationCalendar]
               : booking.user?.destinationCalendar
-              ? [booking.user?.destinationCalendar]
-              : [];
+                ? [booking.user?.destinationCalendar]
+                : [];
             const team = booking.eventType?.team
               ? {
                   name: booking.eventType.team.name,
@@ -366,10 +365,13 @@ const updateAttendees = async (
     },
   });
 
-  const allAttendeesMap = allAttendees.reduce((acc, attendee) => {
-    acc[attendee.email] = attendee;
-    return acc;
-  }, {} as Record<string, { id: number; email: string }>);
+  const allAttendeesMap = allAttendees.reduce(
+    (acc, attendee) => {
+      acc[attendee.email] = attendee;
+      return acc;
+    },
+    {} as Record<string, { id: number; email: string }>
+  );
 
   const updatePromises = attendees.map((attendee) => {
     const attendeeToUpdate = allAttendeesMap[attendee.email];

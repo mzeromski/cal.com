@@ -1,10 +1,9 @@
+import { TUpdateInputSchema } from "@calcom/platform-libraries/workflows";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { TeamsVerifiedResourcesRepository } from "@/modules/verified-resources/teams-verified-resources.repository";
 import { UpdateEventTypeWorkflowDto } from "@/modules/workflows/inputs/update-event-type-workflow.input";
 import { UpdateFormWorkflowDto } from "@/modules/workflows/inputs/update-form-workflow.input";
 import { WorkflowType } from "@/modules/workflows/workflows.repository";
-import { BadRequestException, Injectable } from "@nestjs/common";
-
-import { TUpdateInputSchema } from "@calcom/platform-libraries/workflows";
 
 import {
   EMAIL_ADDRESS,

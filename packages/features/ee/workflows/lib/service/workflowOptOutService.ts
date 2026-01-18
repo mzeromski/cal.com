@@ -1,5 +1,5 @@
+import process from "node:process";
 import { getTranslation } from "@calcom/lib/server/i18n";
-
 import { deleteMultipleScheduledSMS } from "../reminders/providers/twilioProvider";
 import { WorkflowOptOutContactRepository } from "../repository/workflowOptOutContact";
 import { WorkflowReminderRepository } from "../repository/workflowReminder";
@@ -8,9 +8,8 @@ export class WorkflowOptOutService {
   static async optOutPhoneNumber(phoneNumber: string) {
     await WorkflowOptOutContactRepository.addPhoneNumber(phoneNumber);
     // Delete scheduled workflows
-    const scheduledReminders = await WorkflowReminderRepository.getFutureScheduledAttendeeSMSReminders(
-      phoneNumber
-    );
+    const scheduledReminders =
+      await WorkflowReminderRepository.getFutureScheduledAttendeeSMSReminders(phoneNumber);
 
     // Get twilio scheduled workflows reminders
     await deleteMultipleScheduledSMS(

@@ -1,9 +1,7 @@
-import prismock from "@calcom/testing/lib/__mocks__/prisma";
-
 import type { DirectorySyncEvent } from "@boxyhq/saml-jackson";
-import { describe, expect, it, vi, beforeEach } from "vitest";
-
 import { IdentityProvider, MembershipRole } from "@calcom/prisma/enums";
+import prismock from "@calcom/testing/lib/__mocks__/prisma";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import handleUserEvents from "./handleUserEvents";
 
@@ -48,9 +46,11 @@ vi.mock("./removeUserFromOrg", () => ({
 }));
 
 vi.mock("@calcom/features/users/repositories/UserRepository", () => ({
-  UserRepository: vi.fn().mockImplementation(function() { return {
-    isAMemberOfOrganization: vi.fn().mockResolvedValue(false),
-  }; }),
+  UserRepository: vi.fn().mockImplementation(function () {
+    return {
+      isAMemberOfOrganization: vi.fn().mockResolvedValue(false),
+    };
+  }),
 }));
 
 async function createMockOrganization({ id, name, slug }: { id: number; name: string; slug: string }) {

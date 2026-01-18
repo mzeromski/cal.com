@@ -1,11 +1,11 @@
-import { Ratelimit, type LimitOptions, type RatelimitResponse } from "@unkey/ratelimit";
-
+import process from "node:process";
+import { type LimitOptions, Ratelimit, type RatelimitResponse } from "@unkey/ratelimit";
 import { isIpInBanListString } from "./getIP";
 import logger from "./logger";
 
 const log = logger.getSubLogger({ prefix: ["RateLimit"] });
 
-export { type RatelimitResponse };
+export type { RatelimitResponse };
 
 export type RateLimitHelper = {
   rateLimitingType?:
@@ -38,7 +38,7 @@ export function rateLimiter() {
       log.warn("Disabled because the UNKEY_ROOT_KEY environment variable was not found.");
       warned = true;
     }
-    return () => ({ success: true, limit: 10, remaining: 999, reset: 0 } as RatelimitResponse);
+    return () => ({ success: true, limit: 10, remaining: 999, reset: 0 }) as RatelimitResponse;
   }
   const timeout = {
     fallback: { success: true, limit: 10, remaining: 999, reset: 0 },

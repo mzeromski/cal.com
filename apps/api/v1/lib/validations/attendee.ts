@@ -1,7 +1,6 @@
-import { z } from "zod";
-
 import { emailSchema } from "@calcom/lib/emailSchema";
 import { AttendeeSchema } from "@calcom/prisma/zod/modelSchema/AttendeeSchema";
+import { z } from "zod";
 
 import { timeZone } from "~/lib/validations/shared/timeZone";
 

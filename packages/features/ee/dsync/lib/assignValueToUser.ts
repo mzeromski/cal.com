@@ -1,8 +1,8 @@
 import type {
   AttributeId,
   AttributeName,
-  BulkAttributeAssigner,
   AttributeOptionAssignment,
+  BulkAttributeAssigner,
 } from "@calcom/app-store/routing-forms/types/types";
 import { findAssignmentsForMember } from "@calcom/features/attributes/lib/utils";
 import { PrismaAttributeOptionRepository } from "@calcom/features/attributes/repositories/PrismaAttributeOptionRepository";
@@ -13,12 +13,12 @@ import { safeStringify } from "@calcom/lib/safeStringify";
 import prisma from "@calcom/prisma";
 
 import {
+  buildSlugFromValue,
+  canSetValueBeyondOptions,
   doesSupportMultipleValues,
   isAssignmentForLockedAttribute,
   isAssignmentForTheSamePool,
   isAssignmentSame,
-  buildSlugFromValue,
-  canSetValueBeyondOptions,
 } from "./assignValueToUserUtils";
 
 const log = logger.getSubLogger({ prefix: ["entity/attribute"] });
@@ -312,7 +312,7 @@ const buildPrismaQueryForAttributeOptionCreation = ({
 };
 
 const createMissingOptionsAndReturnAlongWithExisting = async <
-  TattributeOptionsToAssign extends AttributeOptionsToAssign
+  TattributeOptionsToAssign extends AttributeOptionsToAssign,
 >({
   attributeOptionsToAssignIncludingNonExistentOptions,
   orgId,

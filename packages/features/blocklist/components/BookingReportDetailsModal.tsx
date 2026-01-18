@@ -1,16 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import { Controller, useForm } from "react-hook-form";
-
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { WatchlistType } from "@calcom/prisma/enums";
 import { Button } from "@calcom/ui/components/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from "@calcom/ui/components/dialog";
 import { ToggleGroup } from "@calcom/ui/components/form";
 import { Icon } from "@calcom/ui/components/icon";
+import Link from "next/link";
+import { Controller, useForm } from "react-hook-form";
 
-import type { BookingReport, BlocklistScope } from "../types";
+import type { BlocklistScope, BookingReport } from "../types";
 
 interface FormData {
   blockType: WatchlistType;

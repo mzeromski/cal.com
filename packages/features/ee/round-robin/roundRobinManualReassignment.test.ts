@@ -1,12 +1,14 @@
+import { OrganizerDefaultConferencingAppType } from "@calcom/app-store/locations";
+import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
+import { BookingStatus, SchedulingType, WorkflowMethods } from "@calcom/prisma/enums";
 import prismaMock from "@calcom/testing/lib/__mocks__/prisma";
-
 import {
-  getDate,
-  createBookingScenario,
-  getScenarioData,
-  getMockBookingAttendee,
-  TestData,
   addWorkflowReminders,
+  createBookingScenario,
+  getDate,
+  getMockBookingAttendee,
+  getScenarioData,
+  TestData,
 } from "@calcom/testing/lib/bookingScenario/bookingScenario";
 import {
   expectBookingToBeInDatabase,
@@ -14,13 +16,8 @@ import {
   expectWorkflowToBeTriggered,
 } from "@calcom/testing/lib/bookingScenario/expects";
 import { setupAndTeardown } from "@calcom/testing/lib/bookingScenario/setupAndTeardown";
-
-import { describe, vi, expect } from "vitest";
-
-import { OrganizerDefaultConferencingAppType } from "@calcom/app-store/locations";
-import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";
-import { SchedulingType, BookingStatus, WorkflowMethods } from "@calcom/prisma/enums";
 import { test } from "@calcom/testing/lib/fixtures/fixtures";
+import { describe, expect, vi } from "vitest";
 
 vi.mock("@calcom/features/bookings/lib/EventManager");
 vi.mock("@calcom/app-store/utils", () => ({
@@ -220,8 +217,8 @@ const mockEventManagerReschedule = async (config?: MockEventManagerConfig) => {
               conferenceType === "zoom"
                 ? "https://zoom.us/j/123456789"
                 : conferenceType === "google"
-                ? "https://meet.google.com/test-meeting"
-                : `https://${conferenceType}.co/test-room`,
+                  ? "https://meet.google.com/test-meeting"
+                  : `https://${conferenceType}.co/test-room`,
           },
         });
       }

@@ -34,9 +34,7 @@ const Page = async ({ searchParams }: PageProps): Promise<ReactElement> => {
   return <MateuszWrapper />;
 };
 
-export const generateMetadata = async (): Promise<
-  ReturnType<typeof _generateMetadata>
-> =>
+export const generateMetadata = async (): Promise<ReturnType<typeof _generateMetadata>> =>
   await _generateMetadata(
     (_t) => "Mateusz Dashboard",
     (_t) => "A comprehensive UI showcase with interactive elements",

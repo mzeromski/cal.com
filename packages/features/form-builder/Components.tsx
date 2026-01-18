@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import type { z } from "zod";
-
 import type {
   SelectLikeComponentProps,
   TextLikeComponentProps,
@@ -8,14 +5,16 @@ import type {
 import Widgets from "@calcom/app-store/routing-forms/components/react-awesome-query-builder/widgets";
 import PhoneInput from "@calcom/features/components/phone-input";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import type { fieldSchema, variantsConfigSchema, FieldType } from "@calcom/prisma/zod-utils";
+import type { FieldType, fieldSchema, variantsConfigSchema } from "@calcom/prisma/zod-utils";
 import { AddressInput } from "@calcom/ui/components/address";
 import { InfoBadge } from "@calcom/ui/components/badge";
 import { Button } from "@calcom/ui/components/button";
-import { Label, CheckboxField, EmailField, InputField, Checkbox } from "@calcom/ui/components/form";
+import { Checkbox, CheckboxField, EmailField, InputField, Label } from "@calcom/ui/components/form";
 import { Icon } from "@calcom/ui/components/icon";
-import { RadioGroup, RadioField } from "@calcom/ui/components/radio";
+import { RadioField, RadioGroup } from "@calcom/ui/components/radio";
 import { Tooltip } from "@calcom/ui/components/tooltip";
+import { useEffect } from "react";
+import type { z } from "zod";
 
 import { ComponentForField } from "./FormBuilderField";
 import { propsTypes } from "./propsTypes";
@@ -66,7 +65,7 @@ type Component =
           name?: string;
           required?: boolean;
           translatedDefaultLabel?: string;
-        }
+        },
       >(
         props: TProps
       ) => JSX.Element;
@@ -79,7 +78,7 @@ type Component =
           variants: z.infer<typeof variantsConfigSchema>["variants"];
           value: Record<string, string> | string | undefined;
           setValue: (value: string | Record<string, string>) => void;
-        }
+        },
       >(
         props: TProps
       ) => JSX.Element;
@@ -179,8 +178,8 @@ export const Components: Record<FieldType, Component> = {
                 variantField.name === "firstName"
                   ? "given-name"
                   : variantField.name === "lastName"
-                  ? "family-name"
-                  : undefined
+                    ? "family-name"
+                    : undefined
               }
               onChange={(e) => onChange(variantField.name, e.target.value)}
             />
@@ -465,7 +464,7 @@ export const Components: Record<FieldType, Component> = {
                       <span className="text-emphasis me-2 ms-2 text-sm">
                         {option.value === "somewhereElse"
                           ? t("somewhere_else")
-                          : getCleanLabel(option.label) ?? ""}
+                          : (getCleanLabel(option.label) ?? "")}
                       </span>
                       <span>
                         {option.value === "phone" && (

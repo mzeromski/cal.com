@@ -1,8 +1,8 @@
-import { AvailableSlotsService } from "@/lib/services/available-slots.service";
+import { IncomingMessage } from "node:http";
+import { isMainThread, parentPort } from "node:worker_threads";
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { IncomingMessage } from "node:http";
-import { parentPort, isMainThread } from "node:worker_threads";
+import { AvailableSlotsService } from "@/lib/services/available-slots.service";
 
 import { SlotsWorkerModule } from "./slots.worker.module";
 

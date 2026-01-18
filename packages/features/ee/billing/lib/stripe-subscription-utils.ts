@@ -1,5 +1,5 @@
-import type Stripe from "stripe";
 import type { BillingPeriod } from "@calcom/prisma/enums";
+import type Stripe from "stripe";
 
 export interface BillingData {
   billingPeriod: BillingPeriod;

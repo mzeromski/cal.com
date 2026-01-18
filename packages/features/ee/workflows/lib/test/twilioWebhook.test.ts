@@ -1,6 +1,5 @@
-import { describe, beforeEach, vi, test, expect } from "vitest";
-
 import { CreditUsageType } from "@calcom/prisma/enums";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
 vi.mock("@calcom/lib/constants", async () => {
   const actual = await vi.importActual<typeof import("@calcom/lib/constants")>("@calcom/lib/constants");
@@ -18,10 +17,12 @@ vi.mock("../reminders/providers/twilioProvider", () => ({
 
 const mockChargeCredits = vi.fn().mockResolvedValue({ teamId: 1 });
 vi.mock("@calcom/features/ee/billing/credit-service", () => ({
-  CreditService: vi.fn().mockImplementation(function() { return {
-    chargeCredits: mockChargeCredits,
-    calculateCreditsFromPrice: vi.fn().mockReturnValue(1),
-  }; }),
+  CreditService: vi.fn().mockImplementation(function () {
+    return {
+      chargeCredits: mockChargeCredits,
+      calculateCreditsFromPrice: vi.fn().mockReturnValue(1),
+    };
+  }),
 }));
 
 const mockFindFirst = vi.fn();

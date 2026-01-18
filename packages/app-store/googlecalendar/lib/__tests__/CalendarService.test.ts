@@ -4,27 +4,24 @@ import oAuthManagerMock, {
 } from "../../../tests/__mocks__/OAuthManager";
 import "../__mocks__/features.repository";
 import "../__mocks__/getGoogleAppKeys";
-import {
-  calendarMock,
-  adminMock,
-  setLastCreatedJWT,
-  setCredentialsMock,
-  setLastCreatedOAuth2Client,
-  freebusyQueryMock,
-  calendarListMock,
-} from "../__mocks__/googleapis";
 
-import { expect, test, beforeEach, vi, describe } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+import {
+  adminMock,
+  calendarListMock,
+  calendarMock,
+  freebusyQueryMock,
+  setCredentialsMock,
+  setLastCreatedJWT,
+  setLastCreatedOAuth2Client,
+} from "../__mocks__/googleapis";
 import "vitest-fetch-mock";
 
+import process from "node:process";
 import logger from "@calcom/lib/logger";
-
+import type { CredentialForCalendarServiceWithEmail } from "@calcom/types/Credential";
 import CalendarService from "../CalendarService";
-import {
-  createMockJWTInstance,
-  createCredentialForCalendarService,
-} from "./utils";
-import { CredentialForCalendarServiceWithEmail } from "@calcom/types/Credential";
+import { createCredentialForCalendarService, createMockJWTInstance } from "./utils";
 
 const log = logger.getSubLogger({ prefix: ["CalendarService.test"] });
 
@@ -46,7 +43,7 @@ const mockCredential: CredentialForCalendarServiceWithEmail = {
   appId: "google-calendar",
   type: "google_calendar",
   key: {
-    access_token: "<INVALID_TOKEN>"
+    access_token: "<INVALID_TOKEN>",
   },
   user: {
     email: "user@example.com",
@@ -59,7 +56,6 @@ const mockCredential: CredentialForCalendarServiceWithEmail = {
 
 describe("getAvailability", () => {
   test("returns availability for selected calendars", async () => {
-
     const calendarService = new CalendarService(mockCredential);
     setFullMockOAuthManagerRequest();
     const mockedBusyTimes1 = [

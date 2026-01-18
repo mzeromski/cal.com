@@ -1,4 +1,4 @@
-import { randomBytes, createHash } from "crypto";
+import { createHash, randomBytes } from "crypto";
 
 const hashSecretKey = (apiKey: string): string => createHash("sha256").update(apiKey).digest("hex");
 

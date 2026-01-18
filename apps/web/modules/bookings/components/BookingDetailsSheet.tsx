@@ -1,10 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useMemo } from "react";
-import { z } from "zod";
-
 import dayjs from "@calcom/dayjs";
+import { BookingHistory } from "@calcom/features/booking-audit/client/components/BookingHistory";
 import { useBookingLocation } from "@calcom/features/bookings/hooks";
 import { shouldShowFieldInCustomResponses } from "@calcom/lib/bookings/SystemField";
 import { formatPrice } from "@calcom/lib/currencyConversions";
@@ -15,8 +12,8 @@ import { getEveryFreqFor } from "@calcom/lib/recurringStrings";
 import { BookingStatus } from "@calcom/prisma/enums";
 import {
   bookingMetadataSchema,
-  eventTypeBookingFields,
   EventTypeMetaDataSchema,
+  eventTypeBookingFields,
 } from "@calcom/prisma/zod-utils";
 import { trpc } from "@calcom/trpc/react";
 import type { RecurringEvent } from "@calcom/types/Calendar";
@@ -25,28 +22,29 @@ import { Avatar } from "@calcom/ui/components/avatar";
 import { Badge } from "@calcom/ui/components/badge";
 import { Button } from "@calcom/ui/components/button";
 import { Icon } from "@calcom/ui/components/icon";
+import { SegmentedControl } from "@calcom/ui/components/segmented-control";
 import {
   Sheet,
-  SheetContent,
   SheetBody,
-  SheetHeader,
+  SheetContent,
   SheetFooter,
+  SheetHeader,
   SheetTitle,
 } from "@calcom/ui/components/sheet";
-
 import assignmentReasonBadgeTitleMap from "@lib/booking/assignmentReasonBadgeTitleMap";
-
+import Link from "next/link";
+import { useMemo } from "react";
+import type { z } from "zod";
 import { AcceptBookingButton } from "../../../components/booking/AcceptBookingButton";
-import { RejectBookingButton } from "../../../components/booking/RejectBookingButton";
 import { BookingActionsDropdown } from "../../../components/booking/actions/BookingActionsDropdown";
 import { BookingActionsStoreProvider } from "../../../components/booking/actions/BookingActionsStoreProvider";
+import { RejectBookingButton } from "../../../components/booking/RejectBookingButton";
 import type { BookingListingStatus } from "../../../components/booking/types";
 import { usePaymentStatus } from "../hooks/usePaymentStatus";
 import { useBookingDetailsSheetStore } from "../store/bookingDetailsSheetStore";
 import type { BookingOutput } from "../types";
 import { JoinMeetingButton } from "./JoinMeetingButton";
-import { BookingHistory } from "@calcom/features/booking-audit/client/components/BookingHistory";
-import { SegmentedControl } from "@calcom/ui/components/segmented-control";
+
 type BookingMetaData = z.infer<typeof bookingMetadataSchema>;
 
 interface BookingDetailsSheetProps {
@@ -93,14 +91,23 @@ interface BookingDetailsSheetInnerProps {
 }
 
 function useActiveSegment(bookingAuditEnabled: boolean) {
-  const [activeSegment, setActiveSegmentInStore] = useBookingDetailsSheetStore((state) => [state.activeSegment, state.setActiveSegment]);
+  const [activeSegment, setActiveSegmentInStore] = useBookingDetailsSheetStore((state) => [
+    state.activeSegment,
+    state.setActiveSegment,
+  ]);
 
-  const getDerivedActiveSegment = ({ activeSegment, bookingAuditEnabled }: { activeSegment: "info" | "history" | null, bookingAuditEnabled: boolean }) => {
+  const getDerivedActiveSegment = ({
+    activeSegment,
+    bookingAuditEnabled,
+  }: {
+    activeSegment: "info" | "history" | null;
+    bookingAuditEnabled: boolean;
+  }) => {
     if (!bookingAuditEnabled && activeSegment === "history") {
       return "info";
     }
     return activeSegment ?? "info";
-  }
+  };
 
   const derivedActiveSegment = getDerivedActiveSegment({ activeSegment, bookingAuditEnabled });
 
@@ -195,15 +202,15 @@ function BookingDetailsSheetInner({
   const recurringInfo =
     booking.recurringEventId && booking.eventType?.recurringEvent
       ? {
-        count: booking.eventType.recurringEvent.count,
-        recurringEvent: booking.eventType.recurringEvent,
-      }
+          count: booking.eventType.recurringEvent.count,
+          recurringEvent: booking.eventType.recurringEvent,
+        }
       : null;
 
   const customResponses = booking.responses
     ? Object.entries(booking.responses as Record<string, unknown>)
-      .filter(([fieldName]) => shouldShowFieldInCustomResponses(fieldName))
-      .map(([question, answer]) => [question, answer] as [string, unknown])
+        .filter(([fieldName]) => shouldShowFieldInCustomResponses(fieldName))
+        .map(([question, answer]) => [question, answer] as [string, unknown])
     : [];
 
   const reason = booking.assignmentReason?.[0];
@@ -284,7 +291,10 @@ function BookingDetailsSheetInner({
 
             {bookingAuditEnabled && (
               <SegmentedControl
-                data={[{ value: "info", label: t("info") }, { value: "history", label: t("history") }]}
+                data={[
+                  { value: "info", label: t("info") },
+                  { value: "history", label: t("history") },
+                ]}
                 value={activeSegment}
                 onChange={(value) => setActiveSegment(value)}
               />

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import type { Attribute } from "@calcom/app-store/routing-forms/types/types";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import type { Attribute } from "@calcom/app-store/routing-forms/types/types";
 import { trpc } from "@calcom/trpc/react";
 import { Button } from "@calcom/ui/components/button";
+import { useState } from "react";
 
 import EditIntegrationAttributeSyncCard from "./components/EditIntegrationAttributeSyncCard";
 import NewIntegrationAttributeSyncCard from "./components/NewIntegrationAttributeSyncCard";
